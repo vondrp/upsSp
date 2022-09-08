@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderPane"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="vondrovic.ups.sp.client.controller.MainMenuController"
+            prefHeight="400.0" prefWidth="600.0">
+    <center>
+        <VBox alignment="CENTER" prefHeight="750.0" prefWidth="500.0" spacing="60.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="gameBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="%play" />
+                <Button fx:id="closeBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="%exit" />
+            </children>
+            <opaqueInsets>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </opaqueInsets>
+        </VBox>
+    </center>
+
+</BorderPane>
