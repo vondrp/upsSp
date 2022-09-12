@@ -1,19 +1,24 @@
 package vondrovic.ups.sp.client.model;
 
+/**
+ * Enum ShipType contains type of ships with their length
+ */
 public enum ShipType
 {
-    CARRIER(1),
-    CRUISER(2),
-    BATTLESHIP(2),
-    DESTROYER(3),
-    SUBMARINE(4);
+    CARRIER(4),
+    CRUISER(3),
+    BATTLESHIP(4),
+    DESTROYER(2),
+    SUBMARINE(1);
 
-    public final Integer label;
+    private final Integer length;
 
-    ShipType(Integer label)
+    ShipType(Integer length)
     {
-        this.label = label;
+        this.length = length;
     }
 
-
+    public Integer getLength() {
+        return length;
+    }
 }
