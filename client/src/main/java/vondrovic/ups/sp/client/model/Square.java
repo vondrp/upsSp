@@ -52,6 +52,17 @@ public class Square {
         this.ship = ship;
     }
 
+    /**
+     * remove ship from the square
+     * by setting ship on null
+     * and setting SquareStatus to Empty
+     */
+    public void removeShip()
+    {
+        this.ship = null;
+        setSquareStatus(SquareStatus.EMPTY);
+    }
+
     public void hitShip()
     {
         setSquareStatus(SquareStatus.HIT);

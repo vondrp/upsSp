@@ -5,4 +5,5 @@ public enum SquareStatus {
     HIT,
     MISSED,
     SHIP,
+    PICKED_SHIP,
 }

@@ -1,10 +1,9 @@
 package vondrovic.ups.sp.client.model;
 
-import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 
@@ -16,8 +15,6 @@ import java.util.Random;
  *
  */
 public class Board {
-
-    Affine originalTransform;
 
     /**
      * Width of the board
@@ -40,11 +37,19 @@ public class Board {
      */
     private final int MAX = 10;
 
+    /**
+     * size of one square
+     */
     private final double SQUARE_SIZE = PAINT_WIDTH / BOARD_LENGTH;
 
+    /**
+     * canvas of Board
+     */
     private final Canvas boardCanvas;
 
-
+    /**
+     * ships located at board
+     */
     private Ship[] boardShips;
 
     /**
@@ -57,7 +62,15 @@ public class Board {
      */
     private final Square[][] squares = new Square[MAX+1][MAX+1];
 
+    /**
+     * instance of random generator
+     */
     private final Random rand;
+
+    /**
+     * currently picked up ship
+     */
+    private Ship pickedUpShip = null;
 
     /**
      * Create instance of the Board
@@ -70,20 +83,6 @@ public class Board {
         this.isEnemy = isEnemy;
 
         toStartForm();
-
-        this.boardCanvas.setOnDragDetected( new EventHandler<MouseEvent>() {
-            @Override
-            public void handle( MouseEvent event ) {
-                dragEvent(event);
-            }
-        });
-
-        this.boardCanvas.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent event) {
-                dragDroppedEvent(event);
-            }
-        });
     }
 
     /**
@@ -103,6 +102,9 @@ public class Board {
         populateShips();
     }
 
+    /**
+     * Initialize array of ships
+     */
     private void initializeShips()
     {
         this.boardShips = new Ship[]{
@@ -117,17 +119,6 @@ public class Board {
     }
 
 
-    private void dragEvent(MouseEvent event)
-    {
-        System.out.println("drag");
-    }
-
-    private void dragDroppedEvent(DragEvent event)
-    {
-        System.out.println("drop");
-    }
-
-
     /**
      * Method to repaint canvas
      */
@@ -136,11 +127,14 @@ public class Board {
         drawBoard(gc);
     }
 
-
+    /**
+     * Draw game board
+     * @param gc    canvas graphicsContext2D
+     */
     public void drawBoard(GraphicsContext gc)
     {
-        this.originalTransform = gc.getTransform();
-        fillBackground(gc, this.originalTransform);
+        Affine originalTransform = gc.getTransform();
+        fillBackground(gc, originalTransform);
 
         double width = this.boardCanvas.getWidth();
         double height = this.boardCanvas.getHeight();
@@ -200,7 +194,14 @@ public class Board {
                             if (!isEnemy)
                             {
                                 gc.setStroke(Color.GREEN);
-                                gc.setFill(Color.WHITE);
+                                if (squares[i][j].getShip().isPickedUp())
+                                {
+                                    gc.setFill(Color.LIGHTGREEN);
+                                }
+                                else
+                                {
+                                    gc.setFill(Color.WHITE);
+                                }
                             }
                             else
                             {
@@ -227,7 +228,6 @@ public class Board {
                 }
             }
         }
-
         gc.setTransform(defaultTransform);
         gc.setTransform(originalTransform);
     }
@@ -245,20 +245,27 @@ public class Board {
         gc.setTransform(transform);
     }
 
-
+    /**
+     * Handle click event
+     * @param event     mouse event
+     * @return          false - action failed, true - success
+     */
     public boolean handleCanvasClick(MouseEvent event)
     {
         Position p = transform(event.getX(), event.getY());
-
-        if (p != null)
+        if (p == null)
         {
-            Square square = squares[p.getX()][p.getY()];
-            switch(square.getSquareStatus())
-            {
+            return false;
+        }
+
+        Square square = squares[p.getX()][p.getY()];
+        // in enemy case player is firing
+        if (isEnemy)
+        {
+            switch (square.getSquareStatus()) {
                 case SHIP:
                     square.hitShip();
-                    if (isShipDestroyed(square))
-                    {
+                    if (isShipDestroyed(square)) {
                         markDestroyedShip(square);
                     }
                     break;
@@ -270,12 +277,93 @@ public class Board {
                 default:
                     return false;
             }
-
-            repaint();
-            return true;
         }
+        else // setting up ship
+        {
+            if (pickedUpShip != null && pickedUpShip.getBoardPosition() == p)
+            {
+                pickedUpShip.setPickedUp(false);
+                pickedUpShip = null;
+                this.boardCanvas.setCursor(null);
+                repaint();
+                return false;
+            }
 
-        return false;
+            if (event.getClickCount() == 2)
+            {
+                if (square.getSquareStatus() == SquareStatus.SHIP && square.getShip() != null)
+                {
+                    turnShip(square.getShip());
+                }
+            }
+            else if (event.getClickCount() == 1)
+            {
+                if (this.boardCanvas.getCursor() == null)
+                {
+                    if (square.getSquareStatus() != SquareStatus.SHIP || square.getShip() == null)
+                    {
+                        return false;
+                    }
+
+                    square.getShip().setPickedUp(true);
+                    this.pickedUpShip = square.getShip();
+
+                    this.boardCanvas.setCursor(Cursor.HAND);
+                }
+                else if (belongsPositionToShip(p, this.pickedUpShip))
+                {
+                    this.pickedUpShip.setPickedUp(false);
+                    this.pickedUpShip = null;
+                    this.boardCanvas.setCursor(null);
+                }
+                else
+                {
+                    relocatePickedUpShip(p);
+                }
+            }
+
+        }
+        repaint();
+        return true;
+    }
+
+    /**
+     * Turn given ship to be vertical/not vertical
+     * @param ship  ship to be turned
+     */
+    private void turnShip(Ship ship)
+    {
+        int firstX = ship.getBoardPosition().getX();
+        int firstY = ship.getBoardPosition().getY();
+        boolean result = removeShip(ship);
+        if (result)
+        {
+            ship.setVertical(!ship.isVertical());
+            result = placeShip(ship, firstX, firstY);
+
+            if (!result)
+            {
+                ship.setVertical(!ship.isVertical());
+                placeShip(ship, firstX, firstY);
+            }
+        }
+    }
+
+    /**
+     * Relocate picked up ship to give position
+     * - will not success if ship cannot be placed on new position
+     * @param p position, where ship try to be located
+     */
+    private void relocatePickedUpShip(Position p)
+    {
+        if (canPlaceShip(pickedUpShip, p.getX(), p.getY()))
+        {
+            removeShip(pickedUpShip);
+            placeShip(pickedUpShip, p.getX(), p.getY());
+            pickedUpShip.setPickedUp(false);
+            pickedUpShip = null;
+            this.boardCanvas.setCursor(null);
+        }
     }
 
     /**
@@ -320,7 +408,11 @@ public class Board {
         return new Position(nx, ny);
     }
 
-
+    /**
+     * Find if ship on given square is destroyed
+     * @param square    square, where ship should be located
+     * @return          false - not located ship or ship is destroyed, otherwise true
+     */
     public boolean isShipDestroyed(Square square)
     {
         if (square.getShip() == null)
@@ -334,18 +426,22 @@ public class Board {
 
     }
 
-    public boolean markDestroyedShip(Square square)
+    /**
+     * If ship is destroyed mark her neighbours as SquareStatus.MISSED
+     * @param square    square, where destroyed ship should be
+     */
+    public void markDestroyedShip(Square square)
     {
         if (!isShipDestroyed(square))
         {
-            return false;
+            return;
         }
 
         Ship ship = square.getShip();
 
         if (ship == null)
         {
-            return false;
+            return;
         }
 
         int i = -1;
@@ -396,11 +492,8 @@ public class Board {
 
             }
         }
-
         //mark neighbours of the hit piece itself
         markNeighboursSquareAsMissed(squares[square.getX()][square.getY()]);
-
-        return true;
     }
 
 
@@ -430,7 +523,8 @@ public class Board {
         if (canPlaceShip(ship, x, y)) {
             int length = ship.shipType.getLength();
 
-            if (ship.vertical) {
+            ship.setBoardPosition(new Position(x, y));
+            if (ship.isVertical()) {
                 for (int i = y; i < y + length; i++) {
                     Square square = squares[x][i];
                     square.placeShip(ship);
@@ -474,6 +568,14 @@ public class Board {
                     if (!isValidPoint(x, i))
                         return false;
 
+                    if (pickedUpShip != null)
+                    {
+                        if (neighbor.getSquareStatus() == SquareStatus.SHIP && neighbor.getShip().equals(pickedUpShip))
+                        {
+                            continue;
+                        }
+                    }
+
                     if (neighbor.getSquareStatus() != SquareStatus.EMPTY)
                         return false;
                 }
@@ -491,6 +593,14 @@ public class Board {
                 for (Square neighbor : getNeighbors(i, y)) {
                     if (!isValidPoint(i, y))
                         return false;
+
+                    if (pickedUpShip != null)
+                    {
+                        if (neighbor.getSquareStatus() == SquareStatus.SHIP && neighbor.getShip().equals(pickedUpShip))
+                        {
+                            continue;
+                        }
+                    }
 
                     if (neighbor.getSquareStatus() != SquareStatus.EMPTY)
                         return false;
@@ -575,5 +685,84 @@ public class Board {
             } while (!canPlaceShip(boardShip, gridX, gridY));
             placeShip(boardShip, gridX, gridY);
         }
+    }
+
+    private boolean removeShip(Ship ship)
+    {
+        Position firstBlockPosition = ship.getBoardPosition();
+
+        if (firstBlockPosition == null || !isValidPoint(firstBlockPosition))
+        {
+            return false;
+        }
+
+        int x = firstBlockPosition.getX();
+        int y = firstBlockPosition.getY();
+        Square firstBlock = squares[x][y];
+
+        if (firstBlock.getShip() == null || firstBlock.getSquareStatus() != SquareStatus.SHIP)
+        {
+            return false;
+        }
+
+        int length = ship.getShipType().getLength();
+
+        if (ship.isVertical()) {
+            for (int i = y; i < y + length; i++) {
+                Square square = squares[x][i];
+                square.removeShip();
+            }
+        }
+        else {
+            for (int i = x; i < x + length; i++) {
+                Square square = squares[i][y];
+                square.removeShip();
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Find out if given position, belongs to ship
+     * @param p     examined position
+     * @param ship  checked ship
+     * @return      true - position belongs to ship, otherwise return false
+     */
+    private boolean belongsPositionToShip(Position p, Ship ship)
+    {
+        ArrayList<Position> shipPositions = getShipPositions(ship);
+
+        return shipPositions.contains(p);
+    }
+
+    /**
+     * Find all positions of board, where given ship is located
+     * @param ship  ship, which position are looked for
+     * @return  arrayList of ship positions
+     */
+    private ArrayList<Position> getShipPositions(Ship ship)
+    {
+        Position firstPosition = ship.getBoardPosition();
+
+        int length = ship.getShipType().getLength();
+        int x = firstPosition.getX();
+        int y = firstPosition.getY();
+
+        ArrayList<Position> positions = new ArrayList<>(length);
+        if (ship.isVertical())
+        {
+            for (int i = y; i < y + length; i++) {
+                positions.add(new Position(x, i));
+            }
+        }
+        else
+        {
+            for (int i = x; i < x + length; i++) {
+                positions.add(new Position(i, y));
+            }
+        }
+
+        return positions;
     }
 }
