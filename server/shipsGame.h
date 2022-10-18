@@ -14,13 +14,14 @@
 #define GAME_STATE_PLAYING 1
 
 /**
- * Game structure to represent a game or a roomd
+ *  structure to represent a game or a roomd
  */
 struct game {
     int id;
     struct client *player1;
     struct client *player2;
-    signed char board[8][8];
+    signed char left_board[10][10];
+    signed char right_board[10][10];
     int p1_count;
     int p2_count;
     int state;

@@ -15,6 +15,15 @@ public class MainMenuController extends AbstractController{
     Button gameBtn;
 
     @FXML
+    Button connectBtn;
+
+    @FXML
+    Button roomBtn;
+
+    @FXML
+    Button lobbyBtn;
+
+    @FXML
     Button closeBtn;
 
     @Override
@@ -28,5 +37,20 @@ public class MainMenuController extends AbstractController{
     public void setGameScene()
     {
         App.INSTANCE.setScene(SceneEnum.GAME);
+    }
+
+    public void setConnectionScene()
+    {
+        App.INSTANCE.setScene(SceneEnum.CONNECT);
+    }
+
+    public void setRoomScene()
+    {
+        App.INSTANCE.setScene(SceneEnum.ROOM);
+    }
+
+    public void setLobbyScene()
+    {
+        App.INSTANCE.setScene(SceneEnum.LOBBY);
     }
 }

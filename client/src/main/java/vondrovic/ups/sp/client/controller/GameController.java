@@ -9,11 +9,9 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Affine;
 import vondrovic.ups.sp.client.AlertFactory;
-import vondrovic.ups.sp.client.model.*;
+import vondrovic.ups.sp.client.model.game.GameBoard;
 
 /**
  * Controller of the Game fxml
@@ -47,16 +45,18 @@ public class GameController extends AbstractController {
     @FXML
     TextArea protocol;
 
+    /**
+     * Left
+     */
+    private GameBoard leftBoard;
 
-    private Board leftBoard;
-
-    private Board rightBoard;
+    private GameBoard rightBoard;
    // GameModel gameModel = App.INSTANCE.getGameModel();
 
     @Override
     public void initialize() {
-        this.leftBoard = new Board(this.leftBoardCanvas, false);
-        this.rightBoard = new Board(this.rightBoardCanvas, true);
+        this.leftBoard = new GameBoard(this.leftBoardCanvas, false);
+        this.rightBoard = new GameBoard(this.rightBoardCanvas, true);
 
         // left side
         this.leftBoard.getBoardCanvas().setHeight(anchorPane.getHeight()/2);

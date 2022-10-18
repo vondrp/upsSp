@@ -20,6 +20,9 @@
         <VBox alignment="CENTER" prefHeight="750.0" prefWidth="500.0" spacing="60.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="gameBtn" onAction="#setGameScene" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="%play" />
+                <Button fx:id="connectBtn" onAction="#setConnectionScene" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="%connect" />
+                <Button fx:id="roomBtn" onAction="#setRoomScene" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Room" />
+                <Button fx:id="lobbyBtn" onAction="#setLobbyScene" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Lobby" />
                 <Button fx:id="closeBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="%exit" />
             </children>
             <opaqueInsets>

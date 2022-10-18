@@ -1,7 +1,9 @@
 #include "arraylist.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "game.h"
+#include <string.h>
+
+#include "shipsGame.h"
 
 arraylist *arraylist_create(int capacity) {
     arraylist *list = (arraylist *) malloc(sizeof(arraylist));

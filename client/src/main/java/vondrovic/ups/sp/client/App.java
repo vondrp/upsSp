@@ -1,12 +1,17 @@
 package vondrovic.ups.sp.client;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javafx.fxml.FXMLLoader;
 import vondrovic.ups.sp.client.controller.AbstractController;
+import vondrovic.ups.sp.client.model.connection.ConnectionModel;
+import vondrovic.ups.sp.client.model.game.Player;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,12 +26,26 @@ public class App extends Application {
      * Instance of App
      */
     public static App INSTANCE;
+
+    public Player player;
+
     private Stage stage;
     private FXMLLoader fxmlLoader;
-    public SceneEnum actualScene;
+
+
+    private SceneEnum actualScene;
     private SceneEnum sceneEnum;
 
+    private ConnectionModel connectionModel;
+    private Receiver reciever;
+
     private I18Support bundle;
+
+    public String lastEnteredUsername;
+    public String lastEnteredHostname;
+    public String lastEnteredPort;
+
+    public static final int MAX_INVALID_MESSAGES = 5;
 
     /**
      * Initialization of program
@@ -61,7 +80,6 @@ public class App extends Application {
         SceneEnum backScene = this.actualScene;
 
         this.actualScene = scene;
-
         this.fxmlLoader = new FXMLLoader(url, this.bundle.getResourceBundle());
 
         try
@@ -80,10 +98,42 @@ public class App extends Application {
 
         this.sceneEnum = scene;
         stage.show();
-        /*if(scene == SceneEnum.GAME) {
+        if(scene == SceneEnum.GAME) {
             AbstractController controller = (AbstractController) this.getController();
             controller.initialize();
-        }*/
+        }
+    }
+
+    /**
+     * Sets scene from outside of JavaFX thread
+     * @param scene scene type
+     */
+    public void setSceneOutside(SceneEnum scene) {
+        Platform.runLater(() -> {
+            setScene(scene);
+        });
+    }
+
+    public void connect(String address, int port) throws IOException {
+        this.connectionModel = new ConnectionModel(address, port);
+        this.reciever = new Receiver(this.connectionModel);
+        this.reciever.start();
+    }
+
+
+    /**
+     * Method that provides disconnection from the server
+     */
+    public void disconnect() {
+        this.reciever.setRunning(false);
+        try {
+            this.connectionModel.close();
+        } catch (IOException e) {
+            this.connectionModel = null;
+        }
+        this.connectionModel = null;
+
+        this.setSceneOutside(SceneEnum.CONNECT);
     }
 
     /**
@@ -102,4 +152,45 @@ public class App extends Application {
         return this.fxmlLoader.getController();
     }
 
+
+    public ConnectionModel getConnectionModel() {
+        return connectionModel;
+    }
+
+    public void setConnectionModel(ConnectionModel connectionModel) {
+        this.connectionModel = connectionModel;
+    }
+
+    /**
+     * Sends a message to a server
+     * @param message
+     */
+    public static void sendMessage(String message) {
+        if(App.INSTANCE.connectionModel != null) {
+            App.INSTANCE.connectionModel.sendMessage(message);
+        }
+    }
+
+    /**
+     * Method to close the application
+     * @param event
+     */
+    @FXML
+    public void exitApplication(ActionEvent event)
+    {
+        Platform.exit();
+    }
+
+    public SceneEnum getSceneEnum() {
+        return sceneEnum;
+    }
+
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

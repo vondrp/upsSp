@@ -10,7 +10,7 @@
 #include <ctype.h>
 #include "client.h"
 #include "server.h"
-#include "game.h"
+#include "shipsGame.h"
 
 typedef int(*fcmd)(server *server, struct client *client, int, char **);
 

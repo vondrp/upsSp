@@ -1,0 +1,3 @@
+D:/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir
+D:/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
