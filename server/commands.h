@@ -1,7 +1,3 @@
-//
-// Created by hintik on 28.11.21.
-//
-
 #ifndef SP_COMMANDS_H
 #define SP_COMMANDS_H
 #include <stdlib.h>
@@ -72,35 +68,6 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv);
  */
 int cmd_room_leave(server *server, struct client *client, int argc, char **argv);
 
-/**
- * Function to handle game info request.
- * @param server server structure
- * @param client client structure
- * @param argc number of arguments
- * @param argv values of arguments
- * @return Information about operation success
- */
-int cmd_game_info(server *server, struct client *client, int argc, char **argv);
-
-/**
- * Function to handle move request.
- * @param server server structure
- * @param client client structure
- * @param argc number of arguments
- * @param argv values of arguments
- * @return Information about operation success
- */
-int cmd_move(server *server, struct client *client, int argc, char **argv);
-
-/**
- * Function to handle jump request.
- * @param server server structure
- * @param client client structure
- * @param argc number of arguments
- * @param argv values of arguments
- * @return Information about operation success
- */
-int cmd_jump(server *server, struct client *client, int argc, char **argv);
 
 /**
  * Function to handle logout request

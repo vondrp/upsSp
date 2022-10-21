@@ -1,19 +1,20 @@
 #include "client.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
 
+#include <stdio.h>
 
 int client_set_name(struct client *client, char *name) {
-    if(!client || !name) {
+    if(!client || !name)
+    {
         return EXIT_FAILURE;
     }
-
-    if(client->state == 0) {
-        client->state = 1;
+    printf("Client set name state %d", client->state);
+    if(client->state == STATE_UNLOGGED)
+    {
+        client->state = STATE_IN_LOBBY;
     }
 
-    strncpy(client->name, name, 20);
-    client->name[20] = '\0';
+    strncpy(client->name, name, NAME_MAX_LENGTH);
+    client->name[NAME_MAX_LENGTH] = '\0';
 }
 

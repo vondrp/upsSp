@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import vondrovic.ups.sp.client.controller.AbstractController;
 import vondrovic.ups.sp.client.model.connection.ConnectionModel;
+import vondrovic.ups.sp.client.model.connection.MessageHandler;
+import vondrovic.ups.sp.client.model.game.GameModel;
 import vondrovic.ups.sp.client.model.game.Player;
 
 import java.io.IOException;
@@ -32,12 +34,12 @@ public class App extends Application {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
-
     private SceneEnum actualScene;
     private SceneEnum sceneEnum;
 
     private ConnectionModel connectionModel;
     private Receiver reciever;
+    private MessageHandler messageHandler;
 
     private I18Support bundle;
 
@@ -47,6 +49,8 @@ public class App extends Application {
 
     public static final int MAX_INVALID_MESSAGES = 5;
 
+
+    public GameModel gameModel;
     /**
      * Initialization of program
      */
@@ -64,6 +68,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         INSTANCE = this;
         this.stage = stage;
+
+        this.messageHandler = new MessageHandler(stage);
         stage.setTitle(bundle.getString("title"));
         this.setScene(SceneEnum.MAIN_MENU);
     }
@@ -116,7 +122,8 @@ public class App extends Application {
 
     public void connect(String address, int port) throws IOException {
         this.connectionModel = new ConnectionModel(address, port);
-        this.reciever = new Receiver(this.connectionModel);
+        System.out.println("V receiver");
+        this.reciever = new Receiver(this.connectionModel, this.messageHandler);
         this.reciever.start();
     }
 
@@ -181,6 +188,16 @@ public class App extends Application {
         Platform.exit();
     }
 
+
+    /**
+     * Method to stop the program
+     */
+    @Override
+    public void stop(){
+        System.exit(0);
+        // Save file
+    }
+
     public SceneEnum getSceneEnum() {
         return sceneEnum;
     }
@@ -193,4 +210,10 @@ public class App extends Application {
     public Player getPlayer() {
         return player;
     }
+
+    public GameModel getGameModel() {
+        return gameModel;
+    }
+
+
 }

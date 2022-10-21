@@ -47,10 +47,6 @@ public class GameBoard {
      */
     private final Canvas boardCanvas;
 
-    /**
-     * ships located at board
-     */
-    private Ship[] boardShips;
 
     /**
      * information if the board belongs to enemy
@@ -60,48 +56,42 @@ public class GameBoard {
     /**
      * status
      */
-    private final Square[][] squares = new Square[MAX+1][MAX+1];
+    private Square[][] squares;
 
     /**
      * instance of random generator
      */
     private final Random rand;
 
-    /**
-     * currently picked up ship
-     */
-    private Ship pickedUpShip = null;
+
+    private GameModel gameModel;
 
     /**
      * Create instance of the Board
      * @param canvasBoard   canvas, where board is painted
      * @param isEnemy       if board belong to enemy
      */
-    public GameBoard(Canvas canvasBoard, boolean isEnemy) {
+    public GameBoard(Canvas canvasBoard, GameModel gameModel, boolean isEnemy) {
         rand = new Random();
         this.boardCanvas = canvasBoard;
         this.isEnemy = isEnemy;
+        this.gameModel = gameModel;
 
-        for (int i = MIN; i <= MAX; i++)
+        if (isEnemy)
         {
-            for (int j = MIN; j <= MAX; j++)
-            {
-                squares[i][j] = new Square(i, j, SquareStatus.EMPTY);
-            }
+            squares = gameModel.getEnemyBoard();
+        }
+        else
+        {
+            squares = gameModel.getMyBoard();
         }
 
-        // if the board belongs to enemy ships not initialized
+        // if the board belongs to enemy ships not initialized + enemy does not need drag function
         if (!isEnemy)
-        {
-            initializeShips();
-            populateShips();
-        }
-        else    // enemy board does not need drag function (used for moving ships)
         {
             // set on dragging start - drop is in
             this.boardCanvas.setOnDragDetected(this::dragEvent);
         }
-
     }
 
     /**
@@ -126,27 +116,11 @@ public class GameBoard {
             }
 
             square.getShip().setPickedUp(true);
-            this.pickedUpShip = square.getShip();
 
+            this.gameModel.setPickedUpShipId(square.getShip().getId());
             this.boardCanvas.setCursor(Cursor.HAND);
             repaint();
         }
-    }
-
-    /**
-     * Initialize array of ships
-     */
-    private void initializeShips()
-    {
-        this.boardShips = new Ship[]{
-                new Ship(ShipType.CARRIER, 1),
-                new Ship(ShipType.CRUISER, 2),
-                new Ship(ShipType.CRUISER, 3),
-                new Ship(ShipType.DESTROYER, 4),
-                new Ship(ShipType.DESTROYER, 5),
-                new Ship(ShipType.DESTROYER, 6),
-                new Ship(ShipType.SUBMARINE, 7)
-        };
     }
 
 
@@ -293,12 +267,11 @@ public class GameBoard {
         // in enemy case player is firing
         if (isEnemy)
         {
-
             switch (square.getSquareStatus()) {
                 case SHIP:
                     square.hitShip();
                     if (isFriendlyShipDestroyed(square)) {
-                        markDestroyedShip(square);
+                        gameModel.markDestroyedShip(square, squares);
                     }
                     break;
                 case EMPTY:
@@ -312,21 +285,26 @@ public class GameBoard {
         }
         else // setting up ship
         {
+            System.out.println("čas: " + gameModel.getPickedUpShip());
             // cancel picking up ship when click on the same position
-            if (pickedUpShip != null && pickedUpShip.getBoardPosition() == p)
+            if (gameModel.getPickedUpShipId() != null)
             {
-                pickedUpShip.setPickedUp(false);
-                pickedUpShip = null;
-                this.boardCanvas.setCursor(null);
-                repaint();
-                return false;
+                if (gameModel.getPickedUpShip().getBoardPosition() == p)
+                {
+                    gameModel.getPickedUpShip().setPickedUp(false);
+                    gameModel.setPickedUpShipId(null);
+
+                    this.boardCanvas.setCursor(null);
+                    repaint();
+                    return false;
+                }
             }
 
             // handling DROP
             // turning ship to (not ) be vertical, works only in no ship is picked up
-            if (square.getSquareStatus() == SquareStatus.SHIP && square.getShip() != null && pickedUpShip == null)
+            if (square.getSquareStatus() == SquareStatus.SHIP && square.getShip() != null && gameModel.getPickedUpShip() == null)
             {
-                turnShip(square.getShip());
+                gameModel.turnShip(square.getShip());
                 repaint();
                 return true;
             }
@@ -335,16 +313,16 @@ public class GameBoard {
             // protection against error which could occur lower
             if (this.boardCanvas.getCursor() == null &&
                     (square.getSquareStatus() != SquareStatus.SHIP || square.getShip() == null)
-                    || this.pickedUpShip == null)
+                    || gameModel.getPickedUpShip() == null)
             {
                 return false;
             }
 
             // if clicked on the currently picked up ship, ship picking up cancel
-            if (belongsPositionToShip(p, this.pickedUpShip))
+            if (belongsPositionToShip(p, gameModel.getPickedUpShip()))
             {
-                this.pickedUpShip.setPickedUp(false);
-                this.pickedUpShip = null;
+                gameModel.getPickedUpShip().setPickedUp(false);
+                gameModel.setPickedUpShipId(null);
                 this.boardCanvas.setCursor(null);
             }
             else
@@ -358,40 +336,14 @@ public class GameBoard {
 
 
     /**
-     * Turn given ship to be vertical/not vertical
-     * @param ship  ship to be turned
-     */
-    private void turnShip(Ship ship)
-    {
-        int firstX = ship.getBoardPosition().getX();
-        int firstY = ship.getBoardPosition().getY();
-        boolean result = removeShip(ship);
-        if (result)
-        {
-            ship.setVertical(!ship.isVertical());
-            result = placeShip(ship, firstX, firstY);
-
-            if (!result)
-            {
-                ship.setVertical(!ship.isVertical());
-                placeShip(ship, firstX, firstY);
-            }
-        }
-    }
-
-    /**
      * Relocate picked up ship to give position
      * - will not success if ship cannot be placed on new position
      * @param p position, where ship try to be located
      */
     private void relocatePickedUpShip(Position p)
     {
-        if (canPlaceShip(pickedUpShip, p.getX(), p.getY()))
-        {
-            removeShip(pickedUpShip);
-            placeShip(pickedUpShip, p.getX(), p.getY());
-            pickedUpShip.setPickedUp(false);
-            pickedUpShip = null;
+        if (gameModel.canPlaceShip(gameModel.getPickedUpShip(), p.getX(), p.getY())) {
+            gameModel.relocatePickedUpShip(p);
             this.boardCanvas.setCursor(null);
         }
     }
@@ -456,240 +408,6 @@ public class GameBoard {
         return false;
     }
 
-    /**
-     * If ship is destroyed mark her neighbours as SquareStatus.MISSED
-     * @param square    square, where destroyed ship should be
-     */
-    public void markDestroyedShip(Square square)
-    {
-        int x = square.getX();
-        int y = square.getY();
-        boolean isVertical = false;
-
-        /*
-        if (!isFriendlyShipDestroyed(square))
-        {
-            return;
-        }*/
-        if (square.getSquareStatus() != SquareStatus.HIT)
-        {
-            return;
-        }
-
-        //mark neighbours of the hit piece itself
-        markNeighboursSquareAsMissed(squares[square.getX()][square.getY()]);
-
-        // if square above or under are marked as hit -> ship is placed vertical
-        if (isValidPoint(x, y + 1))
-        {
-            if (squares[x][y + 1].getSquareStatus() == SquareStatus.HIT)
-            {
-                isVertical = true;
-            }
-        }
-
-        if (isValidPoint(x, y - 1))
-        {
-            if (squares[x][y - 1].getSquareStatus() == SquareStatus.HIT)
-            {
-                isVertical = true;
-            }
-        }
-
-        int i = -1;
-        if (isVertical)
-        {
-            // mark below neighbours
-            while (isValidPoint(square.getX(), square.getY()+i)
-                    && squares[square.getX()][square.getY()+i].getSquareStatus() == SquareStatus.HIT)
-            {
-                markNeighboursSquareAsMissed(squares[square.getX()][square.getY()+i]);
-                i--;
-            }
-
-
-            i = 1;
-            // mark above neighbour
-            while (isValidPoint(square.getX(), square.getY()+i)
-                    && squares[square.getX()][square.getY()+i].getSquareStatus() == SquareStatus.HIT)
-            {
-               markNeighboursSquareAsMissed(squares[square.getX()][square.getY()+i]);
-               i++;
-            }
-        }
-        else
-        {
-            // mark left pieces neighbours
-            while (isValidPoint(square.getX()+i, square.getY())
-                    && squares[square.getX()+i][square.getY()].getSquareStatus() == SquareStatus.HIT)
-            {
-                markNeighboursSquareAsMissed(squares[square.getX()+i][square.getY()]);
-                i--;
-            }
-
-            i = 1;
-            // mark right pieces neighbour
-            while (isValidPoint(square.getX()+i, square.getY()))
-            {
-                System.out.println(squares[square.getX()+i][square.getY()].getSquareStatus());
-                if( squares[square.getX()+i][square.getY()].getSquareStatus() == SquareStatus.HIT)
-                {
-                    markNeighboursSquareAsMissed(squares[square.getX()+i][square.getY()]);
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-
-            }
-        }
-    }
-
-
-    /**
-     * Mark square neighbours as MISSED, if they are not HIT
-     * @param square        central square
-     */
-    private void markNeighboursSquareAsMissed(Square square)
-    {
-        Square[] squareNeighbors = getNeighbors(square.getX(), square.getY());
-        for (Square squareNeighbor : squareNeighbors) {
-            if (squareNeighbor.getSquareStatus() != SquareStatus.HIT) {
-                squareNeighbor.setSquareStatus(SquareStatus.MISSED);
-            }
-        }
-    }
-
-
-    /**
-     * Place ship at with first point at given coordinates
-     * @param ship  ship to place
-     * @param x     x-coordinate
-     * @param y     y-coordinate
-     * @return      true - successfully place, otherwise return false
-     */
-    public boolean placeShip(Ship ship, int x, int y) {
-        if (canPlaceShip(ship, x, y)) {
-            int length = ship.getShipType().getLength();
-
-            ship.setBoardPosition(new Position(x, y));
-            if (ship.isVertical()) {
-                for (int i = y; i < y + length; i++) {
-                    Square square = squares[x][i];
-                    square.placeShip(ship);
-                    //square.setSquareStatus(SquareStatus.SHIP);
-                }
-            }
-            else {
-                for (int i = x; i < x + length; i++) {
-                    Square square = squares[i][y];
-                    square.placeShip(ship);
-                    //square.setSquareStatus(SquareStatus.SHIP);
-                }
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Can ship be placed at given coordinates?
-     * @param ship      ship
-     * @param x         x-coordinate
-     * @param y         y-coordinate
-     * @return          true - can be place, false - cannot be
-     */
-    private boolean canPlaceShip(Ship ship, int x, int y) {
-        int length = ship.getShipType().getLength();
-
-        if (ship.isVertical()) {
-            for (int i = y; i < y + length; i++) {
-                if (!isValidPoint(x, i))
-                    return false;
-
-                Square square = squares[x][y];
-                if (square.getSquareStatus() != SquareStatus.EMPTY)
-                    return false;
-
-                for (Square neighbor : getNeighbors(x, i)) {
-                    if (!isValidPoint(x, i))
-                        return false;
-
-                    if (pickedUpShip != null)
-                    {
-                        if (neighbor.getSquareStatus() == SquareStatus.SHIP && neighbor.getShip().equals(pickedUpShip))
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (neighbor.getSquareStatus() != SquareStatus.EMPTY)
-                        return false;
-                }
-            }
-        }
-        else {
-            for (int i = x; i < x + length; i++) {
-                if (!isValidPoint(i, y))
-                    return false;
-
-                Square square = squares[i][y];
-                if (square.getSquareStatus() != SquareStatus.EMPTY)
-                    return false;
-
-                for (Square neighbor : getNeighbors(i, y)) {
-                    if (!isValidPoint(i, y))
-                        return false;
-
-                    if (pickedUpShip != null)
-                    {
-                        if (neighbor.getSquareStatus() == SquareStatus.SHIP && neighbor.getShip().equals(pickedUpShip))
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (neighbor.getSquareStatus() != SquareStatus.EMPTY)
-                        return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Find neighbours of square on given position
-     * @param x x-coordinate
-     * @param y y-coordinate
-     * @return  array of neighbours from 8 sides
-     */
-    private Square[] getNeighbors(int x, int y) {
-        Position[] points = new Position[] {
-                new Position(x - 1, y),
-                new Position(x + 1, y),
-                new Position(x, y - 1),
-                new Position(x, y + 1),
-
-                new Position(x + 1, y + 1),
-                new Position(x - 1, y - 1),
-                new Position(x + 1, y - 1),
-                new Position(x - 1, y + 1)
-        };
-
-        List<Square> neighbors = new ArrayList<>();
-
-        for (Position p : points) {
-            if (isValidPoint(p)) {
-                neighbors.add(squares[p.getX()][p.getY()]);
-            }
-        }
-
-        return neighbors.toArray(new Square[0]);
-    }
 
     /**
      * Find out if the point is valid
@@ -718,65 +436,7 @@ public class GameBoard {
         return boardCanvas;
     }
 
-    /**
-     * Clears all current ships, and then randomly places all the ships. The ships
-     * will not be placed over the top of other ships. This method assumes there is
-     * plenty of space to place all the ships regardless of configuration.
-     */
-    public void populateShips() {
-        for (Ship boardShip : boardShips) {
-            boolean vertical = rand.nextBoolean();
 
-            boardShip.setVertical(vertical);
-            int gridX, gridY;
-            do {
-                gridX = rand.nextInt(vertical ? MAX - boardShip.getShipType().getLength() : MAX);
-                gridY = rand.nextInt(vertical ? MAX : MAX - boardShip.getShipType().getLength());
-            } while (!canPlaceShip(boardShip, gridX, gridY));
-            placeShip(boardShip, gridX, gridY);
-        }
-    }
-
-    /**
-     * Remove ship from the canvas of the board
-     * @param ship  ship to be removed
-     * @return      true - success, false- fail
-     */
-    private boolean removeShip(Ship ship)
-    {
-        Position firstBlockPosition = ship.getBoardPosition();
-
-        if (firstBlockPosition == null || !isValidPoint(firstBlockPosition))
-        {
-            return false;
-        }
-
-        int x = firstBlockPosition.getX();
-        int y = firstBlockPosition.getY();
-        Square firstBlock = squares[x][y];
-
-        if (firstBlock.getShip() == null || firstBlock.getSquareStatus() != SquareStatus.SHIP)
-        {
-            return false;
-        }
-
-        int length = ship.getShipType().getLength();
-
-        if (ship.isVertical()) {
-            for (int i = y; i < y + length; i++) {
-                Square square = squares[x][i];
-                square.removeShip();
-            }
-        }
-        else {
-            for (int i = x; i < x + length; i++) {
-                Square square = squares[i][y];
-                square.removeShip();
-            }
-        }
-
-        return true;
-    }
 
     /**
      * Find out if given position, belongs to ship
@@ -835,7 +495,7 @@ public class GameBoard {
 
         if (destroyed)
         {
-            markDestroyedShip(squares[x][y]);
+            gameModel.markDestroyedShip(squares[x][y], squares);
         }
     }
 
@@ -851,16 +511,4 @@ public class GameBoard {
         repaint();
     }
 
-    public void setBoard(Square[][] squares)
-    {
-        for (int x = 0; x < MAX; x++)
-        {
-            for (int y = 0; y < MAX; y++)
-            {
-                // set board squares - coordinates are inc + 1, because actual
-                // game board includes additional 1 - 10 and A - J
-                this.squares[x + 1][y + 1] = squares[x][y];
-            }
-        }
-    }
 }

@@ -11,9 +11,4 @@ public class Stats {
     public int recievedMessages = 0;
     public int sentBytes = 0;
     public int recievedBytes = 0;
-
-
-    public Stats() {
-
-    }
 }

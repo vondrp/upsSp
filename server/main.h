@@ -27,11 +27,25 @@ void close_connection(int fd);
 int process_message(server *server, int fd, char *message);
 
 /**
+ * Function used to send given client a message
+ * @param client    client to who the message is being send
+ * @param message   message to sed
+ */
+void send_message(struct client *client, char *message, ...);
+
+/**
+ * Function to print and save trace information
+ * @param message message format
+ * @param ... message values
+ */
+void trace(char *message,...);
+
+/**
  * Function to save statistics data into file
  */
 void saveStats();
 
 
-void intHandler(int dummy);
+void intHandler();
 
 #endif //SERVER_MAIN_H

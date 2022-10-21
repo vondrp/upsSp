@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.HBox?>
 <BorderPane fx:id="borderPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -21,6 +22,10 @@
                 <Label fx:id="userNameLabel" />
             </items>
         </ToolBar>
+
+        <HBox fx:id="readyHBox" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Button fx:id="readyButton" mnemonicParsing="false" onAction="#handleLeave" text="Ready" />
+        </HBox>
     </top>
     <right>
         <AnchorPane fx:id="sideBar" prefHeight="603.0" prefWidth="202.0" BorderPane.alignment="CENTER">

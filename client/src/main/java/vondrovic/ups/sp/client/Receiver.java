@@ -3,6 +3,8 @@ package vondrovic.ups.sp.client;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import vondrovic.ups.sp.client.model.connection.ConnectionModel;
+import vondrovic.ups.sp.client.model.connection.MessageHandler;
+import vondrovic.ups.sp.client.model.connection.Stats;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +16,7 @@ public class Receiver extends Thread {
 
     ConnectionModel connectionModel;
     BufferedReader bufferedReader;
-    //MessageHandler messageHandler;
+    MessageHandler messageHandler;
     boolean running = false;
 
     /**
@@ -22,9 +24,9 @@ public class Receiver extends Thread {
      * @param connectionModel connection
      * @throws IOException
      */
-    public Receiver(ConnectionModel connectionModel) throws IOException {
+    public Receiver(ConnectionModel connectionModel, MessageHandler messageHandler) throws IOException {
         this.connectionModel = connectionModel;
-        //this.messageHandler = messageHandler;
+        this.messageHandler = messageHandler;
 
         this.bufferedReader = connectionModel.getBufferedReader();
     }
@@ -74,18 +76,18 @@ public class Receiver extends Thread {
                 return;
             }
 
-            /*
+
             if(line.length() != 0) {
 
                 Stats.INSTANCE.recievedMessages++;
                 Stats.INSTANCE.recievedBytes += line.length() + 1;
 
                 try {
-                    messageHandler.proccessMessage(line);
+                    messageHandler.processMessage(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }*/
+            }
 
             try {
                 Thread.sleep(20);

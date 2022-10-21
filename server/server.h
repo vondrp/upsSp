@@ -71,11 +71,4 @@ void server_disconnect(server *server, int fd_number);
  */
 void server_listen(server *server, char *port);
 
-/**
- * Function to print and save trace information
- * @param message message format
- * @param ... message values
- */
-void trace(char *message,...);
-
 #endif //SERVER_SERVER_H

@@ -1,0 +1,318 @@
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 disconnected, closing connection
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 disconnected, closing connection
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 disconnected, closing connection
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 - Socket was disconnected at its request
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 - Socket was disconnected at its request
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhyUcet
+
+Socket 6 - User druhyUcet logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 disconnected, closing connection
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission room_join_req;0
+
+Sock1et 6 - Room join was rejected due to wrong client state (3)
+Socket 6 receiving transmission room_join_req;0
+
+Sock1et 6 - Room join was rejected due to wrong client state (3)
+Socket 6 disconnected, closing connection
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Game 0 was terminated due client leave
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Room leaving failed due wrong client state (1)
+Socket 5 disconnected, closing connection
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp is logged bud disconnected, reconnecting
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission room_leave_req
+
+Socket 6 - Game 0 was terminated due client leave
+Socket 6 - Client left the game/room
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Room leaving failed due wrong client state (1)
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission room_leave_req
+
+Socket 6 - Game 0 was terminated due client leave
+Socket 6 - Client left the game/room
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Room leaving failed due wrong client state (1)
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Room leaving failed due wrong client state (1)
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection

@@ -4,24 +4,25 @@
 
 #include "hashmap.h"
 #include <stdio.h>
-/* 	Internal funcion to calculate hash for keys.
-	It's based on the DJB algorithm from Daniel J. Bernstein.
-	The key must be ended by '\0' character.*/
+
 static unsigned int ht_calc_hash(char* key)
 {
     unsigned int h = 5381;
     while(*(key++))
+    {
         h = ((h << 5) + h) + (*key);
+    }
+
     return h;
 }
 
-/* 	Create a hashtable with capacity 'capacity'
-	and return a pointer to it*/
 hashtable_t *ht_create(unsigned int capacity)
 {
     hashtable_t* hasht = malloc(sizeof(hashtable_t));
     if(!hasht)
+    {
         return NULL;
+    }
 
     hasht->table = (hash_elem_t **) malloc(capacity * sizeof(hash_elem_t *));
     if(!(hasht->table)) {

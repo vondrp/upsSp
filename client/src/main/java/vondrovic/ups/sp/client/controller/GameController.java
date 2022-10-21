@@ -3,15 +3,19 @@ package vondrovic.ups.sp.client.controller;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import vondrovic.ups.sp.client.AlertFactory;
+import vondrovic.ups.sp.client.App;
 import vondrovic.ups.sp.client.model.game.GameBoard;
+import vondrovic.ups.sp.client.model.game.GameModel;
 
 /**
  * Controller of the Game fxml
@@ -31,6 +35,12 @@ public class GameController extends AbstractController {
     ToolBar toolBar;
 
     @FXML
+    HBox readyHBox;
+
+    @FXML
+    Button readyButton;
+
+    @FXML
     AnchorPane anchorPane;
 
     @FXML
@@ -45,18 +55,22 @@ public class GameController extends AbstractController {
     @FXML
     TextArea protocol;
 
+    private GameModel gameModel = App.INSTANCE.getGameModel();
+
     /**
      * Left
      */
     private GameBoard leftBoard;
 
     private GameBoard rightBoard;
-   // GameModel gameModel = App.INSTANCE.getGameModel();
 
     @Override
     public void initialize() {
-        this.leftBoard = new GameBoard(this.leftBoardCanvas, false);
-        this.rightBoard = new GameBoard(this.rightBoardCanvas, true);
+        //App.INSTANCE.gameModel = new GameModel();
+        //this.gameModel = App.INSTANCE.getGameModel();
+
+        this.leftBoard = new GameBoard(this.leftBoardCanvas, this.gameModel, false);
+        this.rightBoard = new GameBoard(this.rightBoardCanvas, this.gameModel, true);
 
         // left side
         this.leftBoard.getBoardCanvas().setHeight(anchorPane.getHeight()/2);
@@ -97,9 +111,14 @@ public class GameController extends AbstractController {
     @FXML
     public void handleLeave() {
         if(AlertFactory.sendConfirmation("Leave The Game", "Are you sure you want to leave the game? The game will end.")) {
-            //App.sendMessage("room_leave_req");
-            System.out.println("leave");
+            App.sendMessage("room_leave_req");
         }
+    }
+
+    public void readyToPlay()
+    {
+
+        App.sendMessage("game_prepared");
     }
 
     /**
@@ -120,6 +139,14 @@ public class GameController extends AbstractController {
     @FXML
     public void handleRightCanvasClick(MouseEvent event) {
         this.rightBoard.handleCanvasClick(event);
+    }
+
+    /**
+     * Method to add message to the protocol pane
+     * @param s
+     */
+    public void protocolAdd(String s) {
+        protocol.appendText(s + "\n");
     }
 
 }

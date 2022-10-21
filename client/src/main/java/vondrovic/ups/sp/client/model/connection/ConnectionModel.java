@@ -60,8 +60,8 @@ public class ConnectionModel {
      * @param message message
      */
     public void sendMessage(String message) {
-        //Stats.INSTANCE.sentMessages++;
-        //Stats.INSTANCE.sentBytes += message.length() + 1;
+        Stats.INSTANCE.sentMessages++;
+        Stats.INSTANCE.sentBytes += message.length() + 1;
         this.printWriter.println(message);
         this.printWriter.flush();
     }

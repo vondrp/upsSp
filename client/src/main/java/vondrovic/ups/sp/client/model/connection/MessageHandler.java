@@ -10,11 +10,21 @@ import java.util.ArrayList;
 import vondrovic.ups.sp.client.AlertFactory;
 import vondrovic.ups.sp.client.App;
 import vondrovic.ups.sp.client.SceneEnum;
+import vondrovic.ups.sp.client.controller.GameController;
 import vondrovic.ups.sp.client.controller.LobbyController;
+import vondrovic.ups.sp.client.model.game.GameModel;
 import vondrovic.ups.sp.client.model.game.Player;
 
 public class MessageHandler {
-    
+
+    // states of client
+    private final int STATE_UNLOGGED = 0;
+    private final int STATE_IN_LOBBY = 1;
+    private final int STATE_IN_ROOM = 2;
+    private final int STATE_IN_GAME = 3;
+    private final int STATE_IN_GAME_PLAYING = 4;
+
+
     Window window;
     public int invalidMessages = 0;
 
@@ -45,11 +55,13 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("login_ok"))
         {
             this.invalidMessages = 0;
-            if(message.length <= 2) {
+            if(message.length <= 2)
+            {
                 return;
             }
 
-            if(App.INSTANCE.getSceneEnum() != SceneEnum.CONNECT) {
+            if(App.INSTANCE.getSceneEnum() != SceneEnum.CONNECT)
+            {
                 return;
             }
 
@@ -57,12 +69,12 @@ public class MessageHandler {
 
             Platform.runLater(() -> {
                 App.INSTANCE.player = new Player(message[1], state);
-                if(state == 2) {
-                    //App.INSTANCE.gameModel = new GameModel();
+                if(state == STATE_IN_ROOM) {
+                    App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.setScene(SceneEnum.ROOM);
-                } else if(state == 3 || state == 4) {
+                } else if(state == STATE_IN_GAME || state == STATE_IN_GAME_PLAYING) {
                     // TODO nastaveni game model
-                    //App.INSTANCE.gameModel = new GameModel();
+                    App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.setScene(SceneEnum.GAME);
                     App.sendMessage("game_info_req");
                 } else {
@@ -100,7 +112,6 @@ public class MessageHandler {
             LobbyController controller = (LobbyController) App.INSTANCE.getController();
             Platform.runLater(() -> {
 
-                //controller.e
                 ArrayList<Room> rooms = new ArrayList<Room>();
                 for(int i = 2; i < message.length; i = i + 2) {
                     rooms.add(new Room(message[i], Integer.parseInt(message[i - 1])));
@@ -120,7 +131,7 @@ public class MessageHandler {
         if(message[0].equalsIgnoreCase("room_create_ok")) {
             this.invalidMessages = 0;
 
-            //App.INSTANCE.gameModel = new GameModel();
+            App.INSTANCE.gameModel = new GameModel();
 
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.ROOM);
@@ -136,8 +147,8 @@ public class MessageHandler {
                 return;
             }
 
-            //App.INSTANCE.gameModel = new GameModel();
-            //App.INSTANCE.getGameModel().setOpponentName(message[1]);
+            App.INSTANCE.gameModel = new GameModel();
+            App.INSTANCE.getGameModel().setOpponentName(message[1]);
 
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.ROOM);
@@ -159,9 +170,9 @@ public class MessageHandler {
                 return;
             }
 
-            //App.INSTANCE.getGameModel().setOpponentName(message[1]);
+            App.INSTANCE.getGameModel().setOpponentName(message[1]);
             if(App.INSTANCE.getSceneEnum() == SceneEnum.GAME) {
-                //((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " joined the game.");
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " joined the game.");
             }
 
             return;
@@ -169,7 +180,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_leave_ok")) {
             this.invalidMessages = 0;
-            //App.INSTANCE.gameModel = null;
+            App.INSTANCE.gameModel = null;
 
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.LOBBY);
@@ -187,8 +198,38 @@ public class MessageHandler {
         if(message[0].equalsIgnoreCase("room_leave_opp")) {
             this.invalidMessages = 0;
             if(App.INSTANCE.getSceneEnum() == SceneEnum.GAME) {
-                //((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " left the game.");
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " left the game.");
             }
+        }
+
+        if(message[0].equalsIgnoreCase("game_start")) {
+            System.out.println("jsem v game_start");
+            this.invalidMessages = 0;
+
+            if(App.INSTANCE.getSceneEnum() != SceneEnum.LOBBY && App.INSTANCE.getSceneEnum() != SceneEnum.ROOM) {
+
+                return;
+            }
+
+            //GameModel.PlayerColor color;
+
+            /*if (message[1].equalsIgnoreCase("white")) {
+                color = GameModel.PlayerColor.WHITE;
+            } else if(message[1].equalsIgnoreCase("black")) {
+                color = GameModel.PlayerColor.BLACK;
+            } else {
+
+                return;
+            }*/
+
+            //App.INSTANCE.getGameModel().setPlayerColor(color);
+            App.INSTANCE.getGameModel().init();
+
+            Platform.runLater(() -> {
+                App.INSTANCE.setScene(SceneEnum.GAME);
+            });
+
+            return;
         }
 
         this.invalidMessages++;
