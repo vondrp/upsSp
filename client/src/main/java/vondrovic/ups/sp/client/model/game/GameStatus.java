@@ -4,7 +4,8 @@ public enum GameStatus {
 
     PREPARING(0),
     PLAYING(1),
-    WAITING(2);
+    WAITING(2),
+    ENEMY_PLAYING(3);
 
     private final Integer id;
 

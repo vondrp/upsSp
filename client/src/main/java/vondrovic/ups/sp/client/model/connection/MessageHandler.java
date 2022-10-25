@@ -13,6 +13,7 @@ import vondrovic.ups.sp.client.SceneEnum;
 import vondrovic.ups.sp.client.controller.GameController;
 import vondrovic.ups.sp.client.controller.LobbyController;
 import vondrovic.ups.sp.client.model.game.GameModel;
+import vondrovic.ups.sp.client.model.game.GameStatus;
 import vondrovic.ups.sp.client.model.game.Player;
 
 public class MessageHandler {
@@ -202,8 +203,8 @@ public class MessageHandler {
             }
         }
 
-        if(message[0].equalsIgnoreCase("game_start")) {
-            System.out.println("jsem v game_start");
+        if(message[0].equalsIgnoreCase("game_conn")) {
+            System.out.println("jsem v game_conn");
             this.invalidMessages = 0;
 
             if(App.INSTANCE.getSceneEnum() != SceneEnum.LOBBY && App.INSTANCE.getSceneEnum() != SceneEnum.ROOM) {
@@ -211,25 +212,26 @@ public class MessageHandler {
                 return;
             }
 
-            //GameModel.PlayerColor color;
-
-            /*if (message[1].equalsIgnoreCase("white")) {
-                color = GameModel.PlayerColor.WHITE;
-            } else if(message[1].equalsIgnoreCase("black")) {
-                color = GameModel.PlayerColor.BLACK;
-            } else {
-
-                return;
-            }*/
-
-            //App.INSTANCE.getGameModel().setPlayerColor(color);
             App.INSTANCE.getGameModel().init();
-
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.GAME);
             });
 
             return;
+        }
+
+        if (message[0].equalsIgnoreCase("game_prepared_ok"))
+        {
+            this.invalidMessages = 0;
+            System.out.println("V game prepared ok");
+        }
+
+
+        if (message[0].equalsIgnoreCase("game_play"))
+        {
+            System.out.println("V game play");
+            App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
         }
 
         this.invalidMessages++;

@@ -33,6 +33,9 @@ void game_init(struct game *game)
     game->player1->playerNum = 1;
     game->player2->playerNum = 2;
 
+    game->player1_prepare = 0;
+    game->player2_prepare = 0;
+
     for(i = 0; i < SHIP_GAME_BOARD_SIZE; i++) {
         for(j = 0; j < SHIP_GAME_BOARD_SIZE; j++) {
             game->player1_board[i][j] = 'E';

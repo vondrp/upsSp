@@ -24,7 +24,7 @@
         </ToolBar>
 
         <HBox fx:id="readyHBox" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-            <Button fx:id="readyButton" mnemonicParsing="false" onAction="#handleLeave" text="Ready" />
+            <Button fx:id="readyButton" mnemonicParsing="false" onAction="#readyToPlay" text="Ready" />
         </HBox>
     </top>
     <right>

@@ -16,6 +16,7 @@ import vondrovic.ups.sp.client.AlertFactory;
 import vondrovic.ups.sp.client.App;
 import vondrovic.ups.sp.client.model.game.GameBoard;
 import vondrovic.ups.sp.client.model.game.GameModel;
+import vondrovic.ups.sp.client.model.game.GameStatus;
 
 /**
  * Controller of the Game fxml
@@ -67,6 +68,7 @@ public class GameController extends AbstractController {
     @Override
     public void initialize() {
         //App.INSTANCE.gameModel = new GameModel();
+        //App.INSTANCE.gameModel.init();
         //this.gameModel = App.INSTANCE.getGameModel();
 
         this.leftBoard = new GameBoard(this.leftBoardCanvas, this.gameModel, false);
@@ -117,8 +119,9 @@ public class GameController extends AbstractController {
 
     public void readyToPlay()
     {
-
-        App.sendMessage("game_prepared");
+        String myBoard = this.gameModel.getMyBoardStringForm();
+        readyButton.setDisable(true);
+        App.sendMessage("game_prepared;"+myBoard);
     }
 
     /**
@@ -128,7 +131,11 @@ public class GameController extends AbstractController {
      */
     @FXML
     public void handleLeftCanvasClick(MouseEvent event) {
-        this.leftBoard.handleCanvasClick(event);
+
+        if (gameModel.getGameStatus() == GameStatus.PREPARING)
+        {
+            this.leftBoard.handleCanvasClick(event);
+        }
     }
 
     /**
@@ -138,7 +145,11 @@ public class GameController extends AbstractController {
      */
     @FXML
     public void handleRightCanvasClick(MouseEvent event) {
-        this.rightBoard.handleCanvasClick(event);
+
+        if (gameModel.getGameStatus() == GameStatus.PLAYING)
+        {
+            this.rightBoard.handleCanvasClick(event);
+        }
     }
 
     /**

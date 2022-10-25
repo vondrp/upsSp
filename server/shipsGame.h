@@ -10,6 +10,7 @@
 #define GAME_STATE_PLAYING 1
 
 #define SHIP_GAME_BOARD_SIZE 10
+#define GAME_BOARD_STRING_SIZE (SHIP_GAME_BOARD_SIZE * SHIP_GAME_BOARD_SIZE) + SHIP_GAME_BOARD_SIZE
 
 
 //char board_symbols[] = {'H', 'E', 'M', '0', '1', '2', '3', '4', '5', '6'};
@@ -20,8 +21,10 @@ struct game {
     int id;
     struct client *player1;
     struct client *player2;
-    signed char player1_board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
-    signed char player2_board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
+    int player1_prepare;
+    int player2_prepare;
+    unsigned char player1_board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
+    unsigned char player2_board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
     int p1_count;
     int p2_count;
     int state;

@@ -4,7 +4,7 @@
 #include "shipsGame.h"
 
 #define SPLIT_SYMBOL ';'
-const int COMMANDS_COUNT = 6;
+const int COMMANDS_COUNT = 8;
 const cmd_handler COMMANDS[] =
     {
         {"login_req", cmd_login},
@@ -12,6 +12,8 @@ const cmd_handler COMMANDS[] =
         {"room_list_req", cmd_room_list},
         {"room_join_req", cmd_room_join},
         {"room_leave_req", cmd_room_leave},
+        {"game_prepared", cmd_game_prepared},
+        {"game_hit", cmd_game_hit},
        // {"game_conn", cmd_game_conn},
        // {"game_prepared", cmd_game_prepared}
         {"logout_req", cmd_logout}
@@ -101,7 +103,8 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         sprintf(buff, "login_ok%c%s%c%d\n", SPLIT_SYMBOL, client->name, SPLIT_SYMBOL, client->state);
         ht_put(server->players, client->name, client);
         send_message(client, buff);
-        if(client->game && (client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING))
+        if(client->game && (client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING
+        || client->state == STATE_IN_GAME_PREPARING))
         {
             if(client->game->player1 == client) {
                 opp = client->game->player2;
@@ -134,7 +137,7 @@ int cmd_room_create(server *server, struct client *client, int argc, char **argv
     }
 
     room_create(server, client);
-    client->state = 2;
+    client->state = STATE_IN_ROOM;
 
     //CREATE ROOM
     send_message(client, "room_create_ok\n");
@@ -279,19 +282,23 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
     send_message(opponent, buf);
     trace("Socket %d - Room (%d) join success.", client->fd, room->id);
 
-    room->player1->state = STATE_IN_GAME;
-    room->player2->state = STATE_IN_GAME;
+    room->player1->state = STATE_IN_GAME_PREPARING;
+    room->player2->state = STATE_IN_GAME_PREPARING;
 
+
+    send_message(client, "game_conn\n");
+    send_message(opponent, "game_conn\n");
+    trace("Game %d - Room is full, game is starting", room->id);
     //TODO rozmyslet sprvavu
-    if(client == room->player1) {
-        send_message(client, "game_start\n");
-        send_message(opponent, "game_start\n");
+    /*if(client == room->player1) {
+        send_message(client, "game_conn\n");
+        send_message(opponent, "game_conn\n");
         trace("Game %d - Room is full, game is starting", room->id);
     } else if (client == room->player2){
         send_message(client, "game_start\n");
         send_message(opponent, "game_start\n");
         trace("Game %d - Room is full, game is starting", room->id);
-    }
+    }*/
 
     game_init(room);
     //room->player1->state = STATE_IN_GAME_PLAYING;
@@ -302,7 +309,8 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
 int cmd_room_leave(server *server, struct client *client, int argc, char **argv) {
 
     char buf[64];
-    if(client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING) {
+    if(client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING || client->state == STATE_IN_GAME_PREPARING)
+    {
 
         struct client *opp = NULL;
         char * winner;
@@ -392,7 +400,8 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
                 client->game = NULL;
             }
         }
-    } else if(client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING) {
+    } else if(client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING
+    || client->state == STATE_IN_GAME_PREPARING) {
 
         struct client *opp = NULL;
         char* winner = NULL;
@@ -421,7 +430,92 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
     return EXIT_SUCCESS;
 }
 
-/*int cmd_game_conn()
-{
 
-}*/
+int cmd_game_prepared(server *server, struct client *client, int argc, char **argv) {
+
+    int i, j;
+    if (client->state != STATE_IN_GAME_PREPARING)
+    {
+        send_message(client, "game_err%c%d\n", SPLIT_SYMBOL, 10);
+        trace("Socket %d - Tried to prepared game when not in right state", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if(argc < 1) {
+        send_message(client, "game_err%c%d\n", SPLIT_SYMBOL, 2);
+        trace("Socket %d Game prepared failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (strlen(argv[0]) != GAME_BOARD_STRING_SIZE)
+    {
+        send_message(client, "game_err%c%d\n", SPLIT_SYMBOL, 2);
+        trace("Socket %d Game prepared failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+    int x = 0;
+    int y = 0;
+    unsigned char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
+
+    for (i = 0; i < strlen(argv[0]); i++)
+    {
+        //TODO kontrola znaku
+        if (argv[0][i]  == '/')
+        {
+            continue;
+        }
+
+        board[y][x] = argv[0][i];
+
+        x++;
+        if (x >= SHIP_GAME_BOARD_SIZE)
+        {
+            y++;
+        }
+    }
+
+    if (client->playerNum == 1)
+    {
+        client->game->player1_prepare = 1;
+
+        for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
+        {
+            for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
+            {
+                client->game->player1_board[i][j] = board[i][j];
+            }
+        }
+    }
+    else if (client->playerNum == 2)
+    {
+        client->game->player2_prepare = 1;
+        for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
+        {
+            for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
+            {
+                client->game->player2_board[i][j] = board[i][j];
+            }
+        }
+    }
+
+    if (client->game->player1_prepare == 1 && client->game->player2_prepare == 1)
+    {
+        client->game->player1->state = STATE_IN_GAME_PLAYING;
+        client->game->player2->state = STATE_IN_GAME;
+        if (client->playerNum == 1)
+        {
+            send_message(client, "game_start");
+        }
+        else
+        {
+            send_message(client->game->player1, "game_start");
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int cmd_game_hit(server *server, struct client *client, int argc, char **argv)
+{
+    printf("V game hit %s", client->name);
+}

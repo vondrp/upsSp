@@ -510,5 +510,4 @@ public class GameBoard {
         this.squares[x][y].setSquareStatus(status);
         repaint();
     }
-
 }

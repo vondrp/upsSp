@@ -18,6 +18,14 @@ shipsGame.h
 
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.h
 
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c
+client.h
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.h
+stdlib.h
+-
+stdio.h
+-
+
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.h
 string.h
 -

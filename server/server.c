@@ -214,7 +214,8 @@ void server_listen(server *server, char *port) {
 
     struct game *game = client->game;
 
-    if(game && (client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING)) {
+    if(game && (client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING
+    || client->state == STATE_IN_GAME_PREPARING)) {
         struct client *opp;
         if(game->player1 == client) {
             opp = game->player2;

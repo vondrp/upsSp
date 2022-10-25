@@ -60,14 +60,11 @@ public class GameModel {
         this.enemyBoard = enemyBoard;
     }
 
-    /**
-     * Getter for playing boolean value
-     *
-     * @return boolean value
-     */
-    public boolean isPlaying() {
-        return gameStatus == GameStatus.PLAYING;
+    public GameStatus getGameStatus()
+    {
+        return this.gameStatus;
     }
+
 
     public Square[][] getEnemyBoard() {
         return enemyBoard;
@@ -467,7 +464,7 @@ public class GameModel {
     }
 
 
-    public String convertMyBoardToString() {
+    public String getMyBoardStringForm() {
         StringBuilder stringForm = new StringBuilder();
         char c;
         Square sq;
