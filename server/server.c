@@ -188,6 +188,7 @@ void server_listen(server *server, char *port) {
                             trace("Socket %d receiving transmission %s", i, buf);
                             server->stat_messages_in++;
                             server->stat_bytes_in += nbytes;
+
                             process_message(server, i, buf);
                             if(server->clients[i]->invalid_count >= MAX_INVALID_MESSAGES) {
                                 trace("Socket %d exceeded the invalid message limit, was disconnected", i);

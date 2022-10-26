@@ -41,7 +41,6 @@ public class LobbyController extends AbstractController
             public void changed(ObservableValue<? extends Room> observable,
                                 Room oldValue, Room newValue) {
                 joinButton.setDisable(newValue == null);
-
             }
         });
 

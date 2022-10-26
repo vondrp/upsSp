@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import vondrovic.ups.sp.client.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -265,8 +266,13 @@ public class GameBoard {
 
         Square square = squares[p.getX()][p.getY()];
         // in enemy case player is firing
-        if (isEnemy)
+        if (isEnemy && gameModel.getGameStatus() == GameStatus.PLAYING)
         {
+            int serverX = p.getX() - 1;
+            int serverY = p.getY() - 1;
+            App.sendMessage("game_fire;"+serverX+";"+serverY);
+            gameModel.setGameStatus(GameStatus.WAITING);
+            /*
             switch (square.getSquareStatus()) {
                 case SHIP:
                     square.hitShip();
@@ -282,10 +288,10 @@ public class GameBoard {
                 default:
                     return false;
             }
+            */
         }
-        else // setting up ship
+        else if (gameModel.getGameStatus() == GameStatus.PREPARING)// setting up ship
         {
-            System.out.println("čas: " + gameModel.getPickedUpShip());
             // cancel picking up ship when click on the same position
             if (gameModel.getPickedUpShipId() != null)
             {

@@ -159,7 +159,7 @@ int process_message(server *server, int fd, char *message)
 
     if(message_length > 1)
     {
-        if(message[message_length - 2] == 13)
+        if(message[message_length - 2] == 13) //
         {
             message[message_length - 2] = '\0';
 
@@ -168,7 +168,7 @@ int process_message(server *server, int fd, char *message)
 
     message_length = strlen(message);
     if(message[message_length - 1] == SPLIT_SYMBOL) {
-        message[message_length - 1] == '\0';
+        message[message_length - 1] = '\0';
         message_length--;
     }
 
@@ -191,12 +191,12 @@ int process_message(server *server, int fd, char *message)
     if(argc == 0) {
         message_type = message;
     } else {
-        message_type = strtok(message, split_symbol_string);
+        message_type = strtok(message, ";");
     }
 
     for(i = 0; i < argc; i++)
     {
-        argv[i] = strtok(NULL, split_symbol_string);
+        argv[i] = strtok(NULL, ";");
     }
 
     fcmd handler = get_handler(message_type);

@@ -44,12 +44,12 @@ void game_init(struct game *game)
     }
 }
 
-void save_board(char * string_board, int playerNumber)
+void save_board(char * string_board, struct game *game, int playerNumber)
 {
     int x = 0 , y = 0, i, j;
     //int arrLen = sizeof board_symbols / sizeof board_symbols[0];
     //int isElementPresent = 0;
-    signed char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
+    unsigned char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
     for (i = 0; i < strlen(string_board); i++)
     {
         /*
@@ -59,13 +59,18 @@ void save_board(char * string_board, int playerNumber)
             }
         }*/
 
-        board[x][y] = string_board[i];
+        board[y][x] = string_board[i];
         x++;
         if (x >= SHIP_GAME_BOARD_SIZE)
         {
             x = 0;
             y++;
         }
+    }
+
+    if (playerNumber == 1)
+    {
+        //game->player1_board = board;
     }
 }
 void game_end(server *server, struct game *game, char* name) {

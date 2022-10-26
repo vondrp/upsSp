@@ -82,5 +82,5 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv);
 
 int cmd_game_prepared(server *server, struct client *client, int argc, char **argv);
 
-int cmd_game_hit(server *server, struct client *client, int argc, char **argv);
+int cmd_game_fire(server *server, struct client *client, int argc, char **argv);
 #endif //SP_COMMANDS_H

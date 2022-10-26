@@ -15,6 +15,7 @@ import vondrovic.ups.sp.client.controller.LobbyController;
 import vondrovic.ups.sp.client.model.game.GameModel;
 import vondrovic.ups.sp.client.model.game.GameStatus;
 import vondrovic.ups.sp.client.model.game.Player;
+import vondrovic.ups.sp.client.model.game.SquareStatus;
 
 public class MessageHandler {
 
@@ -204,7 +205,6 @@ public class MessageHandler {
         }
 
         if(message[0].equalsIgnoreCase("game_conn")) {
-            System.out.println("jsem v game_conn");
             this.invalidMessages = 0;
 
             if(App.INSTANCE.getSceneEnum() != SceneEnum.LOBBY && App.INSTANCE.getSceneEnum() != SceneEnum.ROOM) {
@@ -224,14 +224,57 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_prepared_ok"))
         {
             this.invalidMessages = 0;
-            System.out.println("V game prepared ok");
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
+        }
+
+        if (message[0].equalsIgnoreCase("game_prepared_err"))
+        {
+            AlertFactory.sendErrorMessageOutside("Game prepare error", "An error occurred while preparing a game. Try again.");
+            ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid");
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
         }
 
 
         if (message[0].equalsIgnoreCase("game_play"))
         {
-            System.out.println("V game play");
+            this.invalidMessages = 0;
             App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
+        }
+
+
+        if (message[0].equalsIgnoreCase("game_fire_ok"))
+        {
+            this.invalidMessages = 0;
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
+        }
+
+        if (message[0].equalsIgnoreCase("game_opp_fire"))
+        {
+            if (message.length < 3) return;
+
+            int x = Integer.parseInt(message[1]) + 1;
+
+            int y = Integer.parseInt(message[2]) + 1;
+
+            char status = message[3].charAt(0);
+
+            App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
+            SquareStatus squareStatus;
+            switch (status)
+            {
+                case 'H':
+                    squareStatus = SquareStatus.HIT;
+                case 'M':
+                default:
+                    squareStatus = SquareStatus.MISSED;
+                    break;
+            }
+            App.INSTANCE.gameModel.hitEnemy(x, y, squareStatus);
+
+            ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit x = " + x + " y = " + y + " status: " + status);
+            ((GameController) App.INSTANCE.getController()).repaint();
+
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
         }
 
         this.invalidMessages++;

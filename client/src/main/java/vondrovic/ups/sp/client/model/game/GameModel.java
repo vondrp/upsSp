@@ -269,6 +269,11 @@ public class GameModel {
         return enemyBoard[x][y].getSquareStatus() == SquareStatus.EMPTY;
     }
 
+    public void hitEnemy(int x, int y, SquareStatus status)
+    {
+        this.enemyBoard[x][y].setSquareStatus(status);
+    }
+
     /**
      * Find out if the point is valid
      *
@@ -491,8 +496,9 @@ public class GameModel {
                         break;
                 }
             }
-            stringForm.append("/");
+            stringForm.append(",");
         }
+        stringForm.append("\0");
         return stringForm.toString();
     }
 
@@ -519,7 +525,7 @@ public class GameModel {
             if (!success)
                 break;
 
-            if (string_form.charAt(i) == '/' || string_form.charAt(i) == '\0')
+            if (string_form.charAt(i) == ',' || string_form.charAt(i) == '\0')
             {
                 continue;
             }

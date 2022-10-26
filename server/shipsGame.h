@@ -25,6 +25,7 @@ struct game {
     int player2_prepare;
     unsigned char player1_board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
     unsigned char player2_board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
+
     int p1_count;
     int p2_count;
     int state;
@@ -54,5 +55,5 @@ void game_init(struct game *game);
 void game_end(server *server, struct game *game, char* name_winner);
 
 
-void save_board(char * board, int playerNumber);
+void save_board(char * string_board, struct game *game, int playerNumber);
 #endif

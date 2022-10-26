@@ -13,7 +13,7 @@ const cmd_handler COMMANDS[] =
         {"room_join_req", cmd_room_join},
         {"room_leave_req", cmd_room_leave},
         {"game_prepared", cmd_game_prepared},
-        {"game_hit", cmd_game_hit},
+        {"game_fire_req", cmd_game_fire},
        // {"game_conn", cmd_game_conn},
        // {"game_prepared", cmd_game_prepared}
         {"logout_req", cmd_logout}
@@ -285,6 +285,8 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
     room->player1->state = STATE_IN_GAME_PREPARING;
     room->player2->state = STATE_IN_GAME_PREPARING;
 
+    room->player1->playerNum = 1;
+    room->player2->playerNum = 2;
 
     send_message(client, "game_conn\n");
     send_message(opponent, "game_conn\n");
@@ -432,40 +434,48 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
 
 
 int cmd_game_prepared(server *server, struct client *client, int argc, char **argv) {
-
     int i, j;
+    int x = 0;
+    int y = 0;
+
     if (client->state != STATE_IN_GAME_PREPARING)
     {
-        send_message(client, "game_err%c%d\n", SPLIT_SYMBOL, 10);
+        send_message(client, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 10);
         trace("Socket %d - Tried to prepared game when not in right state", client->fd);
         return EXIT_FAILURE;
     }
 
     if(argc < 1) {
-        send_message(client, "game_err%c%d\n", SPLIT_SYMBOL, 2);
+        send_message(client, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 2);
         trace("Socket %d Game prepared failed due message format error", client->fd);
         return EXIT_FAILURE;
     }
 
     if (strlen(argv[0]) != GAME_BOARD_STRING_SIZE)
     {
-        send_message(client, "game_err%c%d\n", SPLIT_SYMBOL, 2);
+        send_message(client, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 2);
         trace("Socket %d Game prepared failed due message format error", client->fd);
         return EXIT_FAILURE;
     }
-    int x = 0;
-    int y = 0;
-    unsigned char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
 
-    for (i = 0; i < strlen(argv[0]); i++)
+    //unsigned char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
+    for (i = 0; i < GAME_BOARD_STRING_SIZE; i++)
     {
         //TODO kontrola znaku
-        if (argv[0][i]  == '/')
+        // send_message(client, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 2);
+        if (argv[0][i]  == ',')
         {
             continue;
         }
-
-        board[y][x] = argv[0][i];
+        if (client->playerNum == 1)
+        {
+            client->game->player1_board[y][x] = argv[0][i];
+        }
+        else
+        {
+            client->game->player2_board[y][x] = argv[0][i];
+        }
+        //board[y][x] = argv[0][i];
 
         x++;
         if (x >= SHIP_GAME_BOARD_SIZE)
@@ -478,44 +488,147 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
     {
         client->game->player1_prepare = 1;
 
-        for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
+        /*for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
         {
             for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
             {
                 client->game->player1_board[i][j] = board[i][j];
             }
-        }
+        }*/
     }
     else if (client->playerNum == 2)
     {
         client->game->player2_prepare = 1;
-        for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
+        /*for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
         {
             for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
             {
                 client->game->player2_board[i][j] = board[i][j];
             }
-        }
+        }*/
     }
+    send_message(client, "game_prepared_ok");
 
+    printf("Player 1 prepare %d, player 2 prepare %d \n", client->game->player1_prepare, client->game->player2_prepare);
     if (client->game->player1_prepare == 1 && client->game->player2_prepare == 1)
     {
         client->game->player1->state = STATE_IN_GAME_PLAYING;
         client->game->player2->state = STATE_IN_GAME;
         if (client->playerNum == 1)
         {
-            send_message(client, "game_start");
+            send_message(client, "game_play");
         }
         else
         {
-            send_message(client->game->player1, "game_start");
+            send_message(client->game->player1, "game_play");
         }
     }
 
     return EXIT_SUCCESS;
 }
 
-int cmd_game_hit(server *server, struct client *client, int argc, char **argv)
+int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
 {
-    printf("V game hit %s", client->name);
+    int x, y;
+    unsigned char c;
+    if(!client || !argv)
+    {
+        send_message(client, "game_fire_err%c%d\n", SPLIT_SYMBOL, 1);
+        trace("Socket %d - Game fire request filed due internal error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if(argc < 3) {
+        send_message(client, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
+        trace("Socket %d - Game fire request failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    x = atoi(argv[0]);
+    y = atoi(argv[1]);
+
+    if (x >= SHIP_GAME_BOARD_SIZE || x < 0 || y >= SHIP_GAME_BOARD_SIZE || y < 0)
+    {
+        //TODO doplnit cislo erroru
+        send_message(client, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
+        trace("Socket %d - Game fire request failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (client->playerNum == 1)
+    {
+        c = client->game->player2_board[x][y];
+    }
+    else
+    {
+        c = client->game->player1_board[x][y];
+    }
+
+    if (c == 'H' || c == 'M')
+    {
+        //TODO spravny error spatne policko
+        send_message(client, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
+        trace("Socket %d - Game fire request failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (c == 'E')
+    {
+        if (client->playerNum == 1)
+        {
+            client->game->player2_board[x][y] = 'M';
+        }
+        else
+        {
+            client->game->player1_board[x][y] = 'M';
+        }
+
+        send_message(client, "game_fire_ok%c%d%c%d", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, 'M');
+        trace("Socket %d - Game fire request succeeded - position:[%d][%d], fire missed", client->fd, x, y);
+        if (client->playerNum == 1)
+        {
+            send_message(client->game->player2, "game_opp_fire%c%d%c%d%c", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, 'M');
+        }
+        else
+        {
+            send_message(client->game->player1, "game_opp_fire%c%d%c%d%c", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, 'M');
+        }
+        return EXIT_SUCCESS;
+    }
+
+    if (isdigit(c))
+    {
+        if (client->playerNum == 1)
+        {
+            client->game->player2_board[x][y] = 'H';
+        }
+        else
+        {
+            client->game->player1_board[x][y] = 'H';
+        }
+        //TODO kontrola zda lod potopena
+
+        send_message(client, "game_fire_ok%c%d%c%d%c", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, 'H');
+        trace("Socket %d - Game fire request succeeded - position:[%d][%d], fire hit its target", client->fd, x, y);
+        if (client->playerNum == 1)
+        {
+            send_message(client->game->player2, "game_opp_fire%c%d%c%d%c", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, 'H');
+            //TODO poslat zpravu informujici o znicene lodi
+            //send_message(client->game->player2, "game_ship_end%c%d%c%d%c", SPLIT_SYMBOL, SHIP ID);
+        }
+        else
+        {
+            send_message(client->game->player1, "game_opp_fire%c%d%c%d%c", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, 'H');
+
+            //send_message(client->game->player2, "game_ship_end%c%d%c%d%c", SPLIT_SYMBOL, SHIP ID);
+        }
+        return EXIT_SUCCESS;
+    }
+
+
+    // NEZNAMA hodnota policka
+    //TODO spravny error spatna hodnota policka
+    send_message(client, "game_fire_err%c%d\n", SPLIT_SYMBOL, 1);
+    trace("Socket %d - Game fire request failed due to internal error", client->fd);
+    return EXIT_FAILURE;
 }

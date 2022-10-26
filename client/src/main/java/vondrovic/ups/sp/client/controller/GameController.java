@@ -119,9 +119,13 @@ public class GameController extends AbstractController {
 
     public void readyToPlay()
     {
-        String myBoard = this.gameModel.getMyBoardStringForm();
+        if (this.gameModel.getGameStatus() == GameStatus.PREPARING)
+        {
+            String myBoard = this.gameModel.getMyBoardStringForm();
+            App.sendMessage("game_prepared;"+myBoard);
+        }
+
         readyButton.setDisable(true);
-        App.sendMessage("game_prepared;"+myBoard);
     }
 
     /**
@@ -160,4 +164,9 @@ public class GameController extends AbstractController {
         protocol.appendText(s + "\n");
     }
 
+    public void repaint()
+    {
+        this.leftBoard.repaint();
+        this.rightBoard.repaint();
+    }
 }
