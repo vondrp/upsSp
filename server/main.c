@@ -101,11 +101,11 @@ void send_message(struct client *client, char *message, ...)
     int nbytes;
     if(client->name)
     {
-        printf("Sending to client %s (%d) message: %s", client->name, client->fd, message);
+        printf("Sending to client %s (%d) message: %s\n", client->name, client->fd, message);
     }
     else
     {
-        printf("Sending to socket %d message: %s", client->fd, message);
+        printf("Sending to socket %d message: %s\n", client->fd, message);
     }
 
     nbytes = (int) send(client->fd, message, strlen(message), 0);

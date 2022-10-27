@@ -65,6 +65,7 @@ public class GameController extends AbstractController {
 
     private GameBoard rightBoard;
 
+    @FXML
     @Override
     public void initialize() {
         //App.INSTANCE.gameModel = new GameModel();
@@ -117,6 +118,7 @@ public class GameController extends AbstractController {
         }
     }
 
+    @FXML
     public void readyToPlay()
     {
         if (this.gameModel.getGameStatus() == GameStatus.PREPARING)

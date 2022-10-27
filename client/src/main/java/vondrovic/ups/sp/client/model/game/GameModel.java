@@ -274,6 +274,12 @@ public class GameModel {
         this.enemyBoard[x][y].setSquareStatus(status);
     }
 
+    public void beingHit(int x, int y, SquareStatus status)
+    {
+        this.myBoard[x][y].setSquareStatus(status);
+    }
+
+
     /**
      * Find out if the point is valid
      *
@@ -471,12 +477,11 @@ public class GameModel {
 
     public String getMyBoardStringForm() {
         StringBuilder stringForm = new StringBuilder();
-        char c;
         Square sq;
         SquareStatus squareStatus;
         for (int i = MIN; i <= MAX; i++) {
             for (int j = MIN; j <= MAX; j++) {
-                sq = myBoard[i][j];
+                sq = myBoard[j][i];
                 squareStatus = sq.getSquareStatus();
                 switch(squareStatus)
                 {

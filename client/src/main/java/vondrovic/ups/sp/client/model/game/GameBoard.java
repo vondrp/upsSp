@@ -17,6 +17,8 @@ import java.util.Random;
  */
 public class GameBoard {
 
+
+    private char command_split = ';';
     /**
      * Width of the board
      */
@@ -270,7 +272,7 @@ public class GameBoard {
         {
             int serverX = p.getX() - 1;
             int serverY = p.getY() - 1;
-            App.sendMessage("game_fire;"+serverX+";"+serverY);
+            App.sendMessage("game_fire_req"+command_split+""+serverX+""+command_split+""+serverY);
             gameModel.setGameStatus(GameStatus.WAITING);
             /*
             switch (square.getSquareStatus()) {

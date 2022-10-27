@@ -975,3 +975,1177 @@ Socket 6 receiving transmission game_prepared;EEEEEEEEEE,E44E222EEE,EEEEEEEEEE,E
 Socket 6 - Tried to prepared game when not in right state
 Socket 6 disconnected, closing connection
 Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;E3E6EEEEEE,E3EEEEEEEE,EEEEE2E55E,EEEEE2EEEE,1EE0E2EEEE,1EE0EEEEEE,1EE0EE44EE,EEE0EEEEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;EE111EEEEE,EEEEEE3EEE,E2EE0E3EEE,E2EE0EEEEE,E2EE0EEEEE,EEEE0EEEEE,EEEEEE44EE,EE5EEEEEEE,EE5EEEE6EE,EEEEEEEEEE,
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEE0000EEE,EEEEEEEEEE,EEEEEEEEEE,EEEE33EE44,E6EEEEEEEE,EEEEEEE111,EEEEEEEEEE,2EEEE5EEEE,2EEEE5EEEE,2EEEEEEEEE,
+Socket 5 receiving transmission game_prepared;EEEEEEEEEE,E222EEE33E,EEEEEEEEEE,EEEEEEEEEE,E0EEEEEEEE,E0EEEEE111,E0E44EEEEE,E0EEEEEEEE,EEE5E6EEEE,EEE5EEEEEE,
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEEEEEEEEE,0000EE33EE,EEEEEEEEEE,EEEEE55EEE,111EEEEEEE,EEEEEEEEEE,4EEEEEEEEE,4EE6E2EEEE,EEEEE2EEEE,EEEEE2EEEE,
+Socket 6 receiving transmission game_prepared;EEEE0000EE,6EEEEEEEEE,EEEEEE111E,EEEEEEEEEE,EEEEE3E55E,222EE3EEEE,EEEEEEEEEE,EEEEEEEEEE,EEEEEE4EEE,EEEEEE4EEE,
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEEEEEEEE,E111EEEEEE,EEEEE222EE,EEEEEEEEEE,EEE55E33EE,0EEEEEEEEE,0EEE44EEEE,0EEEEEEEEE,0EEEEEE6EE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;6EE0000EEE,EEEEEEEEEE,222EEEEEEE,EEEEE111EE,EEEEEEEEEE,EE44EEEEEE,EEEEEEEEEE,E3EEE5EEEE,E3EEE5EEEE,EEEEEEEEEE,
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;0000E2EEEE,EEEEE2EEEE,EEEEE2E111,EEEEEEEEEE,EEE44EEEEE,55EEEEEEEE,EEEEEE3EEE,EEEEEE3EEE,E6EEEEEEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;2EE0EEEEEE,2EE0E1EEEE,2EE0E1EEEE,EEE0E1EEEE,EEEEEEEEEE,EEEE3EEEEE,6EEE3EEE44,EEEEEEEEEE,5EEEEEEEEE,5EEEEEEEEE,
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEE6EEEEEE,EEEEEEEEEE,44EEEEEEEE,EEE0000EEE,EEEEEEEEEE,E33EEEEEEE,EEEEEE5EEE,E2EE1E5EEE,E2EE1EEEEE,E2EE1EEEEE,
+Socket 5 receiving transmission game_prepared;E55EE3EEEE,EEEEE3EE44,E0EEEEEEEE,E0EEEEEEEE,E0EEE1EEEE,E0EEE1EEEE,EEEEE1EEEE,2EEEEEE6EE,2EEEEEEEEE,2EEEEEEEEE,
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;33EEEEEE6E,EEE111EEEE,EEEEEEEEEE,EEEEE222EE,EE0EEEEEEE,EE0E5EE44E,EE0E5EEEEE,EE0EEEEEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;EEEEEEEEEE,EE0000EEEE,EEEEEEEEEE,EEEE222EEE,EEEEEEEEEE,EEEEEEEEEE,E33EEEEE4E,EEEEE1EE4E,E5E6E1EEEE,E5EEE1EEEE,
+Socket 6 receiving transmission game_fire;2;2
+
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;4EEEEEEEEE,4EEEEEEEEE,EE3E0000EE,EE3EEEEEEE,EEEEE6EEEE,EEEEEEE55E,EEEEE1EEEE,222EE1EEEE,EEEEE1EEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;EEEE1EEEEE,EEEE1EEEEE,E33E1EE222,EEEEEEEEEE,E0EEEEE55E,E0EEE4EEEE,E0EEE4EEEE,E0EEEEEE6E,EEEEEEEEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_fire_req;1;1
+
+Socket 5 - Game fire request failed due message format error
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;d
+
+Socket 5 - User d logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;v
+
+Socket 6 - User v logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;E222EEEEEE,EEEEEEEEEE,EEE1E6EEEE,55E1EEEE44,EEE1EEEEEE,E0EEEEEEEE,E0EEEEEEEE,E0EEEE3EEE,E0EEEE3EEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;EEEEE44EEE,0000EEEEEE,EEEEEEEEEE,EEEEEE222E,EEEEEEEEEE,EEEEE1EEEE,EE55E1E33E,EEEEE1EEEE,E6EEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_fire_req;0;1
+
+Socket 6 - Game fire request failed due message format error
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EE4E6EEEEE,1E4EEEEEEE,1EEEEEEEEE,1EEE0EEEEE,EEEE0E5EEE,EEEE0E5EEE,E2EE0EEEEE,E2EEEEEEEE,E2EEEE3EEE,EEEEEE3EEE,
+Socket 6 receiving transmission game_prepared;0000EEEEEE,EEEEEEEEEE,EEEEEE222E,1EEE5EEEEE,1EEE5EEEEE,1EEEEEEEEE,EEEEEEEE33,E6EEEEEEEE,EEEE4EEEEE,EEEE4EEEEE,
+Socket 5 receiving transmission game_fire_req;1;2
+
+Socket 5 - Game fire request failed due message format error
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;d
+
+Socket 5 - User d logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;v
+
+Socket 6 - User v logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;E6EEEEEEEE,EEEEEEEEEE,EEE0000E55,EEEEEEEEEE,EEEEEEEEEE,EE1E2EEEEE,EE1E2EEEEE,3E1E2EEEEE,3EEEEE4EEE,EEEEEE4EEE,
+Socket 6 receiving transmission game_prepared;EEE0EEEEEE,6EE0E111EE,EEE0EEEEEE,3EE0EEEEEE,3EEEEEEEEE,EEE2EEEEEE,55E2EE4EEE,EEE2EE4EEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_fire_req;7;0
+
+Socket 6 - Game fire request succeeded - position:[7][0], fire missed
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEEEEEEEEE,E0000E6EEE,EEEEEEEEEE,E55EE1EEEE,EEEEE1EEEE,E2EEE1E44E,E2E3EEEEEE,E2E3EEEEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;4EE55EEE33,4EEEEEEEEE,EE0000EEEE,EEEEEEEEEE,111EEEEEEE,EEEE222EEE,EEEEEEEEEE,EEEEE6EEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_fire_req;1;1
+
+Socket 5 - Game fire request succeeded - position:[1][1], fire missed
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EE1EEEEEEE,EE1EEEEEEE,EE1E222E33,EEEEEEEEEE,EE0000EEEE,EEEEEEE6EE,EEEEEEEEEE,E5EE4EEEEE,E5EE4EEEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;EEE4EEEEEE,EEE4EE55EE,EEEEEEEEEE,2EE111EEEE,2EEEEEEEEE,2EEE0EE6EE,EEEE0EEEEE,EEEE0EEEEE,EEEE0E3EEE,EEEEEE3EEE,
+Socket 6 receiving transmission game_fire_req;2;0
+
+Socket 6 - Game fire request succeeded - position:[2][0], fire missed
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEEEEE44EE,0EEEEEEEEE,0EE55E222E,0EEEEEEEEE,0EEEEEEEEE,EEEEEE33EE,EEEEEEEEEE,E1EEEEEEEE,E1EE6EEEEE,E1EEEEEEEE,
+Socket 6 receiving transmission game_prepared;EEEEE55EEE,E4EEEEEEEE,E4E111EEEE,EEEEEEEEEE,6EEEEE222E,EEEEEEEEEE,E0EE33EEEE,E0EEEEEEEE,E0EEEEEEEE,E0EEEEEEEE,
+Socket 6 - Tried to prepared game when not in right state
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEEEEEEEEE,EEEEEEEEEE,E0000EE6EE,EEEEEEEEEE,E222EEEE55,EEEEE3EEEE,1EEEE3EEEE,1EEEEEEEEE,1EEEEE4EEE,EEEEEE4EEE,
+Socket 6 receiving transmission game_prepared;EEEEEEEEEE,EE5E0E222E,EE5E0EEEEE,EEEE0EEEEE,EEEE0EE111,44EEEEEEEE,EEEEEEEEEE,EE3EE6EEEE,EE3EEEEEEE,EEEEEEEEEE,
+Socket 6 - Tried to prepared game when not in right state
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEEEEEE55,EEEEEEEEEE,EEE1EEEEEE,E6E1EE222E,EEE1EEEEEE,E0EEEE3EEE,E0EEEE3EEE,E0EEEEEEEE,E0EEE4EEEE,EEEEE4EEEE,
+Socket 5 receiving transmission game_prepared;111EEE44EE,EEEE0EEEEE,EEEE0EEEEE,E33E0EEEEE,EEEE0EEEEE,EEEEEE6EEE,EEE2EEEEEE,EEE2E5EEEE,EEE2E5EEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_fire_req;1;1
+
+Socket 6 - Game fire request succeeded - position:[1][1], fire missed
+Socket 5 receiving transmission game_fire_req;0;3
+
+Socket 5 - Game fire request succeeded - position:[0][3], fire missed
+Socket 6 receiving transmission game_fire_req;0;2
+
+Socket 6 - Game fire request succeeded - position:[0][2], fire hit its target
+Socket 5 receiving transmission game_fire_req;3;1
+
+Socket 5 - Game fire request succeeded - position:[3][1], fire missed
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEE0EEEEE,EEEE0E3EEE,EEEE0E3E55,E44E0EEEEE,EEEEEEEEEE,EEE1EEEEEE,E2E1EEEEEE,E2E1E6EEEE,E2EEEEEEEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_prepared;6EE1EEEEEE,EEE1EEEE55,EEE1EEEEEE,E0EEEEEEEE,E0EEEEEEEE,E0EEEEEEEE,E0EEE2EE33,EEE4E2EEEE,EEE4E2EEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_fire_req;3;1
+
+Socket 6 - Game fire request succeeded - position:[3][1], fire missed
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 6 receiving transmission room_leave_req
+
+Socket 6 - Client left the game/room
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EE44E6EEEE,EEEEEEEEEE,EEEE222EEE,EEEEEEEEEE,111EE0000E,EEEEEEEEEE,EE33EEEEEE,EEEEEE5EEE,EEEEEE5EEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;EEEEEEEEEE,E2EEEEEEEE,E2EEEEEEEE,E2E111E33E,EEEEEEEEEE,0EEEEE5EEE,0EE4EE5EEE,0EE4EEEEEE,0EEEEE6EEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_fire_req;2;0
+
+Socket 6 - Game fire request succeeded - position:[2][0], fire missed
+Socket 5 receiving transmission game_fire_req;1;1
+
+Socket 5 - Game fire request succeeded - position:[1][1], fire missed
+Socket 6 receiving transmission game_fire_req;3;0
+
+Socket 6 - Game fire request succeeded - position:[3][0], fire missed
+Socket 5 receiving transmission game_fire_req;1;2
+
+Socket 5 - Game fire request succeeded - position:[1][2], fire missed
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;E3EE0000EE,E3EEEEEEEE,EEEE55EEEE,EEEEEEEEEE,222E1EEEEE,EEEE1EEEEE,44EE1EE6EE,EEEEEEEEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;E33EEEEEEE,EEEEE111EE,6EEEEEEEEE,EEE4EE222E,0EE4EEEEEE,0EEEEEEEEE,0EEEEE55EE,0EEEEEEEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_fire_req;2;0
+
+Socket 6 - Game fire request succeeded - position:[2][0], fire missed
+Socket 5 receiving transmission game_fire_req;3;3
+
+Socket 5 - Game fire request succeeded - position:[3][3], fire missed
+Socket 6 receiving transmission game_fire_req;0;4
+
+Socket 6 - Game fire request succeeded - position:[0][4], fire hit its target
+Socket 5 receiving transmission game_fire_req;1;0
+
+Socket 5 - Game fire request succeeded - position:[1][0], fire missed
+Socket 6 receiving transmission game_fire_req;3;4
+
+Socket 6 - Game fire request succeeded - position:[3][4], fire missed
+Socket 5 receiving transmission game_fire_req;6;6
+
+Socket 5 - Game fire request succeeded - position:[6][6], fire missed
+Socket 6 receiving transmission game_fire_req;2;7
+
+Socket 6 - Game fire request succeeded - position:[2][7], fire missed
+Socket 5 receiving transmission game_fire_req;6;3
+
+Socket 5 - Game fire request succeeded - position:[6][3], fire missed
+Socket 6 receiving transmission game_fire_req;0;5
+
+Socket 6 - Game fire request succeeded - position:[0][5], fire hit its target
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;v
+
+Socket 5 - User v logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;d
+
+Socket 6 - User d logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEE0000EEE,6EEEEEEEEE,EEEEEEEEEE,EE2EEEE55E,EE2EEEEEEE,EE2EEE3EEE,EEEE1E3EEE,4EEE1EEEEE,4EEE1EEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;EEEEEEEEEE,EEEEE33EEE,EEEEEEEEEE,EEE111EE55,EEEEEEEEEE,222E0EEE44,EEEE0E6EEE,EEEE0EEEEE,EEEE0EEEEE,EEEEEEEEEE,
+Socket 6 - Tried to prepared game when not in right state
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondr
+
+Socket 5 - User vondr logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;dv
+
+Socket 6 - User dv logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Sock1et 6 - Room join was rejected due to wrong client state (2)
+Socket 6 receiving transmission room_join_req;0
+
+Sock1et 6 - Room join was rejected due to wrong client state (2)
+Socket 6 receiving transmission room_join_req;0
+
+Sock1et 6 - Room join was rejected due to wrong client state (2)
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;dv
+
+Socket 5 - User dv logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;vondr
+
+Socket 6 - User vondr logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEEEEEEEEE,E55E0000EE,EEEEEEEEEE,EEE1EEE222,EEE1EEEEEE,EEE1E44EEE,E6EEEEEE33,EEEEEEEEEE,EEEEEEEEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;EEEEEEEEEE,1E6EEEEEEE,1EEEEEEEEE,1E2E0000EE,EE2EEEEEEE,EE2E5EEEEE,EEEE5EEEEE,E4EEEE3EEE,E4EEEE3EEE,EEEEEEEEEE,
+Socket 5 receiving transmission game_fire_req;1;0
+
+Socket 5 - Game fire request succeeded - position:[1][0], fire missed
+Socket 6 receiving transmission game_fire_req;6;1
+
+Socket 6 - Game fire request succeeded - position:[6][1], fire missed
+Socket 5 receiving transmission game_fire_req;0;1
+
+Socket 5 - Game fire request succeeded - position:[0][1], fire missed
+Socket 6 receiving transmission game_fire_req;0;1
+
+Socket 6 - Game fire request succeeded - position:[0][1], fire missed
+Socket 5 receiving transmission game_fire_req;3;4
+
+Socket 5 - Game fire request succeeded - position:[3][4], fire missed
+Socket 6 receiving transmission game_fire_req;3;3
+
+Socket 6 - Game fire request succeeded - position:[3][3], fire missed
+Socket 5 receiving transmission game_fire_req;0;2
+
+Socket 5 - Game fire request succeeded - position:[0][2], fire missed
+Socket 6 receiving transmission game_fire_req;3;1
+
+Socket 6 - Game fire request succeeded - position:[3][1], fire hit its target
+Socket 5 receiving transmission game_fire_req;1;1
+
+Socket 5 - Game fire request succeeded - position:[1][1], fire missed
+Socket 6 receiving transmission game_fire_req;3;2
+
+Socket 6 - Game fire request succeeded - position:[3][2], fire missed
+Socket 5 receiving transmission game_fire_req;0;8
+
+Socket 5 - Game fire request succeeded - position:[0][8], fire missed
+Socket 6 receiving transmission game_fire_req;2;1
+
+Socket 6 - Game fire request succeeded - position:[2][1], fire missed
+Socket 5 receiving transmission game_fire_req;9;8
+
+Socket 5 - Game fire request succeeded - position:[9][8], fire missed
+Socket 6 receiving transmission game_fire_req;4;1
+
+Socket 6 - Game fire request succeeded - position:[4][1], fire missed
+Socket 5 receiving transmission game_fire_req;7;8
+
+Socket 5 - Game fire request succeeded - position:[7][8], fire missed
+Socket 6 receiving transmission game_fire_req;3;0
+
+Socket 6 - Game fire request succeeded - position:[3][0], fire missed
+Socket 5 receiving transmission game_fire_req;0;3
+
+Socket 5 - Game fire request succeeded - position:[0][3], fire missed
+Socket 6 receiving transmission game_fire_req;1;2
+
+Socket 6 - Game fire request succeeded - position:[1][2], fire missed
+Socket 5 receiving transmission game_fire_req;3;7
+
+Socket 5 - Game fire request succeeded - position:[3][7], fire missed
+Socket 6 receiving transmission game_fire_req;4;3
+
+Socket 6 - Game fire request succeeded - position:[4][3], fire missed
+Socket 5 receiving transmission game_fire_req;2;7
+
+Socket 5 - Game fire request succeeded - position:[2][7], fire missed
+Socket 6 receiving transmission game_fire_req;8;1
+
+Socket 6 - Game fire request succeeded - position:[8][1], fire missed
+Socket 5 receiving transmission game_fire_req;6;4
+
+Socket 5 - Game fire request succeeded - position:[6][4], fire missed
+Socket 6 receiving transmission game_fire_req;1;1
+
+Socket 6 - Game fire request succeeded - position:[1][1], fire missed
+Socket 5 receiving transmission game_fire_req;3;6
+
+Socket 5 - Game fire request succeeded - position:[3][6], fire missed
+Socket 6 receiving transmission game_fire_req;7;1
+
+Socket 6 - Game fire request succeeded - position:[7][1], fire missed
+Socket 5 receiving transmission game_fire_req;2;0
+
+Socket 5 - Game fire request succeeded - position:[2][0], fire hit its target
+Socket 6 receiving transmission game_fire_req;5;3
+
+Socket 6 - Game fire request succeeded - position:[5][3], fire missed
+Socket 5 receiving transmission game_fire_req;3;0
+
+Socket 5 - Game fire request succeeded - position:[3][0], fire missed
+Socket 6 receiving transmission game_fire_req;3;6
+
+Socket 6 - Game fire request succeeded - position:[3][6], fire missed
+Socket 5 receiving transmission game_fire_req;2;1
+
+Socket 5 - Game fire request succeeded - position:[2][1], fire missed
+Socket 6 receiving transmission game_fire_req;6;6
+
+Socket 6 - Game fire request succeeded - position:[6][6], fire missed
+Socket 5 receiving transmission game_fire_req;2;2
+
+Socket 5 - Game fire request succeeded - position:[2][2], fire missed
+Socket 6 receiving transmission game_fire_req;6;7
+
+Socket 6 - Game fire request succeeded - position:[6][7], fire missed
+Socket 5 receiving transmission game_fire_req;3;1
+
+Socket 5 - Game fire request succeeded - position:[3][1], fire missed
+Socket 6 receiving transmission game_fire_req;3;8
+
+Socket 6 - Game fire request succeeded - position:[3][8], fire missed
+Socket 5 receiving transmission game_fire_req;7;1
+
+Socket 5 - Game fire request succeeded - position:[7][1], fire missed
+Socket 6 receiving transmission game_fire_req;8;4
+
+Socket 6 - Game fire request succeeded - position:[8][4], fire missed
+Socket 5 receiving transmission game_fire_req;7;5
+
+Socket 5 - Game fire request succeeded - position:[7][5], fire missed
+Socket 6 receiving transmission game_fire_req;5;6
+
+Socket 6 - Game fire request succeeded - position:[5][6], fire missed
+Socket 5 receiving transmission game_fire_req;1;7
+
+Socket 5 - Game fire request succeeded - position:[1][7], fire missed
+Socket 6 receiving transmission game_fire_req;8;7
+
+Socket 6 - Game fire request succeeded - position:[8][7], fire missed
+Socket 5 receiving transmission game_fire_req;3;5
+
+Socket 5 - Game fire request succeeded - position:[3][5], fire missed
+Socket 6 receiving transmission game_fire_req;6;8
+
+Socket 6 - Game fire request succeeded - position:[6][8], fire missed
+Socket 5 receiving transmission game_fire_req;3;8
+
+Socket 5 - Game fire request succeeded - position:[3][8], fire missed
+Socket 6 receiving transmission game_fire_req;1;5
+
+Socket 6 - Game fire request succeeded - position:[1][5], fire missed
+Socket 5 receiving transmission game_fire_req;2;2
+
+Socket 5 - Game fire request failed due message format error
+Socket 5 receiving transmission game_fire_req;3;3
+
+Socket 5 - Game fire request succeeded - position:[3][3], fire missed
+Socket 6 receiving transmission game_fire_req;1;6
+
+Socket 6 - Game fire request succeeded - position:[1][6], fire missed
+Socket 5 receiving transmission game_fire_req;4;3
+
+Socket 5 - Game fire request succeeded - position:[4][3], fire missed
+Socket 6 receiving transmission game_fire_req;1;7
+
+Socket 6 - Game fire request succeeded - position:[1][7], fire missed
+Socket 5 receiving transmission game_fire_req;5;3
+
+Socket 5 - Game fire request succeeded - position:[5][3], fire missed
+Socket 6 receiving transmission game_fire_req;1;8
+
+Socket 6 - Game fire request succeeded - position:[1][8], fire missed
+Socket 5 receiving transmission game_fire_req;6;3
+
+Socket 5 - Game fire request succeeded - position:[6][3], fire missed
+Socket 6 receiving transmission game_fire_req;1;9
+
+Socket 6 - Game fire request succeeded - position:[1][9], fire missed
+Socket 5 receiving transmission game_fire_req;5;2
+
+Socket 5 - Game fire request succeeded - position:[5][2], fire missed
+Socket 6 receiving transmission game_fire_req;1;4
+
+Socket 6 - Game fire request succeeded - position:[1][4], fire missed
+Socket 5 receiving transmission game_fire_req;4;1
+
+Socket 5 - Game fire request succeeded - position:[4][1], fire missed
+Socket 6 receiving transmission game_fire_req;1;3
+
+Socket 6 - Game fire request succeeded - position:[1][3], fire missed
+Socket 5 receiving transmission game_fire_req;5;1
+
+Socket 5 - Game fire request succeeded - position:[5][1], fire missed
+Socket 6 receiving transmission game_fire_req;3;5
+
+Socket 6 - Game fire request succeeded - position:[3][5], fire missed
+Socket 5 receiving transmission game_fire_req;6;1
+
+Socket 5 - Game fire request succeeded - position:[6][1], fire missed
+Socket 6 receiving transmission game_fire_req;6;5
+
+Socket 6 - Game fire request succeeded - position:[6][5], fire missed
+Socket 5 receiving transmission game_fire_req;5;6
+
+Socket 5 - Game fire request succeeded - position:[5][6], fire missed
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;von
+
+Socket 5 - User von logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;dv
+
+Socket 6 - User dv logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;6E111E55EE,EEEEEEEEEE,EEEEEE33EE,EEEEEEEEEE,E0000EEEEE,EEEEEEE44E,EEEEEEEEEE,EE2EEEEEEE,EE2EEEEEEE,EE2EEEEEEE,
+Socket 5 receiving transmission game_prepared;EEEEE6E111,EEEEEEEEEE,EEEEEEE44E,E0000EEEEE,EEEEEEEEEE,EE2EEEEEEE,EE2E33EEEE,EE2EEEEEEE,5EEEEEEEEE,5EEEEEEEEE,
+Socket 5 receiving transmission game_fire_req;0;2
+
+Socket 5 - Game fire request succeeded - position:[0][2], fire missed
+Socket 6 receiving transmission game_fire_req;4;1
+
+Socket 6 - Game fire request succeeded - position:[4][1], fire missed
+Socket 5 receiving transmission game_fire_req;7;2
+
+Socket 5 - Game fire request succeeded - position:[7][2], fire missed
+Socket 6 receiving transmission game_fire_req;9;0
+
+Socket 6 - Game fire request succeeded - position:[9][0], fire hit its target
+Socket 5 receiving transmission game_fire_req;2;5
+
+Socket 5 - Game fire request succeeded - position:[2][5], fire missed
+Socket 6 receiving transmission game_fire_req;8;0
+
+Socket 6 - Game fire request succeeded - position:[8][0], fire hit its target
+Socket 5 receiving transmission game_fire_req;4;1
+
+Socket 5 - Game fire request succeeded - position:[4][1], fire missed
+Socket 6 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;von
+
+Socket 5 - User von logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;dr
+
+Socket 6 - User dr logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEE3EEE44E,EEE3EEEEEE,EEEEE2EEEE,E5EEE2EEEE,E5EEE2EEEE,EEEEEEE6EE,1EE0EEEEEE,1EE0EEEEEE,1EE0EEEEEE,EEE0EEEEEE,
+Socket 6 receiving transmission game_prepared;EEEEE44EEE,EEEEEEEEEE,6EEEE0000E,EE55EEEEEE,EEEEEEEEEE,EEEEEEEEEE,EEEEE2EEEE,EE1EE2EEEE,3E1EE2EEEE,3E1EEEEEEE,
+Socket 5 receiving transmission game_fire_req;2;0
+
+Socket 5 - Game fire request succeeded - position:[2][0], fire missed
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;von
+
+Socket 5 - User von logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;dr
+
+Socket 6 - User dr logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEE0000EE,EEEEEEEEEE,EEEEEEEEEE,E33EE55EEE,EEEEEEEEEE,EEEEE44EEE,EEE1EEEEEE,E2E1EEE6EE,E2E1EEEEEE,E2EEEEEEEE,
+Socket 5 receiving transmission game_prepared;1EEEEEEEEE,1EE55EEE6E,1EEEEEEEEE,EEEEE3EEEE,EEE0E3EEEE,EEE0EEEEEE,EEE0EE44EE,E2E0EEEEEE,E2EEEEEEEE,E2EEEEEEEE,
+Socket 6 receiving transmission game_fire_req;0;0
+
+Socket 6 - Game fire request succeeded - position:[0][0], fire hit its target
+Socket 5 receiving transmission game_fire_req;0;5
+
+Socket 5 - Game fire request succeeded - position:[0][5], fire missed
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;von
+
+Socket 5 - User von logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;dr
+
+Socket 6 - User dr logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EE44EEEEEE,EEEEEEEEEE,2EEEEEEE55,2EE0000EEE,2EEEEEEEEE,EEEE3E111E,EEEE3EEEEE,EEEEEEEEEE,EEEEE6EEEE,EEEEEEEEEE,
+Socket 6 receiving transmission game_prepared;2EE5EE33EE,2EE5EEEEEE,2EEEEEEEEE,EEEEEEEEEE,EEE6E1EEEE,EEEEE1EEEE,EE0EE1EEEE,EE0EEEEEEE,EE0E4EEEEE,EE0E4EEEEE,
+Socket 5 receiving transmission game_fire_req;7;2
+
+Socket 5 - Game fire request succeeded - position:[7][2], fire missed
+Socket 6 receiving transmission game_fire_req;6;8
+
+Socket 6 - Game fire request succeeded - position:[6][8], fire missed
+Socket 5 receiving transmission game_fire_req;1;0
+
+Socket 5 - Game fire request succeeded - position:[1][0], fire missed
+Socket 6 receiving transmission game_fire_req;5;8
+
+Socket 6 - Game fire request succeeded - position:[5][8], fire hit its target
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vond
+
+Socket 5 - User vond logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;dv
+
+Socket 6 - User dv logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EE0EEEE6EE,EE0EEEEEEE,EE0EEE222E,EE0EEEEEEE,EEEEEEEE44,111EEE3EEE,EEEEEE3EEE,EEEEEEEEEE,5EEEEEEEEE,5EEEEEEEEE,
+Socket 5 receiving transmission game_prepared;EE5EEEE44E,EE5EEEEEEE,EEEEEEEEEE,E0E111EEEE,E0EEEEEEEE,E0EEEE3EEE,E0EEEE3EEE,EEEE2EEEEE,EEEE2E6EEE,EEEE2EEEEE,
+Socket 6 receiving transmission game_fire_req;2;1
+
+Socket 6 - Game fire request succeeded - position:[2][1], fire hit its target
+Socket 5 receiving transmission game_fire_req;0;8
+
+Socket 5 - Game fire request succeeded - position:[0][8], fire hit its target
+Socket 6 receiving transmission game_fire_req;6;5
+
+Socket 6 - Game fire request succeeded - position:[6][5], fire hit its target
+Socket 5 receiving transmission game_fire_req;1;5
+
+Socket 5 - Game fire request succeeded - position:[1][5], fire hit its target
+Socket 6 receiving transmission game_fire_req;6;6
+
+Socket 6 - Game fire request succeeded - position:[6][6], fire hit its target
+Socket 5 receiving transmission game_fire_req;2;2
+
+Socket 5 - Game fire request succeeded - position:[2][2], fire hit its target
+Socket 6 receiving transmission game_fire_req;7;0
+
+Socket 6 - Game fire request succeeded - position:[7][0], fire hit its target
+Socket 5 receiving transmission game_fire_req;7;0
+
+Socket 5 - Game fire request succeeded - position:[7][0], fire hit its target
+Socket 6 receiving transmission game_fire_req;2;7
+
+Socket 6 - Game fire request succeeded - position:[2][7], fire missed
+Socket 5 receiving transmission game_fire_req;2;7
+
+Socket 5 - Game fire request succeeded - position:[2][7], fire missed
+Socket 6 receiving transmission game_fire_req;0;9
+
+Socket 6 - Game fire request succeeded - position:[0][9], fire missed
+Socket 5 receiving transmission game_fire_req;0;9
+
+Socket 5 - Game fire request succeeded - position:[0][9], fire hit its target
+Socket 6 receiving transmission game_fire_req;2;2
+
+Socket 6 - Game fire request succeeded - position:[2][2], fire missed
+Socket 5 receiving transmission game_fire_req;8;8
+
+Socket 5 - Game fire request succeeded - position:[8][8], fire missed
+Socket 6 receiving transmission game_fire_req;2;0
+
+Socket 6 - Game fire request succeeded - position:[2][0], fire hit its target
+Socket 5 receiving transmission game_fire_req;2;0
+
+Socket 5 - Game fire request succeeded - position:[2][0], fire hit its target
+Socket 6 disconnected, closing connection
+Socket 5 disconnected, closing connection

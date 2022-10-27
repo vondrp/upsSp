@@ -41,6 +41,8 @@ public class MessageHandler {
 
     public void processMessage(String line) throws IOException
     {
+
+        System.out.println("Message: "+line);
         if (line.length() == 0) return;
 
         System.out.println(line);
@@ -202,6 +204,7 @@ public class MessageHandler {
             if(App.INSTANCE.getSceneEnum() == SceneEnum.GAME) {
                 ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " left the game.");
             }
+            return;
         }
 
         if(message[0].equalsIgnoreCase("game_conn")) {
@@ -223,8 +226,13 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_prepared_ok"))
         {
+            System.out.println("Jsem v game prepared ok");
             this.invalidMessages = 0;
+
+            ((GameController) App.INSTANCE.getController()).protocolAdd("Game prepared ok");
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
+
+            return;
         }
 
         if (message[0].equalsIgnoreCase("game_prepared_err"))
@@ -232,30 +240,34 @@ public class MessageHandler {
             AlertFactory.sendErrorMessageOutside("Game prepare error", "An error occurred while preparing a game. Try again.");
             ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid");
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
+
+            return;
         }
 
 
         if (message[0].equalsIgnoreCase("game_play"))
         {
             this.invalidMessages = 0;
+            this.invalidMessages = 0;
             App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
+
+            Platform.runLater(() -> {
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Your turn to fire");
+                ((GameController) App.INSTANCE.getController()).repaint();
+            });
+
+            return;
         }
 
 
         if (message[0].equalsIgnoreCase("game_fire_ok"))
         {
             this.invalidMessages = 0;
-            App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
-        }
 
-        if (message[0].equalsIgnoreCase("game_opp_fire"))
-        {
             if (message.length < 3) return;
 
             int x = Integer.parseInt(message[1]) + 1;
-
             int y = Integer.parseInt(message[2]) + 1;
-
             char status = message[3].charAt(0);
 
             App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
@@ -264,18 +276,64 @@ public class MessageHandler {
             {
                 case 'H':
                     squareStatus = SquareStatus.HIT;
+                    break;
                 case 'M':
                 default:
                     squareStatus = SquareStatus.MISSED;
                     break;
             }
             App.INSTANCE.gameModel.hitEnemy(x, y, squareStatus);
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
 
-            ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit x = " + x + " y = " + y + " status: " + status);
-            ((GameController) App.INSTANCE.getController()).repaint();
-
-            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
+            Platform.runLater(() -> {
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit x = " + x + " y = " + y + " status: " + status);
+                ((GameController) App.INSTANCE.getController()).repaint();
+            });
+            return;
         }
+
+        if (message[0].equalsIgnoreCase("game_fire_err"))
+        {
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
+
+            Platform.runLater(() -> {
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Fire request failed. Try fire again");
+            });
+
+        }
+
+        if (message[0].equalsIgnoreCase("game_opp_fire"))
+        {
+            this.invalidMessages = 0;
+            System.out.println("V game opp fire");
+            if (message.length < 3) return;
+
+            int x = Integer.parseInt(message[1]) + 1;
+            int y = Integer.parseInt(message[2]) + 1;
+            char status = message[3].charAt(0);
+
+            App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
+            SquareStatus squareStatus;
+            switch (status)
+            {
+                case 'H':
+                    squareStatus = SquareStatus.HIT;
+                    break;
+                case 'M':
+                default:
+                    squareStatus = SquareStatus.MISSED;
+                    break;
+            }
+            App.INSTANCE.gameModel.beingHit(x, y, squareStatus);
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
+
+            Platform.runLater(() -> {
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit x = " + x + " y = " + y + " status: " + status);
+                ((GameController) App.INSTANCE.getController()).repaint();
+            });
+            return;
+        }
+
 
         this.invalidMessages++;
         if(this.invalidMessages > App.MAX_INVALID_MESSAGES) {
