@@ -3,7 +3,7 @@
 #include "main.h"
 #include "shipsGame.h"
 
-#define SPLIT_SYMBOL ';'
+
 const int COMMANDS_COUNT = 8;
 const cmd_handler COMMANDS[] =
     {
@@ -432,11 +432,11 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
 
 
 int cmd_game_prepared(server *server, struct client *client, int argc, char **argv) {
-    int i, j;
+    int i;
     int x, y;
+    int ship_number;
     char buff[64];
 
-    printf("Klient %s state: %d\n", client->name, client->state);
     if (client->state != STATE_IN_GAME_PREPARING)
     {
         sprintf(buff,  "game_prepare_err%c%d\n", SPLIT_SYMBOL, 10);
@@ -460,12 +460,12 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         return EXIT_FAILURE;
     }
 
-    //unsigned char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
 
     x = 0;
     y = 0;
     for (i = 0; i < GAME_BOARD_STRING_SIZE; i++)
     {
+        ship_number = -1;
         //TODO kontrola znaku
         // send_message(client, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 2);
         if (argv[0][i]  == ',')
@@ -473,13 +473,35 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             continue;
         }
 
+        if (isdigit(argv[0][i]))
+        {
+            ship_number = argv[0][i] - '0';
+            if (ship_number < 0 || ship_number >= AMOUNT_OF_SHIP)
+            {
+                sprintf(buff, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 2);
+                send_message(client, buff);
+                trace("Socket %d - Game prepare request failed due message format error", client->fd);
+                return EXIT_FAILURE;
+            }
+        }
+
         if (client->playerNum == 1)
         {
             client->game->player1_board[y][x] = argv[0][i];
+
+            if (ship_number != -1)
+            {
+                ship_place(&client->game->player1Ships[ship_number], x, y);
+            }
         }
         else
         {
             client->game->player2_board[y][x] = argv[0][i];
+
+            if (ship_number != -1)
+            {
+                ship_place(&client->game->player2Ships[ship_number], x, y);
+            }
         }
 
         x = x + 1;
@@ -490,19 +512,13 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         }
     }
 
-    if (client->playerNum == 1)
-    {
-        client->game->player1_prepare = 1;
-    }
-    else if (client->playerNum == 2)
-    {
-        client->game->player2_prepare = 1;
-    }
+
+    // CLIENT IS prepared
+    client->state = STATE_PREPARED;
 
     send_message(client, "game_prepared_ok\n");
 
-    printf("Player 1 prepare %d, player 2 prepare %d \n", client->game->player1_prepare, client->game->player2_prepare);
-    if (client->game->player1_prepare == 1 && client->game->player2_prepare == 1)
+    if (client->game->player1->state == STATE_PREPARED && client->game->player2->state == STATE_PREPARED)
     {
         client->game->player1->state = STATE_IN_GAME_PLAYING;
         client->game->player2->state = STATE_IN_GAME;
@@ -524,6 +540,8 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     char buff[64];
     int x, y, i, j;
     unsigned char c;
+    int ship_number = -1;
+    int ship_destroyed = 0;
     if(!client || !argv)
     {
         sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, 1);
@@ -543,7 +561,7 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     y = atoi(argv[1]);
 
 
-    printf("Player 1 %s board: \n", client->game->player1->name);
+    /*printf("Player 1 %s board: \n", client->game->player1->name);
     for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++)
     {
         for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
@@ -551,12 +569,14 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
             printf("%c", client->game->player1_board[i][j]);
         }
         printf("\n");
-    }
+    }*/
 
-
+    printf("Player %s score %d\n", client->game->player1->name, client->game->p1_count);
+    printf("Player %s score %d\n", client->game->player2->name, client->game->p2_count);
     if (x >= SHIP_GAME_BOARD_SIZE || x < 0 || y >= SHIP_GAME_BOARD_SIZE || y < 0)
     {
         //TODO doplnit cislo erroru
+        printf("pada v serkci kontroly rozmezi\n");
         sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
         send_message(client, buff);
         trace("Socket %d - Game fire request failed due message format error", client->fd);
@@ -574,8 +594,8 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
 
     if (c == 'H' || c == 'M')
     {
-
         //TODO spravny error spatne policko
+        printf("Padam v sekci kontroly H, M");
         sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
         send_message(client, buff);
         trace("Socket %d - Game fire request failed due message format error", client->fd);
@@ -586,18 +606,18 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     {
         if (client->playerNum == 1)
         {
-            client->game->player2_board[x][y] = 'M';
+            client->game->player2_board[y][x] = 'M';
         }
         else
         {
-            client->game->player1_board[x][y] = 'M';
+            client->game->player1_board[y][x] = 'M';
         }
 
-        sprintf(buff, "game_fire_ok%c%d%c%d%c%c\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'M');
+        sprintf(buff, "game_fire_ok%c%d%c%d%c%c%c%d\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'M', SPLIT_SYMBOL, ship_destroyed);
         send_message(client, buff);
         trace("Socket %d - Game fire request succeeded - position:[%d][%d], fire missed", client->fd, x, y);
 
-        sprintf(buff, "game_opp_fire%c%d%c%d%c%c\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'M');
+        sprintf(buff, "game_opp_fire%c%d%c%d%c%c%c%d\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'M',  SPLIT_SYMBOL, ship_destroyed);
         if (client->playerNum == 1)
         {
             send_message(client->game->player2, buff);
@@ -611,39 +631,75 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
 
     if (isdigit(c))
     {
+        ship_number = c - '0';
+
+        if (ship_number < 0 || ship_number >= AMOUNT_OF_SHIP)
+        {
+            //TODO spravny error spatna hodnota policka
+            sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
+            send_message(client, buff);
+            trace("Socket %d - Game fire request failed due to message format", client->fd);
+            return EXIT_FAILURE;
+        }
+
         if (client->playerNum == 1)
         {
-            client->game->player2_board[x][y] = 'H';
+            client->game->player2_board[y][x] = 'H';
+            ship_destroyed = ship_hit(&client->game->player2Ships[ship_number]);
+
+            if (ship_destroyed == 1)
+            {
+                mark_destroyed_ship(client->game, &client->game->player2Ships[ship_number], 2);
+                client->game->p1_count++;
+            }
         }
         else
         {
-            client->game->player1_board[x][y] = 'H';
-        }
-        //TODO kontrola zda lod potopena
+            client->game->player1_board[y][x] = 'H';
+            ship_destroyed = ship_hit(&client->game->player1Ships[ship_number]);
 
-        sprintf(buff, "game_fire_ok%c%d%c%d%c%c\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'H');
+            if (ship_destroyed == 1)
+            {
+                mark_destroyed_ship(client->game, &client->game->player1Ships[ship_number], 1);
+                client->game->p2_count++;
+            }
+        }
+
+        sprintf(buff, "game_fire_ok%c%d%c%d%c%c%c%d\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'H', SPLIT_SYMBOL, ship_destroyed);
         send_message(client, buff);
 
-        sprintf(buff, "game_opp_fire%c%d%c%d%c%c\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'H');
-        trace("Socket %d - Game fire request succeeded - position:[%d][%d], fire hit its target", client->fd, x, y);
+        if (ship_destroyed == 1)
+        {
+            trace("Socket %d - Game fire request succeeded - position:[%d][%d], fire hit its target, ship %d is destroyed", client->fd, x, y, ship_number);
+        }
+        else
+        {
+            trace("Socket %d - Game fire request succeeded - position:[%d][%d], fire hit its target, ship %d is still alive", client->fd, x, y, ship_number);
+        }
+
+        sprintf(buff, "game_opp_fire%c%d%c%d%c%c%c%d\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'H', SPLIT_SYMBOL, ship_destroyed);
         if (client->playerNum == 1)
         {
             send_message(client->game->player2, buff);
-            //TODO poslat zpravu informujici o znicene lodi
-            //send_message(client->game->player2, "game_ship_end%c%d%c%d%c", SPLIT_SYMBOL, SHIP ID);
         }
         else
         {
             send_message(client->game->player1, buff);
-            //send_message(client->game->player2, "game_ship_end%c%d%c%d%c", SPLIT_SYMBOL, SHIP ID);
         }
+
+        // check if current player win
+
+        if (client->game->p1_count >= AMOUNT_OF_SHIP || client->game->p2_count >= AMOUNT_OF_SHIP)
+            game_end(server, client->game, client->name);
+
         return EXIT_SUCCESS;
     }
 
-    sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, 1);
     // NEZNAMA hodnota policka
+
     //TODO spravny error spatna hodnota policka
+    sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, 2);
     send_message(client, buff);
-    trace("Socket %d - Game fire request failed due to internal error", client->fd);
+    trace("Socket %d - Game fire request failed due to message format", client->fd);
     return EXIT_FAILURE;
 }

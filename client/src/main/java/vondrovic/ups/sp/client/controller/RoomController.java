@@ -13,7 +13,7 @@ public class RoomController extends AbstractController{
     @FXML
     @Override
     public void initialize() {
-        userNameLabel.setText(App.INSTANCE.player.getName());
+        userNameLabel.setText(App.INSTANCE.getPlayer().getName());
     }
 
     @FXML

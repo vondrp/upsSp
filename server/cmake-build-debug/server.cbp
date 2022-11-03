@@ -115,6 +115,12 @@
 		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h">
 			<Option target="server"/>
 		</Unit>
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h">
+			<Option target="server"/>
+		</Unit>
 		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c">
 			<Option target="server"/>
 		</Unit>

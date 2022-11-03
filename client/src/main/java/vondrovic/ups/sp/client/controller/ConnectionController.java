@@ -81,7 +81,8 @@ public class ConnectionController extends AbstractController{
             return;
         }
 
-        App.INSTANCE.player = new Player(usernameInput.getText());
+        //App.INSTANCE.player = new Player(usernameInput.getText());
+        App.INSTANCE.setPlayer(new Player(usernameInput.getText()));
 
         VBox box = new VBox(new ProgressIndicator());
         box.setAlignment(Pos.CENTER);

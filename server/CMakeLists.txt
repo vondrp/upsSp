@@ -12,4 +12,5 @@ add_executable(
         hashmap.h hashmap.c
         player.h
         shipsGame.h shipsGame.c
+        ship.h ship.c
         )

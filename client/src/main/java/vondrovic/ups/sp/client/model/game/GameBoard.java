@@ -503,7 +503,7 @@ public class GameBoard {
 
         if (destroyed)
         {
-            gameModel.markDestroyedShip(squares[x][y], squares);
+            gameModel.markDestroyedShip(x, y, squares);
         }
     }
 

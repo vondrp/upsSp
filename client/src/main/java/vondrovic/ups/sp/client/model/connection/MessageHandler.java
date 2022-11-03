@@ -41,8 +41,6 @@ public class MessageHandler {
 
     public void processMessage(String line) throws IOException
     {
-
-        System.out.println("Message: "+line);
         if (line.length() == 0) return;
 
         System.out.println(line);
@@ -52,7 +50,7 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("connected"))
         {
             this.invalidMessages = 0;
-            App.sendMessage("login_req;" + App.INSTANCE.player.getName());
+            App.sendMessage("login_req;" + App.INSTANCE.getPlayer().getName());
             return;
         }
 
@@ -72,7 +70,8 @@ public class MessageHandler {
             int state = Integer.parseInt(message[2]);
 
             Platform.runLater(() -> {
-                App.INSTANCE.player = new Player(message[1], state);
+                App.INSTANCE.setPlayer(new Player(message[1], state));
+
                 if(state == STATE_IN_ROOM) {
                     App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.setScene(SceneEnum.ROOM);
@@ -226,7 +225,6 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_prepared_ok"))
         {
-            System.out.println("Jsem v game prepared ok");
             this.invalidMessages = 0;
 
             ((GameController) App.INSTANCE.getController()).protocolAdd("Game prepared ok");
@@ -248,7 +246,6 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_play"))
         {
             this.invalidMessages = 0;
-            this.invalidMessages = 0;
             App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
 
             Platform.runLater(() -> {
@@ -264,7 +261,7 @@ public class MessageHandler {
         {
             this.invalidMessages = 0;
 
-            if (message.length < 3) return;
+            if (message.length < 4) return;
 
             int x = Integer.parseInt(message[1]) + 1;
             int y = Integer.parseInt(message[2]) + 1;
@@ -283,6 +280,13 @@ public class MessageHandler {
                     break;
             }
             App.INSTANCE.gameModel.hitEnemy(x, y, squareStatus);
+
+            // is square was hit check if ship is destroyed
+            if (squareStatus == SquareStatus.HIT && Integer.parseInt(message[4]) == 1)
+            {
+               App.INSTANCE.getGameModel().markDestroyedShip(x, y, App.INSTANCE.getGameModel().getEnemyBoard());
+            }
+
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
 
             Platform.runLater(() -> {
@@ -305,8 +309,8 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_opp_fire"))
         {
             this.invalidMessages = 0;
-            System.out.println("V game opp fire");
-            if (message.length < 3) return;
+
+            if (message.length < 4) return;
 
             int x = Integer.parseInt(message[1]) + 1;
             int y = Integer.parseInt(message[2]) + 1;
@@ -325,6 +329,12 @@ public class MessageHandler {
                     break;
             }
             App.INSTANCE.gameModel.beingHit(x, y, squareStatus);
+
+            // is square was hit check if ship is destroyed
+            if (squareStatus == SquareStatus.HIT && Integer.parseInt(message[4]) == 1)
+            {
+                App.INSTANCE.getGameModel().markDestroyedShip(x, y, App.INSTANCE.getGameModel().getMyBoard());
+            }
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
 
             Platform.runLater(() -> {
@@ -334,6 +344,25 @@ public class MessageHandler {
             return;
         }
 
+        if (message[0].equalsIgnoreCase("game_end"))
+        {
+            System.out.println("V game end");
+            this.invalidMessages = 0;
+
+            if (message.length < 1) return;
+
+            if(App.INSTANCE.getSceneEnum() != SceneEnum.GAME) {
+                return;
+            }
+
+            App.INSTANCE.getGameModel().setWinner(message[1]);
+
+            Platform.runLater(() -> {
+                App.INSTANCE.setScene(SceneEnum.GAME_RESULT);
+            });
+            
+            return;
+        }
 
         this.invalidMessages++;
         if(this.invalidMessages > App.MAX_INVALID_MESSAGES) {

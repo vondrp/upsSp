@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/hashmap.c.o"
   "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/main.c.o"
   "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/server.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/ship.c.o"
   "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/shipsGame.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

@@ -29,7 +29,9 @@ public class App extends Application {
      */
     public static App INSTANCE;
 
-    public Player player;
+    private Player player;
+
+    private Player opponent;
 
     private Stage stage;
     private FXMLLoader fxmlLoader;
@@ -209,6 +211,18 @@ public class App extends Application {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player getOpponent() {
+        return opponent;
+    }
+
+    public void setOpponent(Player opponent) {
+        this.opponent = opponent;
     }
 
     public GameModel getGameModel() {

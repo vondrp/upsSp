@@ -16,6 +16,8 @@
 #define STATE_IN_GAME_PLAYING 4
 #define STATE_IN_GAME_PREPARING 5
 
+#define STATE_PREPARED 6
+
 
 // max name length without \0
 #define NAME_MAX_LENGTH 20

@@ -20,6 +20,9 @@
                 <Button fx:id="roomLeaveButton" mnemonicParsing="false" onAction="#handleLeave" text="Log Out" />
                 <Label text="Logged as:" />
                 <Label fx:id="userNameLabel" />
+
+                <Label text="Playing against: "/>
+                <Label fx:id="opponentNameLabel" />
             </items>
         </ToolBar>
 

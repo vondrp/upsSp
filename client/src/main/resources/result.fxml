@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="400.0"
+            prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/11"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="vondrovic.ups.sp.client.controller.ResultController">
+    <children>
+        <Button layoutX="262.0" layoutY="319.0" mnemonicParsing="false" onAction="#handleContinue" text="Continue" />
+        <Label contentDisplay="CENTER" layoutX="181.0" layoutY="69.0" text="Game Over">
+            <font>
+                <Font size="42.0" />
+            </font>
+        </Label>
+        <Label contentDisplay="CENTER" layoutX="263.0" layoutY="146.0" text="Winner" textAlignment="CENTER">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </Label>
+        <Label fx:id="winnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="187.0" prefHeight="44.0" prefWidth="219.0" textAlignment="CENTER">
+            <font>
+                <Font size="31.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

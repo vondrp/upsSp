@@ -285,6 +285,33 @@ server.c.s:
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.s
 .PHONY : server.c.s
 
+ship.o: ship.c.o
+
+.PHONY : ship.o
+
+# target to build an object file
+ship.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/ship.c.o
+.PHONY : ship.c.o
+
+ship.i: ship.c.i
+
+.PHONY : ship.i
+
+# target to preprocess a source file
+ship.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/ship.c.i
+.PHONY : ship.c.i
+
+ship.s: ship.c.s
+
+.PHONY : ship.s
+
+# target to generate assembly for a file
+ship.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/ship.c.s
+.PHONY : ship.c.s
+
 shipsGame.o: shipsGame.c.o
 
 .PHONY : shipsGame.o
@@ -339,6 +366,9 @@ help:
 	@echo "... server.o"
 	@echo "... server.i"
 	@echo "... server.s"
+	@echo "... ship.o"
+	@echo "... ship.i"
+	@echo "... ship.s"
 	@echo "... shipsGame.o"
 	@echo "... shipsGame.i"
 	@echo "... shipsGame.s"

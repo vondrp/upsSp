@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/server.dir/hashmap.c.o"
   "CMakeFiles/server.dir/main.c.o"
   "CMakeFiles/server.dir/server.c.o"
+  "CMakeFiles/server.dir/ship.c.o"
   "CMakeFiles/server.dir/shipsGame.c.o"
   "server"
   "server.pdb"

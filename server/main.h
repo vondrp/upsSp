@@ -11,6 +11,7 @@
 #define TRACE_LOG_FILE_NAME "trace.log"
 #define STATS_FILE_NAME "stats.txt"
 
+#define SPLIT_SYMBOL ';'
 /**
  *  Function to close connection with socket
  * @param fd file descriptor number

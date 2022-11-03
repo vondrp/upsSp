@@ -27,6 +27,12 @@ public class GameController extends AbstractController {
     Label userNameLabel;
 
     @FXML
+    Label opponentNameLabel;
+
+    @FXML
+    Button roomLeaveButton;
+
+    @FXML
     Canvas leftBoardCanvas;
 
     @FXML
@@ -72,6 +78,8 @@ public class GameController extends AbstractController {
         //App.INSTANCE.gameModel.init();
         //this.gameModel = App.INSTANCE.getGameModel();
 
+        this.userNameLabel.setText(App.INSTANCE.getPlayer().getName());
+        this.opponentNameLabel.setText("Jeste treba doplnit zkouska textu");
         this.leftBoard = new GameBoard(this.leftBoardCanvas, this.gameModel, false);
         this.rightBoard = new GameBoard(this.rightBoardCanvas, this.gameModel, true);
 

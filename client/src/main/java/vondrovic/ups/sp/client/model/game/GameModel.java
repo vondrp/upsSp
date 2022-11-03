@@ -16,6 +16,7 @@ public class GameModel {
 
     private GameStatus gameStatus;
 
+    private String winner;
 
     private Integer pickedUpShipId = null;
     /**
@@ -37,6 +38,7 @@ public class GameModel {
         this.enemyBoard = new Square[MAX + 1][MAX + 1];
         this.myBoard = new Square[MAX + 1][MAX + 1];
         this.protocol = new ArrayList<String>();
+        this.winner = null;
     }
 
     private void init_board(Square[][] squares) {
@@ -406,14 +408,14 @@ public class GameModel {
 
     /**
      * If ship is destroyed mark her neighbours as SquareStatus.MISSED
-     *
-     * @param square square, where destroyed ship should be
+     * @param x     x-coordinate of one of ship squares
+     * @param y     y-coordinate of one of ship squares
+     * @param board board in which se square is located
      */
-    public void markDestroyedShip(Square square, Square[][] board) {
-        int x = square.getX();
-        int y = square.getY();
-        boolean isVertical = false;
+    public void markDestroyedShip(int x, int y, Square[][] board) {
 
+        Square square = board[x][y];
+        boolean isVertical = false;
 
         if (square.getSquareStatus() != SquareStatus.HIT) {
             return;
@@ -475,6 +477,10 @@ public class GameModel {
     }
 
 
+    /**
+     * Get player board in string form
+     * @return  Player (mine) board in string form
+     */
     public String getMyBoardStringForm() {
         StringBuilder stringForm = new StringBuilder();
         Square sq;
@@ -570,5 +576,13 @@ public class GameModel {
             }
         }
         return success;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 }

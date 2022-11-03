@@ -33,58 +33,190 @@ void game_init(struct game *game)
     game->player1->playerNum = 1;
     game->player2->playerNum = 2;
 
-    game->player1_prepare = 0;
-    game->player2_prepare = 0;
-
-    for(i = 0; i < SHIP_GAME_BOARD_SIZE; i++) {
-        for(j = 0; j < SHIP_GAME_BOARD_SIZE; j++) {
+    for (i = 0; i < SHIP_GAME_BOARD_SIZE; i++) {
+        for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++) {
             game->player1_board[i][j] = 'E';
             game->player2_board[i][j] = 'E';
         }
     }
-}
 
-void save_board(char * string_board, struct game *game, int playerNumber)
-{
-    int x = 0 , y = 0, i, j;
-    //int arrLen = sizeof board_symbols / sizeof board_symbols[0];
-    //int isElementPresent = 0;
-    unsigned char board[SHIP_GAME_BOARD_SIZE][SHIP_GAME_BOARD_SIZE];
-    for (i = 0; i < strlen(string_board); i++)
+    for (i = 0; i < AMOUNT_OF_SHIP; i++)
     {
-        /*
-        for (j = 0; i < arrLen; i++) {
-            if (board_symbols[i] == x) {
-                isElementPresent = 1;
-            }
-        }*/
-
-        board[y][x] = string_board[i];
-        x++;
-        if (x >= SHIP_GAME_BOARD_SIZE)
-        {
-            x = 0;
-            y++;
-        }
+        ship_init(&game->player1Ships[i], i);
+        ship_init(&game->player2Ships[i], i);
     }
 
-    if (playerNumber == 1)
-    {
-        //game->player1_board = board;
-    }
 }
+
 void game_end(server *server, struct game *game, char* name) {
 
+    char buff[64];
+    sprintf(buff,  "game_end%c%s\n", SPLIT_SYMBOL, name);
 
-    send_message(game->player1, "game_end\n"); //add name
-    send_message(game->player2, "game_end\n");
+    send_message(game->player1, buff);
+    send_message(game->player2, buff);
 
     game->player1->game = NULL;
     game->player2->game = NULL;
-    game->player1->state = 1;
-    game->player2->state = 1;
+    game->player1->state = STATE_IN_LOBBY;
+    game->player2->state = STATE_IN_LOBBY;
 
     arraylist_delete_item(server->rooms, game->id);
     free(game);
+}
+
+void mark_destroyed_ship(struct game *game, struct ship *ship, int ship_owner)
+{
+    int i;
+    int x = ship->startX;
+    int y = ship->startY;
+
+    if (ship->vertical == 1)
+    {
+        if (y > 0)
+        {
+            if (ship_owner == 1)
+            {
+                game->player1_board[y - 1][x] = 'M';
+
+                if (x > 0)
+                    game->player1_board[y - 1][x - 1] = 'M';
+
+                if (x < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player1_board[y - 1][x + 1] = 'M';
+            }
+            else
+            {
+                game->player2_board[y - 1][x] = 'M';
+
+                if (x > 0)
+                    game->player2_board[y - 1][x - 1] = 'M';
+
+                if (x < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player2_board[y - 1][x + 1] = 'M';
+            }
+        }
+
+        for(i = 0; i < ship->length; i++)
+        {
+
+            if (ship_owner == 1)
+            {
+                if (x > 0)
+                    game->player1_board[y][x - 1] = 'M';
+
+                if (x < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player1_board[y][x + 1] = 'M';
+            }
+            else
+            {
+                if (x > 0)
+                    game->player2_board[y][x - 1] = 'M';
+
+                if (x < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player2_board[y][x + 1] = 'M';
+            }
+            y++;
+        }
+
+        y--; //posledni zvednuti y neplati - uz delsi nez delka
+
+        if (y < SHIP_GAME_BOARD_SIZE - 1)
+        {
+            if (ship_owner == 1)
+            {
+                game->player1_board[y + 1][x] = 'M';
+
+                if (x > 0)
+                    game->player1_board[y + 1][x - 1] = 'M';
+
+                if (x < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player1_board[y + 1][x + 1] = 'M';
+            }
+            else
+            {
+                game->player2_board[y + 1][x] = 'M';
+                if (x > 0)
+                    game->player2_board[y + 1][x - 1] = 'M';
+
+                if (x < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player2_board[y + 1][x + 1] = 'M';
+            }
+        }
+    }
+    else
+    {
+
+        if (x > 0)
+        {
+            if (ship_owner == 1)
+            {
+                game->player1_board[y][x - 1] = 'M';
+
+                if (y > 0)
+                    game->player1_board[y - 1][x - 1] = 'M';
+
+                if (y < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player1_board[y + 1][x - 1] = 'M';
+            }
+            else
+            {
+                game->player2_board[y][x - 1] = 'M';
+
+                if (y > 0)
+                    game->player2_board[y - 1][x - 1] = 'M';
+
+                if (y < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player2_board[y + 1][x - 1] = 'M';
+            }
+        }
+
+        for (i = 0; i < ship->length; i++)
+        {
+            if (ship_owner == 1)
+            {
+                if (y > 0)
+                    game->player1_board[y - 1][x] = 'M';
+
+                if (y < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player1_board[y + 1][x] = 'M';
+            }
+            else
+            {
+                if (y > 0)
+                    game->player2_board[y - 1][x] = 'M';
+
+                if (y < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player2_board[y + 1][x] = 'M';
+            }
+            x++;
+        }
+        x--; // posledni zvyseni x neplati - delsi nez delka
+
+        if (x < SHIP_GAME_BOARD_SIZE - 1)
+        {
+            if (ship_owner == 1)
+            {
+                game->player1_board[y][x + 1] = 'M';
+
+                if (y > 0)
+                    game->player1_board[y - 1][x + 1] = 'M';
+
+                if (y < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player1_board[y + 1][x + 1] = 'M';
+            }
+            else
+            {
+                game->player2_board[y][x + 1] = 'M';
+
+                if (y > 0)
+                    game->player2_board[y - 1][x + 1] = 'M';
+
+                if (y < SHIP_GAME_BOARD_SIZE - 1)
+                    game->player2_board[y + 1][x + 1] = 'M';
+            }
+        }
+    }
+
 }
 

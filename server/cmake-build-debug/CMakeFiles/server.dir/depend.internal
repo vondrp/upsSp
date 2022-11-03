@@ -7,6 +7,7 @@ CMakeFiles/server.dir/arraylist.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.h
 CMakeFiles/server.dir/client.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c
@@ -19,6 +20,7 @@ CMakeFiles/server.dir/commands.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.h
 CMakeFiles/server.dir/hashmap.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c
@@ -31,6 +33,7 @@ CMakeFiles/server.dir/main.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.c
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.h
 CMakeFiles/server.dir/server.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.h
@@ -39,12 +42,17 @@ CMakeFiles/server.dir/server.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.h
+CMakeFiles/server.dir/ship.c.o
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h
 CMakeFiles/server.dir/shipsGame.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.h
