@@ -19,13 +19,28 @@ import vondrovic.ups.sp.client.model.game.SquareStatus;
 
 public class MessageHandler {
 
+    // possible error messages
+    private final int ERROR_INTERNAL = 1;
+    private final int ERROR_FORMAT = 2;
+    private final int ERROR_USERNAME_WRONG_FORMAT = 3;
+    private final int ERROR_USED_USERNAME = 4;
+    private final int ERROR_USER_STATE = 5;
+    private final int ERROR_ROOM_FULL = 6;
+    private final int ERROR_ROOM_NOT_ACCESSIBLE = 7;
+    private final int ERROR_ROOM_OPP_LEFT = 8;
+    private final int ERROR_WAIT_TO_LONG_FOR_OPP = 9;
+
+    private final int ERROR_OUT_OF_PLAY_FIELD = 10;
+    private final int ERROR_ALREADY_HIT = 11;
+    private final int ERROR_SHIP_PLACEMENT = 12;
+    private final int ERROR_SHIP_NUMBER = 13;
+
     // states of client
     private final int STATE_UNLOGGED = 0;
     private final int STATE_IN_LOBBY = 1;
     private final int STATE_IN_ROOM = 2;
     private final int STATE_IN_GAME = 3;
     private final int STATE_IN_GAME_PLAYING = 4;
-
 
     Window window;
     public int invalidMessages = 0;
@@ -89,8 +104,87 @@ public class MessageHandler {
         if(message[0].equalsIgnoreCase("login_err")) {
             this.invalidMessages = 0;
             App.INSTANCE.disconnect();
-            AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
 
+            if (message.length < 2)
+            {
+                AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
+                return;
+            }
+            switch(Integer.parseInt(message[1]))
+            {
+                case ERROR_USED_USERNAME:
+                    AlertFactory.sendErrorMessageOutside("Login error", "Chosen username is already being used on server.");
+                    break;
+                case ERROR_FORMAT:
+                    AlertFactory.sendErrorMessageOutside("Login error", "Login command was used in wrong format.");
+                    break;
+                case ERROR_USERNAME_WRONG_FORMAT:
+                    AlertFactory.sendErrorMessageOutside("Login error", "Username contains illegal characters or has an invalid length (more than 20 characters or is empty).");
+                    break;
+                case ERROR_INTERNAL:
+                default:
+                    AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
+                    break;
+
+            }
+
+            return;
+        }
+
+        if(message[0].equalsIgnoreCase("room_create_err")) {
+            this.invalidMessages = 0;
+            App.INSTANCE.disconnect();
+
+            if (message.length < 2)
+            {
+                AlertFactory.sendErrorMessageOutside("Room create error", "An error occurred while creating a room.");
+                return;
+            }
+
+            if (Integer.parseInt(message[0]) == ERROR_USER_STATE) {
+                AlertFactory.sendErrorMessageOutside("Room create error", "Client is in wrong state to be able create a room.");
+            } else {
+                AlertFactory.sendErrorMessageOutside("Room create error", "An error occurred while creating a room.");
+            }
+            return;
+        }
+
+        if(message[0].equalsIgnoreCase("room_list_err")) {
+            this.invalidMessages = 0;
+
+
+            AlertFactory.sendErrorMessageOutside("Room list error", "An error occurred while getting list of rooms");
+            return;
+        }
+
+        //TODO dodelat
+        if(message[0].equalsIgnoreCase("room_join_err")) {
+            this.invalidMessages = 0;
+
+            if (message.length < 2)
+            {
+                AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
+                return;
+            }
+            switch(Integer.parseInt(message[1]))
+            {
+                case ERROR_USER_STATE:
+                    AlertFactory.sendErrorMessageOutside("Room join error", "Client is in wrong state to join a room.");
+                    break;
+                case ERROR_FORMAT:
+                    AlertFactory.sendErrorMessageOutside("Room join error", "Room join failed due to message format.");
+                case ERROR_ROOM_NOT_ACCESSIBLE:
+                    AlertFactory.sendErrorMessageOutside("Room join error", "Room was not found or is not accessible.");
+                    break;
+                case ERROR_ROOM_FULL:
+                    AlertFactory.sendErrorMessageOutside("Room join error", "Room is full.");
+                    break;
+                    case ERROR_INTERNAL:
+                default:
+                    AlertFactory.sendErrorMessageOutside("Room join error", "An error occurred while joining to room.");
+                    break;
+
+            }
             return;
         }
 
@@ -192,9 +286,16 @@ public class MessageHandler {
             return;
         }
 
+        if(message[0].equalsIgnoreCase("room_leave_err")) {
+            this.invalidMessages = 0;
+
+            AlertFactory.sendErrorMessageOutside("Room leave error", "An error occurred while trying to leave a room.");
+        }
+
         if(message[0].equalsIgnoreCase("logout_err")) {
             this.invalidMessages = 0;
 
+            AlertFactory.sendErrorMessageOutside("Logout error", "An error occurred. Client is already disconnected.");
             return;
         }
 
@@ -233,12 +334,43 @@ public class MessageHandler {
             return;
         }
 
-        if (message[0].equalsIgnoreCase("game_prepared_err"))
+        if (message[0].equalsIgnoreCase("game_prepare_err"))
         {
-            AlertFactory.sendErrorMessageOutside("Game prepare error", "An error occurred while preparing a game. Try again.");
-            ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid");
-            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
+            this.invalidMessages = 0;
 
+            if (message.length < 2)
+            {
+                AlertFactory.sendErrorMessageOutside("Game prepare error", "An error occurred while preparing a game.");
+                return;
+            }
+            switch(Integer.parseInt(message[1]))
+            {
+                case ERROR_USER_STATE:
+                    AlertFactory.sendErrorMessageOutside("Game prepare error", "Client is in wrong state to prepare a game.");
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid");
+                    break;
+                case ERROR_FORMAT:
+                    AlertFactory.sendErrorMessageOutside("Game prepare error", "Game preparation failed due to message format.");
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid");
+                case ERROR_SHIP_NUMBER:
+                    AlertFactory.sendErrorMessageOutside("Game prepare error", "Given game board contains invalid ship number.");
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid. It contained invalid ship number.");
+                    break;
+                case ERROR_SHIP_PLACEMENT:
+                    AlertFactory.sendErrorMessageOutside("Game prepare error", "Two ships cannot be placed directly next to each other.");
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid. Two ships cannot be place directly next to each other.");
+                    break;
+                case ERROR_INTERNAL:
+                default:
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid");
+                    AlertFactory.sendErrorMessageOutside("Game prepare error", "An error occurred while preparing a game.");
+                    break;
+            }
+            App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
+            //TODO check if with invalid code game enables to send prepared again
+            Platform.runLater(() -> {
+                App.INSTANCE.setScene(SceneEnum.GAME);
+            });
             return;
         }
 
@@ -298,12 +430,32 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_fire_err"))
         {
+            if (message.length < 2)
+            {
+                AlertFactory.sendErrorMessageOutside("Game fire error", "An error occurred while firing.");
+                return;
+            }
+
+            switch(Integer.parseInt(message[1])) {
+                case ERROR_FORMAT:
+                    AlertFactory.sendErrorMessageOutside("Game fire error", "Game fire request failed due to wrong message format.");
+                case ERROR_OUT_OF_PLAY_FIELD:
+                    AlertFactory.sendErrorMessageOutside("Game fire error", "Given position is out of board restrictions.");
+                    break;
+                case ERROR_ALREADY_HIT:
+                    AlertFactory.sendErrorMessageOutside("Game fire error", "Given position is already hit.");
+                    break;
+                case ERROR_INTERNAL:
+                default:
+                    AlertFactory.sendErrorMessageOutside("Game fire error", "An error occurred while firing.");
+                    break;
+            }
+
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
 
             Platform.runLater(() -> {
                 ((GameController) App.INSTANCE.getController()).protocolAdd("Fire request failed. Try fire again");
             });
-
         }
 
         if (message[0].equalsIgnoreCase("game_opp_fire"))
@@ -346,10 +498,9 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_end"))
         {
-            System.out.println("V game end");
             this.invalidMessages = 0;
 
-            if (message.length < 1) return;
+            if (message.length < 2) return;
 
             if(App.INSTANCE.getSceneEnum() != SceneEnum.GAME) {
                 return;
