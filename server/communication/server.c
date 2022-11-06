@@ -18,25 +18,25 @@
 
 #include "server.h"
 #include "client.h"
-#include "shipsGame.h"
-#include "hashmap.h"
+#include "game/shipsGame.h"
+#include "structures/hashmap.h"
 #include "main.h"
 
-#define MAX_PLAYERS_NUM 20
 #define MAX_INVALID_MESSAGES 5
 
 fd_set master_fd_set;
 
-server *server_init() {
+server *server_init(int max_rooms, int max_player_num)
+{
     server *server = (struct server_ *) malloc(sizeof(struct server_));
 
     if(!server)
     {
         return NULL;
     }
-    server->clients_size = MAX_PLAYERS_NUM;
+    server->clients_size = max_player_num;
     server->clients = malloc(sizeof(struct client *) * server->clients_size);
-    server->rooms = arraylist_create(MAX_PLAYERS_NUM);
+    server->rooms = arraylist_create(max_rooms);
 
     server->stat_messages_out = 0;
     server->stat_messages_in = 0;
@@ -45,7 +45,7 @@ server *server_init() {
     server->stat_fail_requests = 0;
     server->stat_unknown_commands = 0;
 
-    server->players = (hashtable_t *) ht_create(MAX_PLAYERS_NUM);
+    server->players = (hashtable_t *) ht_create(max_player_num);
     return server;
 }
 
@@ -76,6 +76,7 @@ void server_listen(server *server, char *port) {
     int yes=1;
     int i, j, rv;
     char remoteIP[INET6_ADDRSTRLEN];
+    int can_read;
 
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_UNSPEC;
@@ -130,8 +131,6 @@ void server_listen(server *server, char *port) {
 
     fdmax = listener;
 
-    int can_read;
-
     // main loop
     trace("Server has started on port %s\n", port);
     while(1)
@@ -179,7 +178,7 @@ void server_listen(server *server, char *port) {
                     if(can_read > 0) {
 
                         memset(buf, '\0', sizeof(char) * 1024);
-                        if ((nbytes = recv(i, buf, sizeof buf, 0)) <= 0) {
+                        if ((nbytes = (int) recv(i, buf, sizeof buf, 0)) <= 0) {
                             // got error or connection closed by client
                             printf("Socket %d - Connection hang up", i);
 
@@ -207,7 +206,9 @@ void server_listen(server *server, char *port) {
             }
         }
     }
-}void server_disconnect(server *server, int fd_number) {
+}
+
+void server_disconnect(server *server, int fd_number) {
     struct client *client = server->clients[fd_number];
     if(!client) {
         return;
@@ -226,7 +227,7 @@ void server_listen(server *server, char *port) {
 
         if(opp && opp->connected) {
             char buf[64] = "";
-            sprintf(buf, "room_leave_opp|%s\n\0", client->name);
+            sprintf(buf, "room_leave_opp%c%s\n",SPLIT_SYMBOL, client->name);
             send_message(opp, buf);
         }
     }
@@ -239,7 +240,6 @@ void server_listen(server *server, char *port) {
 }
 
 void server_new_connection(server *server, int fd_number) {
-    printf("V novem connection fd je %d", fd_number);
     struct client *client = (struct client *) malloc(sizeof(struct client));
 
     if(!client) {

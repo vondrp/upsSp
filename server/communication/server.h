@@ -6,8 +6,8 @@
 #ifndef SERVER_SERVER_H
 #define SERVER_SERVER_H
 
-#include "arraylist.h"
-#include "hashmap.h"
+#include "structures/arraylist.h"
+#include "structures/hashmap.h"
 /**
  * Server structure
  */
@@ -31,11 +31,14 @@ struct server_ {
  */
 typedef struct server_ server;
 
+
 /**
  * Function to default initialization server structure
- * @return
+ * @param max_rooms         max amount of rooms
+ * @param max_player_num    max amount of player
+ * @return  instance of server structure
  */
-server *server_init();
+server *server_init(int max_rooms, int max_player_num);
 
 /**
  * Destroy server (deallocates memory)

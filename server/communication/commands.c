@@ -1,7 +1,7 @@
 
 #include "commands.h"
 #include "main.h"
-#include "shipsGame.h"
+#include "game/shipsGame.h"
 
 #include "errors.h"
 
@@ -16,8 +16,6 @@ const cmd_handler COMMANDS[] =
         {"game_prepared", cmd_game_prepared},
         {"game_fire_req", cmd_game_fire},
         {"game_info_req", cmd_game_info},
-       // {"game_conn", cmd_game_conn},
-
         {"logout_req", cmd_logout}
     };
 
@@ -86,7 +84,9 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
     {
         if(logged_client->connected)
         {
-            send_message(client, "login_err%c%d\n", SPLIT_SYMBOL, ERROR_USED_USERNAME);
+            sprintf(buff, "login_err%c%d\n", SPLIT_SYMBOL, ERROR_USED_USERNAME);
+            send_message(client, buff);
+            printf("Za poslanim erroru\n");
             trace("Socket %d - User is trying to login as %s, but this name is using", client->fd, logged_client->name);
             return EXIT_SUCCESS;
         }
@@ -103,7 +103,6 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
 
     if(client_set_name(client, argv[0]))
     {
-        char buff[64];
         struct client *opp = NULL;
 
         sprintf(buff, "login_ok%c%s%c%d\n", SPLIT_SYMBOL, client->name, SPLIT_SYMBOL, client->state);
@@ -128,15 +127,18 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         return EXIT_SUCCESS;
     }
 
-    send_message(client, "login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
+    sprintf(buff,  "login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
+    send_message(client, buff);
     trace("Socket %d - Login internal error", client->fd, client->name);
     return EXIT_FAILURE;
 }
 
 int cmd_room_create(server *server, struct client *client, int argc, char **argv)
 {
+    char buff[64];
     if(client->state != STATE_IN_LOBBY) {
-        send_message(client, "room_create_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        sprintf(buff, "room_create_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        send_message(client, buff);
         trace("Socket %d - room creation failed due wrong client state (%d)", client->fd, client->state);
         return EXIT_FAILURE;
     }
@@ -153,11 +155,13 @@ int cmd_room_create(server *server, struct client *client, int argc, char **argv
 int cmd_room_list(server *server, struct client *client, int argc, char **argv) {
 
     size_t buffer_size = 1024;
-    size_t copied = 0;
+    size_t copied;
     char *buffer = malloc(sizeof(char) * buffer_size);
     char *temp = malloc(sizeof(char) * 32);
 
-    strcpy(buffer, "room_list_data\n");
+    char buff[64]; //buffer used to error messages
+
+    strcpy(buffer, "room_list_data");
     copied = strlen(buffer);
 
     int i = server->rooms->first;
@@ -182,7 +186,8 @@ int cmd_room_list(server *server, struct client *client, int argc, char **argv) 
         } else if(game->player2 != NULL) {
             player = game->player2;
         } else {
-            send_message(client, "room_list_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
+            sprintf(buff,  "room_list_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
+            send_message(client, buff);
             trace("Socket %d - Failure due preparing list of free roams.", client->fd);
             return EXIT_FAILURE;
         }
@@ -221,22 +226,26 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
     int i;
     int length;
 
+    char buff[64];
     if(client->state != STATE_IN_LOBBY)
     {
-        send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        sprintf(buff,  "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        send_message(client, buff);
         trace("Sock1et %d - Room join was rejected due to wrong client state (%d)", client->fd, client->state);
         return EXIT_FAILURE;
     }
 
     if(argc < 1) {
-        send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        send_message(client, buff);
         trace("Socket %d - Room joining failed due to wrong message format", client->fd);
         return EXIT_FAILURE;
     }
 
-    length = strlen(argv[0]);
+    length = (int) strlen(argv[0]);
     if(length == 0) {
-        send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        sprintf(buff,  "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        send_message(client, buff);
         trace("Socket %d - Room joining failed due to wrong message format", client->fd);
         return EXIT_FAILURE;
     }
@@ -244,7 +253,8 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
 
     for(i = 0; i < length; i++) {
         if(isdigit(argv[0][i]) == 0) {
-            send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+            sprintf(buff,"room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+            send_message(client, buff);
             trace("Socket %d - Room joining failed due to wrong message format", client->fd);
             return EXIT_FAILURE;
         }
@@ -255,13 +265,15 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
     struct game *room = arraylist_get(server->rooms, room_id);
 
     if(!room) {
-        send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE); //9
+        sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE);
+        send_message(client, buff); //9
         trace("Socket %d - Room joining failed due room is unavailable", client->fd);
         return EXIT_FAILURE;
     }
 
     if(room->state != GAME_STATE_LOBBY) {
-        send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_FULL);
+        sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_FULL);
+        send_message(client, buff);
         trace("Socket %d - Room (%d) joining failed due room is full", client->fd, room->id);
         return EXIT_FAILURE;
     }
@@ -275,19 +287,20 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
         room->player2 = client;
         opponent = room->player1;
     } else {
-        send_message(client, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_FULL);
+        sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_FULL);
+        send_message(client, buff);
         trace("Socket %d - Room (%d) joining failed due room is full", client->fd, room->id);
         return EXIT_FAILURE;
     }
 
     client->game = room;
     client->state = STATE_IN_ROOM;
-    char buf[64] = "";
-    sprintf(buf, "room_join_ok%c%s\n", SPLIT_SYMBOL, opponent->name);
-    send_message(client, buf);
 
-    sprintf(buf, "room_join_opp%c%s\n", SPLIT_SYMBOL, client->name);
-    send_message(opponent, buf);
+    sprintf(buff, "room_join_ok%c%s\n", SPLIT_SYMBOL, opponent->name);
+    send_message(client, buff);
+
+    sprintf(buff, "room_join_opp%c%s\n", SPLIT_SYMBOL, client->name);
+    send_message(opponent, buff);
     trace("Socket %d - Room (%d) join success.", client->fd, room->id);
 
     printf("Client %s state %d\n", client->name, client->state);
@@ -355,7 +368,8 @@ int cmd_room_leave(server *server, struct client *client, int argc, char **argv)
             send_message(opp, buf);
         }
     } else {
-        send_message(client, "room_leave_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        sprintf(buf,  "room_leave_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        send_message(client, buf);
         trace("Socket %d - Room leaving failed due wrong client state (%d)", client->fd, client->state);
         return EXIT_FAILURE;
     }
@@ -366,10 +380,11 @@ int cmd_room_leave(server *server, struct client *client, int argc, char **argv)
 
 int cmd_logout(server *server, struct client *client, int argc, char **argv) {
 
-    char buf[64];
+    char buff[64];
 
     if(client->connected == DISCONNECTED) {
-        send_message(client, "logout_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        sprintf(buff,"logout_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        send_message(client, buff);
         trace("Socket %d - Tried to disconnect when his state was DISCONNECTED", client->fd);
         return EXIT_FAILURE;
     }
@@ -393,8 +408,8 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
                 client->game->player2 = NULL;
             }
 
-            sprintf(buf, "room_leave_opp%c%s", SPLIT_SYMBOL, client->name);
-            send_message(opp, buf);
+            sprintf(buff, "room_leave_opp%c%s", SPLIT_SYMBOL, client->name);
+            send_message(opp, buff);
         } else {
             if(client->game->player1 == client || client->game->player2 == client) {
                 arraylist_delete_item(server->rooms, client->game->id);
@@ -416,8 +431,8 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
             winner = client->name;
         }
 
-        sprintf(buf, "room_leave_opp%c%s\n", SPLIT_SYMBOL, client->name);
-        send_message(opp, buf);
+        sprintf(buff, "room_leave_opp%c%s\n", SPLIT_SYMBOL, client->name);
+        send_message(opp, buff);
 
         trace("Game %d - Game was ended due user (%d - %s) logout.", client->game->id, client->fd, client->name);
 
@@ -444,14 +459,14 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
     if (client->state != STATE_IN_GAME_PREPARING)
     {
-        sprintf(buff,  "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        sprintf(buff,  "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
         send_message(client, buff);
         trace("Socket %d - Tried to prepared game when not in right state", client->fd);
         return EXIT_FAILURE;
     }
 
     if(argc < 1) {
-        sprintf(buff,  "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        sprintf(buff,  "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client,buff);
         trace("Socket %d Game prepared failed due message format error", client->fd);
         return EXIT_FAILURE;
@@ -459,7 +474,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
     if (strlen(argv[0]) != GAME_BOARD_STRING_SIZE)
     {
-        sprintf(buff,  "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        sprintf(buff,  "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);
         trace("Socket %d Game prepared failed due message format error", client->fd);
         return EXIT_FAILURE;
@@ -471,14 +486,13 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
     for (i = 0; i < GAME_BOARD_STRING_SIZE; i++)
     {
         ship_number = -1;
-        //TODO kontrola znaku
-        // send_message(client, "game_prepare_err%c%d\n", SPLIT_SYMBOL, 2);
+
         if (argv[0][i]  == ',')
         {
             // if is not 0 -> wrong amount of characters between
             if (x != 0)
             {
-                sprintf(buff, "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+                sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
                 send_message(client, buff);
                 trace("Socket %d - Game prepare request failed due message format error", client->fd);
                 return EXIT_FAILURE;
@@ -492,7 +506,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             ship_number = argv[0][i] - '0';
             if (ship_number < 0 || ship_number >= AMOUNT_OF_SHIP)
             {
-                sprintf(buff, "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_NUMBER);
+                sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_NUMBER);
                 send_message(client, buff);
                 trace("Socket %d - Game prepare request failed due message format error", client->fd);
                 return EXIT_FAILURE;
@@ -502,7 +516,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         {
             if (argv[0][i] != 'E')
             {
-                sprintf(buff, "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+                sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
                 send_message(client, buff);
                 trace("Socket %d - Game prepare request failed due message format error", client->fd);
                 return EXIT_FAILURE;
@@ -569,7 +583,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
                 if (check_neigh_ship == 1)
                 {
-                    sprintf(buff, "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+                    sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
                     send_message(client, buff);
                     trace("Socket %d - Game prepare request failed due to two ships placed next to each other.", client->fd);
                     return EXIT_FAILURE;
@@ -639,7 +653,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
                 if (check_neigh_ship == 1)
                 {
-                    sprintf(buff, "game_prepare_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+                    sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
                     send_message(client, buff);
                     trace("Socket %d - Game prepare request failed due to two ships placed next to each other.", client->fd);
                     return EXIT_FAILURE;
@@ -658,10 +672,10 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         }
     }
     // CLIENT IS prepared
-    client->state = STATE_PREPARED;
+    client->state = STATE_IN_GAME;
     send_message(client, "game_prepared_ok\n");
 
-    if (client->game->player1->state == STATE_PREPARED && client->game->player2->state == STATE_PREPARED)
+    if (client->game->player1->state == STATE_IN_GAME && client->game->player2->state == STATE_IN_GAME)
     {
         client->game->player1->state = STATE_IN_GAME_PLAYING;
         client->game->player2->state = STATE_IN_GAME;
@@ -681,9 +695,9 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
 {
     char buff[64];
-    int x, y, i, j;
+    int x, y;
     unsigned char c;
-    int ship_number = -1;
+    int ship_number;
     int ship_destroyed = 0;
     if(!client || !argv)
     {
@@ -746,10 +760,14 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
         sprintf(buff, "game_opp_fire%c%d%c%d%c%c%c%d\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'M',  SPLIT_SYMBOL, ship_destroyed);
         if (client->playerNum == 1)
         {
+            client->state = STATE_IN_GAME;
+            client->game->player2->state = STATE_IN_GAME_PLAYING;
             send_message(client->game->player2, buff);
         }
         else
         {
+            client->state = STATE_IN_GAME;
+            client->game->player1->state = STATE_IN_GAME_PLAYING;
             send_message(client->game->player1, buff);
         }
         return EXIT_SUCCESS;
@@ -802,10 +820,14 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
         sprintf(buff, "game_opp_fire%c%d%c%d%c%c%c%d\n", SPLIT_SYMBOL, x, SPLIT_SYMBOL, y, SPLIT_SYMBOL, 'H', SPLIT_SYMBOL, ship_destroyed);
         if (client->playerNum == 1)
         {
+            client->state = STATE_IN_GAME;
+            client->game->player2->state = STATE_IN_GAME_PLAYING;
             send_message(client->game->player2, buff);
         }
         else
         {
+            client->state = STATE_IN_GAME;
+            client->game->player1->state = STATE_IN_GAME_PLAYING;
             send_message(client->game->player1, buff);
         }
 
@@ -828,13 +850,15 @@ int cmd_game_info(server *server, struct client *client, int argc, char **argv)
 {
     int i, j;
     struct client *opp = NULL;
-    char buff[30 + (NAME_MAX_LENGTH * 2) + (SHIP_GAME_BOARD_SIZE * SHIP_GAME_BOARD_SIZE) * 2];
+    //char buff[30 + (NAME_MAX_LENGTH * 2) + (SHIP_GAME_BOARD_SIZE * SHIP_GAME_BOARD_SIZE) * 2];
 
+    char buff[250];
     unsigned char client_board[GAME_BOARD_STRING_SIZE];
     unsigned char opponent_board[GAME_BOARD_STRING_SIZE];
 
-    // TODO rozhodnout zda pridat STATE_PREPARED STATE_IN_GAME_PREPARING
-    if(client->state != STATE_IN_GAME_PLAYING && client->state != STATE_IN_GAME) {
+    if(client->state != STATE_IN_GAME_PLAYING && client->state != STATE_IN_GAME
+    && client->state != STATE_IN_GAME_PREPARING
+    ) {
         sprintf(buff,  "game_info_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
         send_message(client, buff);
         trace("Socket %d - User game info was rejected due to wrong client state (%d)", client->fd, client->state);
@@ -848,7 +872,15 @@ int cmd_game_info(server *server, struct client *client, int argc, char **argv)
         {
             for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
             {
-                opponent_board[i * SHIP_GAME_BOARD_SIZE + j] = client->game->player2_board[i][j];
+
+                if (isdigit(client->game->player2_board[i][j]))
+                {
+                    opponent_board[i * SHIP_GAME_BOARD_SIZE + j] = 'E';
+                }
+                else
+                {
+                    opponent_board[i * SHIP_GAME_BOARD_SIZE + j] = client->game->player2_board[i][j];
+                }
                 client_board[i * SHIP_GAME_BOARD_SIZE + j] = client->game->player1_board[i][j];
             }
         }
@@ -861,15 +893,22 @@ int cmd_game_info(server *server, struct client *client, int argc, char **argv)
         {
             for (j = 0; j < SHIP_GAME_BOARD_SIZE; j++)
             {
-                opponent_board[i * SHIP_GAME_BOARD_SIZE + j] = client->game->player1_board[i][j];
+                if (isdigit(client->game->player1_board[i][j]))
+                {
+                    opponent_board[i * SHIP_GAME_BOARD_SIZE + j] = 'E';
+                }
+                else
+                {
+                    opponent_board[i * SHIP_GAME_BOARD_SIZE + j] = client->game->player1_board[i][j];
+                }
+
                 client_board[i * SHIP_GAME_BOARD_SIZE + j] = client->game->player2_board[i][j];
             }
         }
     }
 
-    sprintf(buff, "game_info_data%c%d%c%s%c%s%c%s%c%s\n", SPLIT_SYMBOL,
-            client->state, SPLIT_SYMBOL,
-            client->name, SPLIT_SYMBOL, client_board, SPLIT_SYMBOL,
+    sprintf(buff, "game_info_data%c%d%c%s%c%s%c%s\n", SPLIT_SYMBOL,
+            client->state, SPLIT_SYMBOL, client_board, SPLIT_SYMBOL,
             opp->name, SPLIT_SYMBOL, opponent_board);
 
     send_message(client, buff);

@@ -11,11 +11,9 @@
 #define STATE_UNLOGGED 0
 #define STATE_IN_LOBBY 1
 #define STATE_IN_ROOM 2
-
-#define STATE_IN_GAME 3
-#define STATE_IN_GAME_PLAYING 4
-#define STATE_IN_GAME_PREPARING 5
-#define STATE_PREPARED 6
+#define STATE_IN_GAME_PREPARING 3
+#define STATE_IN_GAME 4
+#define STATE_IN_GAME_PLAYING 5
 
 
 // max name length without \0
