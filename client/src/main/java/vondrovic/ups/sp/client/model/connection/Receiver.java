@@ -1,7 +1,9 @@
-package vondrovic.ups.sp.client;
+package vondrovic.ups.sp.client.model.connection;
 
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
+import vondrovic.ups.sp.client.AlertFactory;
+import vondrovic.ups.sp.client.App;
+import vondrovic.ups.sp.client.SceneEnum;
 import vondrovic.ups.sp.client.model.connection.ConnectionModel;
 import vondrovic.ups.sp.client.model.connection.MessageHandler;
 import vondrovic.ups.sp.client.model.connection.Stats;
@@ -79,8 +81,8 @@ public class Receiver extends Thread {
 
             if(line.length() != 0) {
 
-                Stats.INSTANCE.recievedMessages++;
-                Stats.INSTANCE.recievedBytes += line.length() + 1;
+                Stats.INSTANCE.receivedMessages++;
+                Stats.INSTANCE.receivedBytes += line.length() + 1;
 
                 try {
                     messageHandler.processMessage(line);

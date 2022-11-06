@@ -50,8 +50,8 @@
 				7,
 				9,
 				11,
-				14,
-				16
+				13,
+				15
 			]
 		}
 	],
@@ -91,8 +91,7 @@
 				8,
 				10,
 				12,
-				13,
-				15
+				14
 			]
 		},
 		{
@@ -105,8 +104,8 @@
 				7,
 				9,
 				11,
-				14,
-				16
+				13,
+				15
 			]
 		}
 	],
@@ -125,84 +124,79 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "server.h",
+			"path" : "communication/server.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "server.c",
+			"path" : "communication/server.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "arraylist.h",
+			"path" : "structures/arraylist.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "arraylist.c",
+			"path" : "structures/arraylist.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "client.h",
+			"path" : "communication/client.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "client.c",
+			"path" : "communication/client.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "commands.h",
+			"path" : "communication/commands.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "commands.c",
+			"path" : "communication/commands.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "hashmap.h",
+			"path" : "structures/hashmap.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "hashmap.c",
+			"path" : "structures/hashmap.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "player.h",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "shipsGame.h",
+			"path" : "game/shipsGame.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "shipsGame.c",
+			"path" : "game/shipsGame.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "ship.h",
+			"path" : "game/ship.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "ship.c",
+			"path" : "game/ship.c",
 			"sourceGroupIndex" : 1
 		}
 	],

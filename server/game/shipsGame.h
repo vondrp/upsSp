@@ -1,13 +1,12 @@
-#include "client.h"
+#include "../communication/client.h"
 #include <stdbool.h>
-#include "server.h"
+#include "../communication/server.h"
 #include <stdlib.h>
 
 #ifndef SERVER_GAME_H
 #define SERVER_GAME_H
 
 #define GAME_STATE_LOBBY 0
-#define GAME_STATE_PLAYING 1
 
 #define SHIP_GAME_BOARD_SIZE 10
 #define AMOUNT_OF_SHIP 7
@@ -56,8 +55,12 @@ void game_init(struct game *game);
  */
 void game_end(server *server, struct game *game, char* name_winner);
 
-
+/**
+ * Mark ship as destroyed by making marking positions around it as missed
+ * @param game      game structure
+ * @param ship      ship structure
+ * @param ship_owner 1 or 2 - player 1 or player 2 of the game ship belongs
+ */
 void mark_destroyed_ship(struct game *game, struct ship *ship, int ship_owner);
 
-void save_board(char * string_board, struct game *game, int playerNumber);
 #endif

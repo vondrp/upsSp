@@ -85,8 +85,8 @@ public class LobbyController extends AbstractController
     public void handleStats()
     {
         AlertFactory.sendMessage(Alert.AlertType.INFORMATION, "Connection statistics",
-                "Recieved messages: " + Stats.INSTANCE.recievedMessages +
-                        "\nRecieved bytes: " + Stats.INSTANCE.recievedBytes +
+                "Recieved messages: " + Stats.INSTANCE.receivedMessages +
+                        "\nRecieved bytes: " + Stats.INSTANCE.receivedBytes +
                         "\nSent messages: " + Stats.INSTANCE.sentMessages +
                         "\nSent bytes: " + Stats.INSTANCE.sentBytes);
     }

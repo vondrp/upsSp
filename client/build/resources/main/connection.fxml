@@ -15,7 +15,7 @@
     <children>
     <VBox fx:id="vbox" alignment="CENTER" prefHeight="317.0" prefWidth="272.0">
         <children>
-            <Label text="%connection">
+            <Label text="Connection">
                 <font>
                     <Font size="18.0" />
                 </font>
@@ -23,7 +23,7 @@
                     <Insets bottom="30.0" top="20.0" />
                 </VBox.margin>
             </Label>
-            <Label text="%username">
+            <Label text="Username">
                 <VBox.margin>
                     <Insets />
                 </VBox.margin>
@@ -33,7 +33,7 @@
                     <Insets bottom="10.0" left="30.0" right="30.0" top="5.0" />
                 </VBox.margin>
             </TextField>
-            <Label text="%server.address">
+            <Label text="Server Address">
                 <VBox.margin>
                     <Insets />
                 </VBox.margin>
@@ -43,7 +43,7 @@
                     <Insets bottom="10.0" left="30.0" right="30.0" top="5.0" />
                 </VBox.margin>
             </TextField>
-            <Label text="%service.port" />
+            <Label text="Service port" />
             <TextField fx:id="portInput" promptText="9123">
                 <VBox.margin>
                     <Insets bottom="10.0" left="30.0" right="30.0" top="5.0" />

@@ -123,113 +123,140 @@ server/fast:
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
 .PHONY : server/fast
 
-arraylist.o: arraylist.c.o
+communication/client.o: communication/client.c.o
 
-.PHONY : arraylist.o
-
-# target to build an object file
-arraylist.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/arraylist.c.o
-.PHONY : arraylist.c.o
-
-arraylist.i: arraylist.c.i
-
-.PHONY : arraylist.i
-
-# target to preprocess a source file
-arraylist.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/arraylist.c.i
-.PHONY : arraylist.c.i
-
-arraylist.s: arraylist.c.s
-
-.PHONY : arraylist.s
-
-# target to generate assembly for a file
-arraylist.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/arraylist.c.s
-.PHONY : arraylist.c.s
-
-client.o: client.c.o
-
-.PHONY : client.o
+.PHONY : communication/client.o
 
 # target to build an object file
-client.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/client.c.o
-.PHONY : client.c.o
+communication/client.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/client.c.o
+.PHONY : communication/client.c.o
 
-client.i: client.c.i
+communication/client.i: communication/client.c.i
 
-.PHONY : client.i
+.PHONY : communication/client.i
 
 # target to preprocess a source file
-client.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/client.c.i
-.PHONY : client.c.i
+communication/client.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/client.c.i
+.PHONY : communication/client.c.i
 
-client.s: client.c.s
+communication/client.s: communication/client.c.s
 
-.PHONY : client.s
+.PHONY : communication/client.s
 
 # target to generate assembly for a file
-client.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/client.c.s
-.PHONY : client.c.s
+communication/client.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/client.c.s
+.PHONY : communication/client.c.s
 
-commands.o: commands.c.o
+communication/commands.o: communication/commands.c.o
 
-.PHONY : commands.o
+.PHONY : communication/commands.o
 
 # target to build an object file
-commands.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/commands.c.o
-.PHONY : commands.c.o
+communication/commands.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/commands.c.o
+.PHONY : communication/commands.c.o
 
-commands.i: commands.c.i
+communication/commands.i: communication/commands.c.i
 
-.PHONY : commands.i
+.PHONY : communication/commands.i
 
 # target to preprocess a source file
-commands.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/commands.c.i
-.PHONY : commands.c.i
+communication/commands.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/commands.c.i
+.PHONY : communication/commands.c.i
 
-commands.s: commands.c.s
+communication/commands.s: communication/commands.c.s
 
-.PHONY : commands.s
+.PHONY : communication/commands.s
 
 # target to generate assembly for a file
-commands.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/commands.c.s
-.PHONY : commands.c.s
+communication/commands.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/commands.c.s
+.PHONY : communication/commands.c.s
 
-hashmap.o: hashmap.c.o
+communication/server.o: communication/server.c.o
 
-.PHONY : hashmap.o
+.PHONY : communication/server.o
 
 # target to build an object file
-hashmap.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/hashmap.c.o
-.PHONY : hashmap.c.o
+communication/server.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/server.c.o
+.PHONY : communication/server.c.o
 
-hashmap.i: hashmap.c.i
+communication/server.i: communication/server.c.i
 
-.PHONY : hashmap.i
+.PHONY : communication/server.i
 
 # target to preprocess a source file
-hashmap.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/hashmap.c.i
-.PHONY : hashmap.c.i
+communication/server.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/server.c.i
+.PHONY : communication/server.c.i
 
-hashmap.s: hashmap.c.s
+communication/server.s: communication/server.c.s
 
-.PHONY : hashmap.s
+.PHONY : communication/server.s
 
 # target to generate assembly for a file
-hashmap.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/hashmap.c.s
-.PHONY : hashmap.c.s
+communication/server.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/communication/server.c.s
+.PHONY : communication/server.c.s
+
+game/ship.o: game/ship.c.o
+
+.PHONY : game/ship.o
+
+# target to build an object file
+game/ship.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game/ship.c.o
+.PHONY : game/ship.c.o
+
+game/ship.i: game/ship.c.i
+
+.PHONY : game/ship.i
+
+# target to preprocess a source file
+game/ship.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game/ship.c.i
+.PHONY : game/ship.c.i
+
+game/ship.s: game/ship.c.s
+
+.PHONY : game/ship.s
+
+# target to generate assembly for a file
+game/ship.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game/ship.c.s
+.PHONY : game/ship.c.s
+
+game/shipsGame.o: game/shipsGame.c.o
+
+.PHONY : game/shipsGame.o
+
+# target to build an object file
+game/shipsGame.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game/shipsGame.c.o
+.PHONY : game/shipsGame.c.o
+
+game/shipsGame.i: game/shipsGame.c.i
+
+.PHONY : game/shipsGame.i
+
+# target to preprocess a source file
+game/shipsGame.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game/shipsGame.c.i
+.PHONY : game/shipsGame.c.i
+
+game/shipsGame.s: game/shipsGame.c.s
+
+.PHONY : game/shipsGame.s
+
+# target to generate assembly for a file
+game/shipsGame.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/game/shipsGame.c.s
+.PHONY : game/shipsGame.c.s
 
 main.o: main.c.o
 
@@ -258,86 +285,59 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.s
 .PHONY : main.c.s
 
-server.o: server.c.o
+structures/arraylist.o: structures/arraylist.c.o
 
-.PHONY : server.o
-
-# target to build an object file
-server.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.o
-.PHONY : server.c.o
-
-server.i: server.c.i
-
-.PHONY : server.i
-
-# target to preprocess a source file
-server.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.i
-.PHONY : server.c.i
-
-server.s: server.c.s
-
-.PHONY : server.s
-
-# target to generate assembly for a file
-server.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.c.s
-.PHONY : server.c.s
-
-ship.o: ship.c.o
-
-.PHONY : ship.o
+.PHONY : structures/arraylist.o
 
 # target to build an object file
-ship.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/ship.c.o
-.PHONY : ship.c.o
+structures/arraylist.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/structures/arraylist.c.o
+.PHONY : structures/arraylist.c.o
 
-ship.i: ship.c.i
+structures/arraylist.i: structures/arraylist.c.i
 
-.PHONY : ship.i
+.PHONY : structures/arraylist.i
 
 # target to preprocess a source file
-ship.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/ship.c.i
-.PHONY : ship.c.i
+structures/arraylist.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/structures/arraylist.c.i
+.PHONY : structures/arraylist.c.i
 
-ship.s: ship.c.s
+structures/arraylist.s: structures/arraylist.c.s
 
-.PHONY : ship.s
+.PHONY : structures/arraylist.s
 
 # target to generate assembly for a file
-ship.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/ship.c.s
-.PHONY : ship.c.s
+structures/arraylist.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/structures/arraylist.c.s
+.PHONY : structures/arraylist.c.s
 
-shipsGame.o: shipsGame.c.o
+structures/hashmap.o: structures/hashmap.c.o
 
-.PHONY : shipsGame.o
+.PHONY : structures/hashmap.o
 
 # target to build an object file
-shipsGame.c.o:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/shipsGame.c.o
-.PHONY : shipsGame.c.o
+structures/hashmap.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/structures/hashmap.c.o
+.PHONY : structures/hashmap.c.o
 
-shipsGame.i: shipsGame.c.i
+structures/hashmap.i: structures/hashmap.c.i
 
-.PHONY : shipsGame.i
+.PHONY : structures/hashmap.i
 
 # target to preprocess a source file
-shipsGame.c.i:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/shipsGame.c.i
-.PHONY : shipsGame.c.i
+structures/hashmap.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/structures/hashmap.c.i
+.PHONY : structures/hashmap.c.i
 
-shipsGame.s: shipsGame.c.s
+structures/hashmap.s: structures/hashmap.c.s
 
-.PHONY : shipsGame.s
+.PHONY : structures/hashmap.s
 
 # target to generate assembly for a file
-shipsGame.c.s:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/shipsGame.c.s
-.PHONY : shipsGame.c.s
+structures/hashmap.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/structures/hashmap.c.s
+.PHONY : structures/hashmap.c.s
 
 # Help Target
 help:
@@ -348,30 +348,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... server"
-	@echo "... arraylist.o"
-	@echo "... arraylist.i"
-	@echo "... arraylist.s"
-	@echo "... client.o"
-	@echo "... client.i"
-	@echo "... client.s"
-	@echo "... commands.o"
-	@echo "... commands.i"
-	@echo "... commands.s"
-	@echo "... hashmap.o"
-	@echo "... hashmap.i"
-	@echo "... hashmap.s"
+	@echo "... communication/client.o"
+	@echo "... communication/client.i"
+	@echo "... communication/client.s"
+	@echo "... communication/commands.o"
+	@echo "... communication/commands.i"
+	@echo "... communication/commands.s"
+	@echo "... communication/server.o"
+	@echo "... communication/server.i"
+	@echo "... communication/server.s"
+	@echo "... game/ship.o"
+	@echo "... game/ship.i"
+	@echo "... game/ship.s"
+	@echo "... game/shipsGame.o"
+	@echo "... game/shipsGame.i"
+	@echo "... game/shipsGame.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
-	@echo "... ship.o"
-	@echo "... ship.i"
-	@echo "... ship.s"
-	@echo "... shipsGame.o"
-	@echo "... shipsGame.i"
-	@echo "... shipsGame.s"
+	@echo "... structures/arraylist.o"
+	@echo "... structures/arraylist.i"
+	@echo "... structures/arraylist.s"
+	@echo "... structures/hashmap.o"
+	@echo "... structures/hashmap.i"
+	@echo "... structures/hashmap.s"
 .PHONY : help
 
 

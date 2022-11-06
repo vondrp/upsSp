@@ -1,7 +1,7 @@
 
 #include "commands.h"
-#include "main.h"
-#include "game/shipsGame.h"
+#include "../main.h"
+#include "../game/shipsGame.h"
 
 #include "errors.h"
 

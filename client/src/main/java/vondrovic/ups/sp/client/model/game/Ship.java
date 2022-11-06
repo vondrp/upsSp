@@ -131,7 +131,9 @@ public class Ship {
         isPickedUp = pickedUp;
     }
 
-
+    /**
+     * @return  ship identifier
+     */
     public int getId() {
         return id;
     }

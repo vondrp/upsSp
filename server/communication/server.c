@@ -13,14 +13,11 @@
 #include <time.h>
 #include <sys/ioctl.h>
 
-#include <stdarg.h>
-
-
 #include "server.h"
 #include "client.h"
-#include "game/shipsGame.h"
-#include "structures/hashmap.h"
-#include "main.h"
+#include "../game/shipsGame.h"
+#include "../structures/hashmap.h"
+#include "../main.h"
 
 #define MAX_INVALID_MESSAGES 5
 
@@ -125,9 +122,9 @@ void server_listen(server *server, char *port) {
         exit(3);
     }
 
+    // Initialize the set of active sockets
     FD_ZERO(&master_fd_set);
-    // add the listener to the master set
-    FD_SET(listener, &master_fd_set);
+    FD_SET(listener, &master_fd_set);  // add the listener to the master set
 
     fdmax = listener;
 

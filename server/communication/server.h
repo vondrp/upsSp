@@ -2,12 +2,11 @@
 // Created by vondr on 13.10.2022.
 //
 
-
 #ifndef SERVER_SERVER_H
 #define SERVER_SERVER_H
 
-#include "structures/arraylist.h"
-#include "structures/hashmap.h"
+#include "../structures/arraylist.h"
+#include "../structures/hashmap.h"
 /**
  * Server structure
  */

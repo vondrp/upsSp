@@ -70,119 +70,119 @@ CMakeFiles/server.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/main.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.c -o CMakeFiles/server.dir/main.c.s
 
-CMakeFiles/server.dir/server.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/server.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c
+CMakeFiles/server.dir/communication/server.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/communication/server.c.o: ../communication/server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/communication/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/communication/server.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c
 
-CMakeFiles/server.dir/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c > CMakeFiles/server.dir/server.c.i
+CMakeFiles/server.dir/communication/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/communication/server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c > CMakeFiles/server.dir/communication/server.c.i
 
-CMakeFiles/server.dir/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c -o CMakeFiles/server.dir/server.c.s
+CMakeFiles/server.dir/communication/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/communication/server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c -o CMakeFiles/server.dir/communication/server.c.s
 
-CMakeFiles/server.dir/arraylist.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/arraylist.c.o: ../arraylist.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/arraylist.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/arraylist.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.c
+CMakeFiles/server.dir/structures/arraylist.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/structures/arraylist.c.o: ../structures/arraylist.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/structures/arraylist.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/structures/arraylist.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/arraylist.c
 
-CMakeFiles/server.dir/arraylist.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/arraylist.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.c > CMakeFiles/server.dir/arraylist.c.i
+CMakeFiles/server.dir/structures/arraylist.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/structures/arraylist.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/arraylist.c > CMakeFiles/server.dir/structures/arraylist.c.i
 
-CMakeFiles/server.dir/arraylist.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/arraylist.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.c -o CMakeFiles/server.dir/arraylist.c.s
+CMakeFiles/server.dir/structures/arraylist.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/structures/arraylist.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/arraylist.c -o CMakeFiles/server.dir/structures/arraylist.c.s
 
-CMakeFiles/server.dir/client.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/client.c.o: ../client.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/server.dir/client.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/client.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c
+CMakeFiles/server.dir/communication/client.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/communication/client.c.o: ../communication/client.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/server.dir/communication/client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/communication/client.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.c
 
-CMakeFiles/server.dir/client.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/client.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c > CMakeFiles/server.dir/client.c.i
+CMakeFiles/server.dir/communication/client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/communication/client.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.c > CMakeFiles/server.dir/communication/client.c.i
 
-CMakeFiles/server.dir/client.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/client.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c -o CMakeFiles/server.dir/client.c.s
+CMakeFiles/server.dir/communication/client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/communication/client.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.c -o CMakeFiles/server.dir/communication/client.c.s
 
-CMakeFiles/server.dir/commands.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/commands.c.o: ../commands.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/server.dir/commands.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/commands.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/commands.c
+CMakeFiles/server.dir/communication/commands.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/communication/commands.c.o: ../communication/commands.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/server.dir/communication/commands.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/communication/commands.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.c
 
-CMakeFiles/server.dir/commands.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/commands.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/commands.c > CMakeFiles/server.dir/commands.c.i
+CMakeFiles/server.dir/communication/commands.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/communication/commands.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.c > CMakeFiles/server.dir/communication/commands.c.i
 
-CMakeFiles/server.dir/commands.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/commands.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/commands.c -o CMakeFiles/server.dir/commands.c.s
+CMakeFiles/server.dir/communication/commands.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/communication/commands.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.c -o CMakeFiles/server.dir/communication/commands.c.s
 
-CMakeFiles/server.dir/hashmap.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/hashmap.c.o: ../hashmap.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/server.dir/hashmap.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/hashmap.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c
+CMakeFiles/server.dir/structures/hashmap.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/structures/hashmap.c.o: ../structures/hashmap.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/server.dir/structures/hashmap.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/structures/hashmap.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.c
 
-CMakeFiles/server.dir/hashmap.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/hashmap.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c > CMakeFiles/server.dir/hashmap.c.i
+CMakeFiles/server.dir/structures/hashmap.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/structures/hashmap.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.c > CMakeFiles/server.dir/structures/hashmap.c.i
 
-CMakeFiles/server.dir/hashmap.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/hashmap.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c -o CMakeFiles/server.dir/hashmap.c.s
+CMakeFiles/server.dir/structures/hashmap.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/structures/hashmap.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.c -o CMakeFiles/server.dir/structures/hashmap.c.s
 
-CMakeFiles/server.dir/shipsGame.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/shipsGame.c.o: ../shipsGame.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/server.dir/shipsGame.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/shipsGame.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c
+CMakeFiles/server.dir/game/shipsGame.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/game/shipsGame.c.o: ../game/shipsGame.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/server.dir/game/shipsGame.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/game/shipsGame.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.c
 
-CMakeFiles/server.dir/shipsGame.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/shipsGame.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c > CMakeFiles/server.dir/shipsGame.c.i
+CMakeFiles/server.dir/game/shipsGame.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/game/shipsGame.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.c > CMakeFiles/server.dir/game/shipsGame.c.i
 
-CMakeFiles/server.dir/shipsGame.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/shipsGame.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c -o CMakeFiles/server.dir/shipsGame.c.s
+CMakeFiles/server.dir/game/shipsGame.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/game/shipsGame.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.c -o CMakeFiles/server.dir/game/shipsGame.c.s
 
-CMakeFiles/server.dir/ship.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/ship.c.o: ../ship.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/server.dir/ship.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/ship.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c
+CMakeFiles/server.dir/game/ship.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/game/ship.c.o: ../game/ship.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/server.dir/game/ship.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/game/ship.c.o   -c /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.c
 
-CMakeFiles/server.dir/ship.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/ship.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c > CMakeFiles/server.dir/ship.c.i
+CMakeFiles/server.dir/game/ship.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/game/ship.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.c > CMakeFiles/server.dir/game/ship.c.i
 
-CMakeFiles/server.dir/ship.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/ship.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c -o CMakeFiles/server.dir/ship.c.s
+CMakeFiles/server.dir/game/ship.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/game/ship.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.c -o CMakeFiles/server.dir/game/ship.c.s
 
 # Object files for target server
 server_OBJECTS = \
 "CMakeFiles/server.dir/main.c.o" \
-"CMakeFiles/server.dir/server.c.o" \
-"CMakeFiles/server.dir/arraylist.c.o" \
-"CMakeFiles/server.dir/client.c.o" \
-"CMakeFiles/server.dir/commands.c.o" \
-"CMakeFiles/server.dir/hashmap.c.o" \
-"CMakeFiles/server.dir/shipsGame.c.o" \
-"CMakeFiles/server.dir/ship.c.o"
+"CMakeFiles/server.dir/communication/server.c.o" \
+"CMakeFiles/server.dir/structures/arraylist.c.o" \
+"CMakeFiles/server.dir/communication/client.c.o" \
+"CMakeFiles/server.dir/communication/commands.c.o" \
+"CMakeFiles/server.dir/structures/hashmap.c.o" \
+"CMakeFiles/server.dir/game/shipsGame.c.o" \
+"CMakeFiles/server.dir/game/ship.c.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
 server: CMakeFiles/server.dir/main.c.o
-server: CMakeFiles/server.dir/server.c.o
-server: CMakeFiles/server.dir/arraylist.c.o
-server: CMakeFiles/server.dir/client.c.o
-server: CMakeFiles/server.dir/commands.c.o
-server: CMakeFiles/server.dir/hashmap.c.o
-server: CMakeFiles/server.dir/shipsGame.c.o
-server: CMakeFiles/server.dir/ship.c.o
+server: CMakeFiles/server.dir/communication/server.c.o
+server: CMakeFiles/server.dir/structures/arraylist.c.o
+server: CMakeFiles/server.dir/communication/client.c.o
+server: CMakeFiles/server.dir/communication/commands.c.o
+server: CMakeFiles/server.dir/structures/hashmap.c.o
+server: CMakeFiles/server.dir/game/shipsGame.c.o
+server: CMakeFiles/server.dir/game/ship.c.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable server"

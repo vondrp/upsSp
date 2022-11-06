@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "shipsGame.h"
+#include "../game/shipsGame.h"
 
 arraylist *arraylist_create(int capacity)
 {

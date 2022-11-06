@@ -2,8 +2,8 @@
 #include <stdlib.h>
 
 #include "shipsGame.h"
-#include "structures/arraylist.h"
-#include "main.h"
+#include "../structures/arraylist.h"
+#include "../main.h"
 
 bool room_create(server *server, struct client *client)
 {

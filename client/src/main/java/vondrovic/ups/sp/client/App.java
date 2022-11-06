@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import vondrovic.ups.sp.client.controller.AbstractController;
 import vondrovic.ups.sp.client.model.connection.ConnectionModel;
 import vondrovic.ups.sp.client.model.connection.MessageHandler;
+import vondrovic.ups.sp.client.model.connection.Receiver;
 import vondrovic.ups.sp.client.model.game.GameModel;
 import vondrovic.ups.sp.client.model.game.Player;
 
@@ -42,15 +43,11 @@ public class App extends Application {
     private ConnectionModel connectionModel;
     private Receiver reciever;
     private MessageHandler messageHandler;
-
-    private I18Support bundle;
-
     public String lastEnteredUsername;
     public String lastEnteredHostname;
     public String lastEnteredPort;
 
     public static final int MAX_INVALID_MESSAGES = 5;
-
 
     public GameModel gameModel;
     /**
@@ -59,7 +56,6 @@ public class App extends Application {
     public void init()
     {
         Locale.setDefault(new Locale("cs", "CZ"));
-        bundle = new I18Support();
     }
     /**
      * Method that starts the application
@@ -72,8 +68,10 @@ public class App extends Application {
         this.stage = stage;
 
         this.messageHandler = new MessageHandler(stage);
-        stage.setTitle(bundle.getString("title"));
-        this.setScene(SceneEnum.MAIN_MENU);
+        stage.setTitle("Ships");
+
+        //"bundle.getString("title")"
+        this.setScene(SceneEnum.CONNECT);
     }
 
     /**
@@ -88,7 +86,7 @@ public class App extends Application {
         SceneEnum backScene = this.actualScene;
 
         this.actualScene = scene;
-        this.fxmlLoader = new FXMLLoader(url, this.bundle.getResourceBundle());
+        this.fxmlLoader = new FXMLLoader(url);
 
         try
         {
@@ -122,9 +120,14 @@ public class App extends Application {
         });
     }
 
+    /**
+     * Connect to the server running on given ip address and port
+     * @param address   ip address of the server
+     * @param port      port number
+     * @throws IOException
+     */
     public void connect(String address, int port) throws IOException {
         this.connectionModel = new ConnectionModel(address, port);
-        System.out.println("V receiver");
         this.reciever = new Receiver(this.connectionModel, this.messageHandler);
         this.reciever.start();
     }
@@ -197,13 +200,11 @@ public class App extends Application {
     @Override
     public void stop(){
         System.exit(0);
-        // Save file
     }
 
     public SceneEnum getSceneEnum() {
         return sceneEnum;
     }
-
 
     public Stage getStage() {
         return stage;
@@ -228,6 +229,5 @@ public class App extends Application {
     public GameModel getGameModel() {
         return gameModel;
     }
-
 
 }

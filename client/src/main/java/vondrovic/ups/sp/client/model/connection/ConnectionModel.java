@@ -3,13 +3,14 @@ package vondrovic.ups.sp.client.model.connection;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * Connection model containing socket, printwriter and bufferedreader
+ */
 public class ConnectionModel {
 
     private Socket socket;
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
-
     /**
      * Constructor that creates necessary structures and creates connection
      * @param address address to connect
@@ -20,7 +21,6 @@ public class ConnectionModel {
         socket = new Socket(address, port);
         printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         this.bufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-        this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
     }
 
     /**

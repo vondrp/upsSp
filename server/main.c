@@ -5,13 +5,15 @@
 #include <stdarg.h>
 
 #include "main.h"
-#include "server.h"
-#include "client.h"
-#include "commands.h"
+#include "communication/server.h"
+#include "communication/client.h"
+#include "communication/commands.h"
 
 
 #define DEFAULT_PORT 9123
 
+#define DEFAULT_MAX_ROOMS 10
+#define DEFAULT_MAX_PLAYERS_NUM 20
 
 #define MAX_PORT_NUMBER 65535
 
@@ -23,25 +25,42 @@ FILE *trace_file; // trace file link
 
 int main(int argc, char **argv)
 {
-    int port = 0;
+    int port = DEFAULT_PORT;
     int i, j;
     unsigned long len;
     char buf_port[10];
+
+    int max_rooms = DEFAULT_MAX_ROOMS;
+    int max_player_num = DEFAULT_MAX_PLAYERS_NUM;
+
+    //char c;
+    int cont = 0;
     srand(time(NULL));
 
     if(argc < 3)
     {
         printf("Use ./server -p <port> or ./server --port <port>\n");
-        printf("<port> - integer from 1 to 65465\n");
+        printf("<port> - integer from 1 to %c\n", MAX_PORT_NUMBER);
         return EXIT_SUCCESS;
     }
 
     for(i = 1; i < argc - 1; i++)
     {
+        if (cont == 1)
+        {
+            cont = 0;
+            continue;
+        }
+
         if(!strcmp(argv[i], "-p") || !strcmp(argv[i], "--port"))
         {
-            len = strlen(argv[i + 1]);
+            if (i + 1 >= argc)
+            {
+                printf("Use ./server -p <port> or ./server --port <port>\n");
+                EXIT_FAILURE;
+            }
 
+            len = strlen(argv[i + 1]);
             for(j = 0; j < len; j++)
             {
                 if(argv[i + 1][j] < '0' || argv[i + 1][j] > '9')
@@ -52,12 +71,65 @@ int main(int argc, char **argv)
 
             if(port == -1) //set default port
             {
-                port = 9123;
+                port = DEFAULT_PORT;
             }
             else
             {
                 port = atoi(argv[i + 1]);
             }
+            cont = 1;
+        }
+        // PARAMETER rooms
+        if(!strcmp(argv[i], "-r") || !strcmp(argv[i], "--rooms"))
+        {
+            len = strlen(argv[i + 1]);
+
+            if (i + 1 >= argc)
+            {
+                printf("Use -r <rooms_amount> or --rooms <rooms_amount>\n");
+                EXIT_FAILURE;
+            }
+
+            for(j = 0; j < len; j++)
+            {
+                if(argv[i + 1][j] < '0' || argv[i + 1][j] > '9')
+                {
+                    max_rooms = -1;
+                }
+            }
+
+            if(max_rooms == -1) //set default port
+            {
+                max_rooms = DEFAULT_MAX_ROOMS;
+            }
+            else
+            {
+                max_rooms = atoi(argv[i + 1]);
+            }
+            cont = 1;
+        }
+
+        // parameter amount of players
+        if(!strcmp(argv[i], "-pl") || !strcmp(argv[i], "--players"))
+        {
+            len = strlen(argv[i + 1]);
+            for(j = 0; j < len; j++)
+            {
+                if(argv[i + 1][j] < '0' || argv[i + 1][j] > '9')
+                {
+                    max_player_num = -1;
+                }
+            }
+
+            if(max_player_num == -1) //set default port
+            {
+                max_player_num = DEFAULT_MAX_PLAYERS_NUM;
+            }
+            else
+            {
+                max_player_num = atoi(argv[i + 1]);
+            }
+            cont = 1;
         }
     }
 
@@ -72,7 +144,7 @@ int main(int argc, char **argv)
 
     signal(SIGINT, intHandler); // handeling signal
 
-    srv = server_init(); // init server
+    srv = server_init(max_rooms, max_player_num); // init server
 
     // open trace file
     trace_file = fopen(TRACE_LOG_FILE_NAME, "a+");
@@ -96,7 +168,7 @@ void intHandler() {
     }
 }
 
-void send_message(struct client *client, char *message, ...)
+void send_message(struct client *client, char *message)
 {
     int nbytes;
     if(client->name)
@@ -148,8 +220,9 @@ int process_message(server *server, int fd, char *message)
     char split_symbol_string[2] = {SPLIT_SYMBOL , '\0'};
     int i;
     unsigned long message_length = strlen(message);
-
+    char buff[64];
     char *message_type;
+
     int argc = 0;
 
     if(message[message_length - 1] == '\n')
@@ -209,7 +282,8 @@ int process_message(server *server, int fd, char *message)
         }
         server->clients[fd]->invalid_count = 0;
     } else {
-        send_message(server->clients[fd], "error;unknown command\n");
+        sprintf(buff, "error%c unknown command\n", SPLIT_SYMBOL);
+        send_message(server->clients[fd], buff);
         server->clients[fd]->invalid_count++;
         server->stat_unknown_commands++;
     }

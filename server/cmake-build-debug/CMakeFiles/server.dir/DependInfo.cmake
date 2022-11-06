@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/arraylist.c.o"
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/client.c.o"
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/commands.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/commands.c.o"
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/hashmap.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/communication/client.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/communication/commands.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/communication/server.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/game/ship.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/game/shipsGame.c.o"
   "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/main.c.o"
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/server.c.o"
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/ship.c.o"
-  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/shipsGame.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/arraylist.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/structures/arraylist.c.o"
+  "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.c" "/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/cmake-build-debug/CMakeFiles/server.dir/structures/hashmap.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

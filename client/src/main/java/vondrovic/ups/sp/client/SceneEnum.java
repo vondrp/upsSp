@@ -5,7 +5,6 @@ package vondrovic.ups.sp.client;
  */
 public enum SceneEnum {
 
-    MAIN_MENU("/mainMenu.fxml"),
     CONNECT("/connection.fxml"),
     LOGIN("/login.fxml"),
     LOBBY("/lobby.fxml"),

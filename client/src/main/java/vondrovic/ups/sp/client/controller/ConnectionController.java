@@ -15,6 +15,8 @@ import java.io.IOException;
 
 public class ConnectionController extends AbstractController{
 
+
+    private final int MAX_PORT_NUMBER = 65535;
     @FXML
     TextField addressInput;
 
@@ -66,8 +68,8 @@ public class ConnectionController extends AbstractController{
         if(portInput.getText().length() != 0) {
             try {
                 port = Integer.parseInt(portInput.getText());
-                if(port < 0 || port > 65535) {
-                    AlertFactory.sendWarningMessage("Invalid Format", "Port have to be in range from 0 to 25535");
+                if(port < 1 || port > MAX_PORT_NUMBER) {
+                    AlertFactory.sendWarningMessage("Invalid Format", "Port have to be in range from 1 to "+ MAX_PORT_NUMBER);
                     return;
                 }
             } catch (NumberFormatException e) {
@@ -81,7 +83,6 @@ public class ConnectionController extends AbstractController{
             return;
         }
 
-        //App.INSTANCE.player = new Player(usernameInput.getText());
         App.INSTANCE.setPlayer(new Player(usernameInput.getText()));
 
         VBox box = new VBox(new ProgressIndicator());

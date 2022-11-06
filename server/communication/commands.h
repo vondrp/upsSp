@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include "client.h"
 #include "server.h"
-#include "game/shipsGame.h"
+#include "../game/shipsGame.h"
 
 typedef int(*fcmd)(server *server, struct client *client, int, char **);
 
@@ -79,10 +79,33 @@ int cmd_room_leave(server *server, struct client *client, int argc, char **argv)
  */
 int cmd_logout(server *server, struct client *client, int argc, char **argv);
 
-
+/**
+ * Functions to handle game prepared request - set up player gaming boards
+ * @param server server structure
+ * @param client client structure
+ * @param argc number of arguments
+ * @param argv values of arguments
+ * @return  Information about operation success
+ */
 int cmd_game_prepared(server *server, struct client *client, int argc, char **argv);
 
+/**
+ * Handle fire request
+ * @param server server structure
+ * @param client client structure
+ * @param argc number of arguments
+ * @param argv values of arguments
+ * @return  Information about operation success
+ */
 int cmd_game_fire(server *server, struct client *client, int argc, char **argv);
 
+/**
+ * Handle game info request - send client game data
+ * @param server server structure
+ * @param client client structure
+ * @param argc number of arguments
+ * @param argv values of arguments
+ * @return  Information about operation success
+ */
 int cmd_game_info(server *server, struct client *client, int argc, char **argv);
 #endif //SP_COMMANDS_H

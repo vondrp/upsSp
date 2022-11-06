@@ -1,7 +1,7 @@
-#include "client.h"
 #include <stdlib.h>
-
 #include <stdio.h>
+
+#include "client.h"
 
 int client_set_name(struct client *client, char *name) {
     if(!client || !name)

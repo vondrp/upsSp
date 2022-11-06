@@ -1,24 +1,22 @@
 package vondrovic.ups.sp.client.model.game;
 
+/**
+ * Class Player is messanger representing player
+ */
 public class Player {
 
+    /**
+     * player name
+     */
     private String name;
-    private int state;
 
+    /**
+     * Create player
+     * @param name  player name
+     */
     public Player(String name)
     {
         this.name = name;
-        this.state = 1;
-    }
-
-    /**
-     * Constructor for new instance of player
-     * @param name player name
-     * @param state player state
-     */
-    public Player(String name, int state) {
-        this.name = name;
-        this.state = state;
     }
 
     /**

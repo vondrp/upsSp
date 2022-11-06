@@ -76,28 +76,34 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.c">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.c">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/arraylist.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.c">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.c">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/client.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/commands.c">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/commands.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.c">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.c">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/hashmap.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.h">
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.c">
@@ -106,25 +112,16 @@
 		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/player.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/arraylist.c">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.c">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/arraylist.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/server.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.c">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.c">
-			<Option target="server"/>
-		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/ship.h">
-			<Option target="server"/>
-		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.c">
-			<Option target="server"/>
-		</Unit>
-		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/shipsGame.h">
+		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.h">
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/CMakeLists.txt">

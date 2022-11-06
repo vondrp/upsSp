@@ -5,12 +5,11 @@ set(CMAKE_C_STANDARD 99)
 
 add_executable(
         server main.h main.c
-        server.h server.c
-        arraylist.h arraylist.c
-        client.h client.c
-        commands.h commands.c
-        hashmap.h hashmap.c
-        player.h
-        shipsGame.h shipsGame.c
-        ship.h ship.c
+        communication/server.h communication/server.c
+        structures/arraylist.h structures/arraylist.c
+        communication/client.h communication/client.c
+        communication/commands.h communication/commands.c
+        structures/hashmap.h structures/hashmap.c
+        game/shipsGame.h game/shipsGame.c
+        game/ship.h game/ship.c
         )

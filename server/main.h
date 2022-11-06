@@ -5,7 +5,7 @@
 #ifndef SERVER_MAIN_H
 #define SERVER_MAIN_H
 
-#include "server.h"
+#include "communication/server.h"
 
 
 #define TRACE_LOG_FILE_NAME "trace.log"
@@ -32,14 +32,14 @@ int process_message(server *server, int fd, char *message);
  * @param client    client to who the message is being send
  * @param message   message to sed
  */
-void send_message(struct client *client, char *message, ...);
+void send_message(struct client *client, char *message);
 
 /**
  * Function to print and save trace information
  * @param message message format
  * @param ... message values
  */
-void trace(char *message,...);
+void trace(char *message, ...);
 
 /**
  * Function to save statistics data into file

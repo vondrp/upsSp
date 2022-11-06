@@ -23,12 +23,11 @@
 
                 <Label text="Playing against: "/>
                 <Label fx:id="opponentNameLabel" />
+
+                <Button fx:id="readyButton" mnemonicParsing="false" onAction="#readyToPlay" text="Ready" />
             </items>
         </ToolBar>
 
-        <HBox fx:id="readyHBox" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-            <Button fx:id="readyButton" mnemonicParsing="false" onAction="#readyToPlay" text="Ready" />
-        </HBox>
     </top>
     <right>
         <AnchorPane fx:id="sideBar" prefHeight="603.0" prefWidth="202.0" BorderPane.alignment="CENTER">

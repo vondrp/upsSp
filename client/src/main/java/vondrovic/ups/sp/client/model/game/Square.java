@@ -94,6 +94,9 @@ public class Square {
         return squareStatus;
     }
 
+    /**
+     * @return located ship
+     */
     public Ship getShip()
     {
         return this.ship;

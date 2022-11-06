@@ -41,8 +41,8 @@ public class GameController extends AbstractController {
     @FXML
     ToolBar toolBar;
 
-    @FXML
-    HBox readyHBox;
+    //@FXML
+    //HBox readyHBox;
 
     @FXML
     Button readyButton;
@@ -65,10 +65,13 @@ public class GameController extends AbstractController {
     private GameModel gameModel = App.INSTANCE.getGameModel();
 
     /**
-     * Left
+     * Board located at left - used for player
      */
     private GameBoard leftBoard;
 
+    /**
+     * Board located at right - used for opponent
+     */
     private GameBoard rightBoard;
 
     @FXML
@@ -79,14 +82,13 @@ public class GameController extends AbstractController {
         //this.gameModel = App.INSTANCE.getGameModel();
 
         this.userNameLabel.setText(App.INSTANCE.getPlayer().getName());
-        this.opponentNameLabel.setText("Jeste treba doplnit zkouska textu");
+
+        this.opponentNameLabel.setText(App.INSTANCE.getOpponent().getName());
         this.leftBoard = new GameBoard(this.leftBoardCanvas, this.gameModel, false);
         this.rightBoard = new GameBoard(this.rightBoardCanvas, this.gameModel, true);
 
         // left side
         this.leftBoard.getBoardCanvas().setHeight(anchorPane.getHeight()/2);
-
-        GraphicsContext gcLeft = this.leftBoard.getBoardCanvas().getGraphicsContext2D();
 
         // right side
         this.rightBoard.getBoardCanvas().setWidth(anchorPane.getWidth()/2 - 5);
@@ -145,7 +147,6 @@ public class GameController extends AbstractController {
      */
     @FXML
     public void handleLeftCanvasClick(MouseEvent event) {
-
         if (gameModel.getGameStatus() == GameStatus.PREPARING)
         {
             this.leftBoard.handleCanvasClick(event);
@@ -153,13 +154,11 @@ public class GameController extends AbstractController {
     }
 
     /**
-     * Method to handle click on canvas.
-     * Transform coordinations
+     * Method to handle click on right canvas (opponent board)
      * @param event
      */
     @FXML
     public void handleRightCanvasClick(MouseEvent event) {
-
         if (gameModel.getGameStatus() == GameStatus.PLAYING)
         {
             this.rightBoard.handleCanvasClick(event);
@@ -168,15 +167,26 @@ public class GameController extends AbstractController {
 
     /**
      * Method to add message to the protocol pane
-     * @param s
+     * @param s string to append to protocol
      */
     public void protocolAdd(String s) {
         protocol.appendText(s + "\n");
     }
 
+    /**
+     * Repaint game board
+     */
     public void repaint()
     {
         this.leftBoard.repaint();
         this.rightBoard.repaint();
+    }
+
+    /**
+     * Reload opponent name text
+     */
+    public void reloadOpponentName()
+    {
+        this.opponentNameLabel.setText(App.INSTANCE.getOpponent().getName());
     }
 }

@@ -4,26 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class GameModel take care of holding data of game boards and game status
+ */
 public class GameModel {
 
-    public List<String> protocol;
-
-    public String opponentName;
-
     private Square[][] enemyBoard;
-
     private Square[][] myBoard;
-
     private GameStatus gameStatus;
-
     private String winner;
-
     private Integer pickedUpShipId = null;
-    /**
-     * instance of random generator
-     */
+    /** instance of random generato */
     private final Random rand;
-
 
     /**
      * ships located at board
@@ -33,14 +25,20 @@ public class GameModel {
     private final int MIN = 1;
     private final int MAX = 10;
 
+    /**
+     * Create instance of the game model
+     */
     public GameModel() {
         rand = new Random();
         this.enemyBoard = new Square[MAX + 1][MAX + 1];
         this.myBoard = new Square[MAX + 1][MAX + 1];
-        this.protocol = new ArrayList<String>();
         this.winner = null;
     }
 
+    /**
+     * Initialized board
+     * @param squares   game board to be initialized
+     */
     private void init_board(Square[][] squares) {
         for (int i = MIN; i <= MAX; i++) {
             for (int j = MIN; j <= MAX; j++) {
@@ -49,6 +47,9 @@ public class GameModel {
         }
     }
 
+    /**
+     * Initialize game - initialize both board, ships and populate them
+     */
     public void init()
     {
         init_board(this.enemyBoard);
@@ -57,23 +58,50 @@ public class GameModel {
         populateMyShips();
     }
 
-    public void updateBoards(Square[][] myBoard, Square[][] enemyBoard) {
-        this.myBoard = myBoard;
-        this.enemyBoard = enemyBoard;
-    }
-
+    /**
+     * @return  game status
+     */
     public GameStatus getGameStatus()
     {
         return this.gameStatus;
     }
 
-
+    /**
+     * @return  opponent game board
+     */
     public Square[][] getEnemyBoard() {
         return enemyBoard;
     }
 
+    /**
+     * @return  client game board
+     */
     public Square[][] getMyBoard() {
         return myBoard;
+    }
+
+    /**
+     * Set game status
+     * @param gameStatus    game status to be set
+     */
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    /**
+     * Set given position at enemy board to given status
+     * @param x     x-coordinate
+     * @param y     y-coordinate
+     * @param status    game status
+     */
+    public void hitEnemy(int x, int y, SquareStatus status)
+    {
+        this.enemyBoard[x][y].setSquareStatus(status);
+    }
+
+    public void beingHit(int x, int y, SquareStatus status)
+    {
+        this.myBoard[x][y].setSquareStatus(status);
     }
 
     /**
@@ -109,7 +137,6 @@ public class GameModel {
                 new Ship(ShipType.SUBMARINE, 6)
         };
     }
-
 
     /**
      * Place ship at with first point at given coordinates
@@ -236,51 +263,6 @@ public class GameModel {
 
         return neighbors.toArray(new Square[0]);
     }
-
-
-    /**
-     * Gets opponent name
-     *
-     * @return opponent name
-     */
-    public String getOpponentName() {
-        return this.opponentName;
-    }
-
-    public void setOpponentName(String opponentName) {
-        this.opponentName = opponentName;
-    }
-
-    public void setGameStatus(GameStatus gameStatus) {
-        this.gameStatus = gameStatus;
-    }
-
-    public void setEnemyBoard(Square[][] enemyBoard) {
-        this.enemyBoard = enemyBoard;
-    }
-
-    public void setMyBoard(Square[][] myBoard) {
-        this.myBoard = myBoard;
-    }
-
-    public boolean canHitEnemy(int x, int y) {
-        if (!isValidPoint(x, y)) {
-            return false;
-        }
-
-        return enemyBoard[x][y].getSquareStatus() == SquareStatus.EMPTY;
-    }
-
-    public void hitEnemy(int x, int y, SquareStatus status)
-    {
-        this.enemyBoard[x][y].setSquareStatus(status);
-    }
-
-    public void beingHit(int x, int y, SquareStatus status)
-    {
-        this.myBoard[x][y].setSquareStatus(status);
-    }
-
 
     /**
      * Find out if the point is valid
@@ -519,27 +501,24 @@ public class GameModel {
      * @param board         board to which the string board is written to
      * @return              true - success, false - string was in wrong format
      */
-    public boolean convertStringToBoard(String string_form, Square[][] board)
+    public void convertStringToBoard(String string_form, Square[][] board)
     {
-        boolean success = true;
 
-        if (string_form.length() != ((MAX * MAX) + MAX + 1)) // + 1 is for \0
+        /*if (string_form.length() != ((MAX * MAX))) // + 1 is for \0
         {
-            return false;
-        }
+            return;
+        }*/
 
         init_board(board);
         int x = MIN;
         int y = MIN;
         for (int i = 0; i < string_form.length(); i++)
         {
-            if (!success)
-                break;
-
+            /*
             if (string_form.charAt(i) == ',' || string_form.charAt(i) == '\0')
             {
                 continue;
-            }
+            }*/
 
             switch(string_form.charAt(i))
             {
@@ -563,9 +542,8 @@ public class GameModel {
                     break;
                 case 'E':
                 case 'e':
-                    board[x][y].setSquareStatus(SquareStatus.EMPTY);
                 default:
-                    success = false;
+                    board[x][y].setSquareStatus(SquareStatus.EMPTY);
                     break;
             }
             x++;
@@ -573,9 +551,11 @@ public class GameModel {
             {
                 x = MIN;
                 y++;
+
+                if (y > MAX)
+                    break;
             }
         }
-        return success;
     }
 
     public String getWinner() {

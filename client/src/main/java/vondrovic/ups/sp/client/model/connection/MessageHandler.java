@@ -39,8 +39,10 @@ public class MessageHandler {
     private final int STATE_UNLOGGED = 0;
     private final int STATE_IN_LOBBY = 1;
     private final int STATE_IN_ROOM = 2;
-    private final int STATE_IN_GAME = 3;
-    private final int STATE_IN_GAME_PLAYING = 4;
+    private final int STATE_IN_GAME_PREPARING = 3;
+    private final int STATE_IN_GAME = 4;
+    private final int STATE_IN_GAME_PLAYING = 5;
+
 
     Window window;
     public int invalidMessages = 0;
@@ -57,8 +59,6 @@ public class MessageHandler {
     public void processMessage(String line) throws IOException
     {
         if (line.length() == 0) return;
-
-        System.out.println(line);
 
         String[] message = line.split(";");
 
@@ -85,20 +85,76 @@ public class MessageHandler {
             int state = Integer.parseInt(message[2]);
 
             Platform.runLater(() -> {
-                App.INSTANCE.setPlayer(new Player(message[1], state));
+                App.INSTANCE.setPlayer(new Player(message[1]));
+                App.INSTANCE.setOpponent(new Player("--not defined--"));
+
 
                 if(state == STATE_IN_ROOM) {
                     App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.setScene(SceneEnum.ROOM);
-                } else if(state == STATE_IN_GAME || state == STATE_IN_GAME_PLAYING) {
+                } else if(state == STATE_IN_GAME || state == STATE_IN_GAME_PLAYING ||
+                 state == STATE_IN_GAME_PREPARING) {
                     // TODO nastaveni game model
                     App.INSTANCE.gameModel = new GameModel();
+                    App.INSTANCE.getGameModel().init();
                     App.INSTANCE.setScene(SceneEnum.GAME);
                     App.sendMessage("game_info_req");
                 } else {
                     App.INSTANCE.setScene(SceneEnum.LOBBY);
                 }
             });
+        }
+
+        if (message[0].equalsIgnoreCase("game_info_data"))
+        {
+            this.invalidMessages = 0;
+
+            if (message.length <= 4) return;
+
+            int state = Integer.parseInt(message[1]);
+            String myBoard = message[2];
+            String opponentName = message[3];
+            String opponentBoard = message[4];
+
+            GameStatus gameStatus;
+            switch(state)
+            {
+                case STATE_IN_GAME_PREPARING:
+                    gameStatus = GameStatus.PREPARING;
+                    break;
+                case STATE_IN_GAME_PLAYING:
+                    gameStatus = GameStatus.PLAYING;
+                    break;
+                case STATE_IN_GAME:
+                default:
+                    gameStatus = GameStatus.WAITING;
+                    break;
+            }
+
+            App.INSTANCE.setOpponent(new Player(opponentName));
+            App.INSTANCE.getGameModel().convertStringToBoard(myBoard, App.INSTANCE.getGameModel().getMyBoard());
+            App.INSTANCE.getGameModel().convertStringToBoard(opponentBoard,  App.INSTANCE.getGameModel().getEnemyBoard());
+
+            Platform.runLater(() -> {
+                App.INSTANCE.getGameModel().setGameStatus(gameStatus);
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Game reconnected");
+                if (gameStatus == GameStatus.PREPARING)
+                {
+                    App.INSTANCE.getGameModel().populateMyShips();
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("Prepare your game board");
+                }
+
+                if (gameStatus == GameStatus.WAITING)
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("Please wait for your opponent turn");
+
+                if (gameStatus == GameStatus.PLAYING)
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("It is your turn to fire.");
+
+                ((GameController) App.INSTANCE.getController()).reloadOpponentName();
+                ((GameController) App.INSTANCE.getController()).repaint();
+            });
+
+
         }
 
         if(message[0].equalsIgnoreCase("login_err")) {
@@ -245,7 +301,7 @@ public class MessageHandler {
             }
 
             App.INSTANCE.gameModel = new GameModel();
-            App.INSTANCE.getGameModel().setOpponentName(message[1]);
+            App.INSTANCE.setOpponent(new Player(message[1]));
 
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.ROOM);
@@ -267,9 +323,10 @@ public class MessageHandler {
                 return;
             }
 
-            App.INSTANCE.getGameModel().setOpponentName(message[1]);
+            App.INSTANCE.setOpponent(new Player(message[1]));
+
             if(App.INSTANCE.getSceneEnum() == SceneEnum.GAME) {
-                ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " joined the game.");
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getOpponent().getName() + " joined the game.");
             }
 
             return;
@@ -302,7 +359,7 @@ public class MessageHandler {
         if(message[0].equalsIgnoreCase("room_leave_opp")) {
             this.invalidMessages = 0;
             if(App.INSTANCE.getSceneEnum() == SceneEnum.GAME) {
-                ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getGameModel().getOpponentName() + " left the game.");
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getOpponent().getName() + " left the game.");
             }
             return;
         }
@@ -334,7 +391,7 @@ public class MessageHandler {
             return;
         }
 
-        if (message[0].equalsIgnoreCase("game_prepare_err"))
+        if (message[0].equalsIgnoreCase("game_prepared_err"))
         {
             this.invalidMessages = 0;
 
@@ -422,7 +479,7 @@ public class MessageHandler {
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
 
             Platform.runLater(() -> {
-                ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit x = " + x + " y = " + y + " status: " + status);
+                ((GameController) App.INSTANCE.getController()).protocolAdd("You hit ["+ x +"]["+ y +"], status: " + status);
                 ((GameController) App.INSTANCE.getController()).repaint();
             });
             return;
@@ -490,7 +547,7 @@ public class MessageHandler {
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
 
             Platform.runLater(() -> {
-                ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit x = " + x + " y = " + y + " status: " + status);
+                ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit ["+ x +"]["+ y +"] status: " + status);
                 ((GameController) App.INSTANCE.getController()).repaint();
             });
             return;
