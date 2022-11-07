@@ -114,6 +114,7 @@
 		\item Uživatelské jméno je zabrané
 		\item Neplatný stav uživatele
 		\item Místnost je plná
+		\item Místnost je nedostupná (nebyla nalezena)
 		\item Mimo rozsah herního plánu
 		\item Už zasažené pole
 		\item Neplatné umístění lodě
@@ -186,11 +187,11 @@
 	
 	\subsubsection{Herní plocha připravena}
 	\label{ssec:game_ready}
-	\par Po vstupu do hry oba hráči v rámci klienta rozmístí své lodě. Po dokončení rozmisťování lodí pošlou serveru zpráv, že jsou připraveni spolu s se svou hrací plochou. Plocha je ve formě řetězce tvořen třemi typy znaků – E (prázdno), číslice v rozsahu 0 až 6 jakožto symboly jednotlivých lodí a znak čárky dělící řádky (,). Příkaz je \uv{game\_prepared;(EEE00EEEEE,…)}.  Je-li vše v pořádku odpoví server se zprávou \uv{game\_prepared\_ok}, při chybě pošle \uv{game\_prepared\_err;(error\_code)}.
+	\par Po vstupu do hry oba hráči v rámci klienta rozmístí své lodě. Po dokončení rozmisťování lodí pošlou serveru zpráv, že jsou připraveni spolu s se svou hrací plochou. Plocha je ve formě řetězce tvořen dvěma typy znaků – E (prázdno) a číslice v rozsahu 0 až 6 jakožto symboly jednotlivých lodí. Příkaz je \uv{game\_prepared;(EEE00EEEEE…)}.  Je-li vše v pořádku odpoví server se zprávou \uv{game\_prepared\_ok}, při chybě pošle \uv{game\_prepared\_err;(error\_code)}.
 	
 	\par Jsou-li obě hrací plochy připraveny pošle navíc jednomu z hráčů zprávu \uv{game\_play} značící začátek hry.\\
 	\textbf{Požadavek klienta:}\\
-	\texttt{game\_prepared;(EEE00EEEEE,…)}\\
+	\texttt{game\_prepared;(EEE00EEEEE…)}\\
 	\textbf{Možné odpovědi serveru:}\\
 	\texttt{game\_prepared\_ok}\\
 	\texttt{game\_prepared\_err;(error\_code)}\\
@@ -230,9 +231,6 @@
 	\texttt{(opp\_board)} - řetězcová reprezentace protivního hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď a \texttt{M} - zasažené prázdné pole.\\
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	
-	\begin{notes}
-	 \item U \texttt{(opp\_board)} a \texttt{(client\_board)} nejsou jednotlivé řádky odděleny čárkou (,) jako v případě přípravy hry (viz. \nameref{ssec:game_ready}). Je to tak z důvodu lehčího zpracování herního plánu do řetězcové podoby na straně serveru.
-	\end{notes}
 	\subsubsection{Ukončení hry}
 	\par Zprávu zasílá server klientům s parametrem jména vítěze.\\
 	\textbf{Zpráva serveru:}\\
@@ -272,7 +270,7 @@
 	\par V souboru \texttt{errors.h} se nachází přehled definovaných chybových stavů.	
 	
 	\section{Implementace klienta}
-	\par Klient je implementovaný v jazyce Java na grafické platformě JavaFX.
+	\par Klient je implementovaný v jazyce Java ve verzi 11, s použitím grafické knihovny JavaFX.
 	\subsection{Rozdělení}
 	\par Aplikace je implementovaná pomocí MVC modelu (model, view, controller). 
 	View vrstva se nachází ve složce resources a skládá se z fxml souborů jednotlivých oken aplikace. Ve vztahu 1 ku 1  se ve složce controller se nachází kontrolery oken, které se starají o propojení pohledů s modely.\\
@@ -336,11 +334,23 @@
 	\subsection{Překlad serveru}
 	\par Pro překlad serveru je potřeba nástroj \texttt{cmake}, \texttt{make} a překladač \texttt{gcc}. Nejprve vygenerujeme soubor makefile zadáním příkazu \texttt{cmake -B ./build/}. Přejdeme do adresáře \texttt{build} příkazem \texttt{cd build} a v něm spustíme překlad programu příkazem \texttt{make}. Po dokončení operace by měl být vytvořen v adresáři \texttt{build} soubor \texttt{server}. 
 	\subsection{Spuštění serveru}
-	\par Pro spuštění serveru potřebujeme nejprve znát číslo portu služby. Řekněme, že zvolíme číslo \texttt{9123}. Spuštění serveru provedeme tak, že v adresáři \texttt{build} zadáme příkaz \texttt{./server 9123}. Server by se měl spustit a potvrdit to první vypsanou zprávou.
+	\par Pro překladu programu se vyskytujeme v adresáři \texttt{/server/}. Pro build aplikace je používán nástroj CMake, jenž vytvoří příslušný Makefile.\\
+	\par Použijeme tedy příkaz: \texttt{cmake -B ./build/}\\
+	\par Přemístíme se do adresáře \texttt{build/} (\texttt{cd build}) a provedeme sestavení spustitelného souboru příkazem \texttt{make}, který vytvoří spustitelný soubor \texttt{server}.\\
+	\par Pro spuštění serveru potřebujeme znát číslo portu služby, například \texttt{9123}. Server s tímto portem spustíme příkazem:\\
+	\texttt{./server -p 9123} nebo \texttt{./server --port 9123}\\
+	\par V případě kdy uvedeme neplatnou hodnotu portu - tedy nečíselnou hodnotu, číslo menší než \texttt{1} nebo větší než texttt{65535} dojde k nastavení defaultní hodnoty portu \texttt{9123}\\
+	\par Program můžeme spusti i s několika nepovinnými parametry:
+	\begin{itemize}
+		\item Maximální počet místností: \texttt{-r 15} nebo \texttt{--rooms 15}  (defaultní hodnota 10)
+		\item Maximální počet uživatelů: \texttt{-pl 30} nebo \texttt{--players 30} (defaultní hodnota 20)
+	\end{itemize}
+	\par Výsledné hodnoty parametrů se vypíšou do konzole.
+	
+
 	\subsection{Překlad a spuštění klienta}
-	\par Klient lze spustit skrz službu \texttt{gradle}, kdy se program automaticky přeloží, sestaví a spustí příkazem \texttt{gradle run}.
-	\par Případně můžeme nechat vygenerovat spustitelný soubor JAR příkazem \texttt{gradle jar}. Výsledný JAR soubor se uloží do adresáře \texttt{build/libs/} pod názvem \texttt{UPS-SP-Client-1.0.jar}. Tento soubor můžeme spustit příkazem \texttt{java -jar UPS-SP-Client-1.0.jar} (pokud máme nainstalované potřebné knihovny a správně nastavené cesty).
+	\par Klient se spouští pomocí služby \texttt{gradle}. Program se přeloží, sestaví a spustí příkazem \texttt{./gradlew run} použitým ve složce \texttt{client}.
 	\section{Závěr}
-	\par Server s klientem spolu síťově komunikují na popsaném protokolu a zároveň je přes něj realizována síťová hra. Programy reagují na výpadky a jsou stabilní. Avšak v práci se vyskytují drobné ústupky v optimalizaci či původní koncepci, které byly způsobeny zejména nevhodným časovým rozvržením práce v kontextu s ostatními činnostmi studenta. Každopádně požadavky na práci jsou splněny.
+	\par Server a klient spolu komunikují na popsaném protokolu a je přes něj realizovaná síťová hra. Program ošetřuje nevalidní zprávy, reaguje na výpadky a běží stabilně. Požadavky na práci jsou splněny.
 	
 \end{document}

@@ -11,7 +11,7 @@
 #define SHIP_GAME_BOARD_SIZE 10
 #define AMOUNT_OF_SHIP 7
 
-#define GAME_BOARD_STRING_SIZE (SHIP_GAME_BOARD_SIZE * SHIP_GAME_BOARD_SIZE) + SHIP_GAME_BOARD_SIZE
+#define GAME_BOARD_STRING_SIZE (SHIP_GAME_BOARD_SIZE * SHIP_GAME_BOARD_SIZE)
 
 #include "ship.h"
 //char board_symbols[] = {'H', 'E', 'M', '0', '1', '2', '3', '4', '5', '6'};

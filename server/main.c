@@ -25,7 +25,7 @@ FILE *trace_file; // trace file link
 
 int main(int argc, char **argv)
 {
-    int port = DEFAULT_PORT;
+    int port = -1;
     int i, j;
     unsigned long len;
     char buf_port[10];
@@ -144,6 +144,7 @@ int main(int argc, char **argv)
 
     signal(SIGINT, intHandler); // handeling signal
 
+    printf("Server is running on port %d, max number of players is %d, max amount of rooms to be created is %d\n", port, max_player_num, max_rooms);
     srv = server_init(max_rooms, max_player_num); // init server
 
     // open trace file

@@ -4683,3 +4683,87 @@ Server has started on port 10000
 
 Server has started on port 10000
 
+Server has started on port 9123
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;EEEEEEEE6EE1E4E33EEEE1E4EEEEEEE1EEEEEEEEEEE5EE222EE0E5EEEEEEE0EEEEEEEEE0EEEEEEEEE0EEEEEEEEEEEEEEEEEE
+Socket 6 receiving transmission game_prepared;EE5EEEEE6EEE5EEEEEEEEEEEEEEEEE2EE3EE00002EE3EEEEEE2EEEEEEEEEEE1EEEEEEEEE1E4EEEEEEE1E4EEEEEEEEEEEEEEE
+Socket 6 receiving transmission game_fire_req;6;3
+
+Socket 6 - Game fire request succeeded - position:[6][3], fire missed
+Socket 5 receiving transmission game_fire_req;7;0
+
+Socket 5 - Game fire request succeeded - position:[7][0], fire missed
+Socket 6 receiving transmission game_fire_req;5;4
+
+Socket 6 - Game fire request succeeded - position:[5][4], fire missed
+Socket 5 receiving transmission game_fire_req;8;0
+
+Socket 5 - Game fire request succeeded - position:[8][0], fire hit its target, ship 6 is destroyed
+Socket 6 receiving transmission game_fire_req;6;5
+
+Socket 6 - Game fire request succeeded - position:[6][5], fire missed
+Socket 5 receiving transmission game_fire_req;2;0
+
+Socket 5 - Game fire request succeeded - position:[2][0], fire hit its target, ship 5 is still alive
+Socket 6 receiving transmission game_fire_req;4;6
+
+Socket 6 - Game fire request succeeded - position:[4][6], fire missed
+Socket 5 disconnected, closing connection
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp is logged bud disconnected, reconnecting
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission game_info_req
+
+Socket 5 receiving transmission game_fire_req;2;1
+
+Socket 5 - Game fire request succeeded - position:[2][1], fire hit its target, ship 5 is destroyed
+Socket 6 receiving transmission game_fire_req;0;4
+
+Socket 6 - Game fire request succeeded - position:[0][4], fire missed
+Socket 5 receiving transmission game_fire_req;0;4
+
+Socket 5 - Game fire request succeeded - position:[0][4], fire hit its target, ship 2 is still alive
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Game 0 was terminated due client leave
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection

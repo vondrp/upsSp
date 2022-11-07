@@ -27,13 +27,12 @@ public class MessageHandler {
     private final int ERROR_USER_STATE = 5;
     private final int ERROR_ROOM_FULL = 6;
     private final int ERROR_ROOM_NOT_ACCESSIBLE = 7;
-    private final int ERROR_ROOM_OPP_LEFT = 8;
-    private final int ERROR_WAIT_TO_LONG_FOR_OPP = 9;
+    private final int ERROR_OUT_OF_PLAY_FIELD = 8;
+    private final int ERROR_ALREADY_HIT = 9;
+    private final int ERROR_SHIP_PLACEMENT = 10;
+    private final int ERROR_SHIP_NUMBER = 11;
 
-    private final int ERROR_OUT_OF_PLAY_FIELD = 10;
-    private final int ERROR_ALREADY_HIT = 11;
-    private final int ERROR_SHIP_PLACEMENT = 12;
-    private final int ERROR_SHIP_NUMBER = 13;
+    //private final int ERROR_WAIT_TO_LONG_FOR_OPP = 12;
 
     // states of client
     private final int STATE_UNLOGGED = 0;
@@ -42,7 +41,6 @@ public class MessageHandler {
     private final int STATE_IN_GAME_PREPARING = 3;
     private final int STATE_IN_GAME = 4;
     private final int STATE_IN_GAME_PLAYING = 5;
-
 
     Window window;
     public int invalidMessages = 0;
@@ -94,7 +92,7 @@ public class MessageHandler {
                     App.INSTANCE.setScene(SceneEnum.ROOM);
                 } else if(state == STATE_IN_GAME || state == STATE_IN_GAME_PLAYING ||
                  state == STATE_IN_GAME_PREPARING) {
-                    // TODO nastaveni game model
+
                     App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.getGameModel().init();
                     App.INSTANCE.setScene(SceneEnum.GAME);
@@ -213,7 +211,6 @@ public class MessageHandler {
             return;
         }
 
-        //TODO dodelat
         if(message[0].equalsIgnoreCase("room_join_err")) {
             this.invalidMessages = 0;
 
@@ -479,7 +476,14 @@ public class MessageHandler {
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
 
             Platform.runLater(() -> {
-                ((GameController) App.INSTANCE.getController()).protocolAdd("You hit ["+ x +"]["+ y +"], status: " + status);
+                if (squareStatus == SquareStatus.HIT && Integer.parseInt(message[4]) == 1)
+                {
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("You hit ["+ x +"]["+ y +"] status: ship destroyed");
+                }
+                else
+                {
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("You hit ["+ x +"]["+ y +"], status: " + status);
+                }
                 ((GameController) App.INSTANCE.getController()).repaint();
             });
             return;
@@ -547,7 +551,15 @@ public class MessageHandler {
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PLAYING);
 
             Platform.runLater(() -> {
-                ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit ["+ x +"]["+ y +"] status: " + status);
+                if (squareStatus == SquareStatus.HIT && Integer.parseInt(message[4]) == 1)
+                {
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit ["+ x +"]["+ y +"] status: ship destroyed");
+                }
+                else
+                {
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("Opponent hit ["+ x +"]["+ y +"] status: " + status);
+                }
+
                 ((GameController) App.INSTANCE.getController()).repaint();
             });
             return;

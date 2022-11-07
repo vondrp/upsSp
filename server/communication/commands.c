@@ -85,8 +85,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         if(logged_client->connected)
         {
             sprintf(buff, "login_err%c%d\n", SPLIT_SYMBOL, ERROR_USED_USERNAME);
-            send_message(client, buff);
-            printf("Za poslanim erroru\n");
+            send_message(client, buff);;
             trace("Socket %d - User is trying to login as %s, but this name is using", client->fd, logged_client->name);
             return EXIT_SUCCESS;
         }
@@ -480,14 +479,13 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         return EXIT_FAILURE;
     }
 
-
     x = 0;
     y = 0;
     for (i = 0; i < GAME_BOARD_STRING_SIZE; i++)
     {
         ship_number = -1;
 
-        if (argv[0][i]  == ',')
+        /*if (argv[0][i]  == ',')
         {
             // if is not 0 -> wrong amount of characters between
             if (x != 0)
@@ -497,9 +495,8 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
                 trace("Socket %d - Game prepare request failed due message format error", client->fd);
                 return EXIT_FAILURE;
             }
-
             continue;
-        }
+        }*/
 
         if (isdigit(argv[0][i]))
         {

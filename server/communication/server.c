@@ -86,19 +86,16 @@ void server_listen(server *server, char *port) {
         fprintf(stderr, "ERROR: %s\n", gai_strerror(rv)); //  gai_strerror - return string representation of addrinfo error
         exit(1);
     }
-    printf("Address info %d\n", rv);
+
     for(p = ai; p != NULL; p = p->ai_next)
     {
         listener = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
-        printf("Family %d\n", p->ai_family);
-        printf("Test %s\n", p->ai_canonname);
         if (listener < 0) {
             continue;
         }
 
         // lose the pesky "address already in use" error message
         setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
-        printf("%s\n", p->ai_addr->sa_data);
         if (bind(listener, p->ai_addr, p->ai_addrlen) < 0)
         {
             close(listener);

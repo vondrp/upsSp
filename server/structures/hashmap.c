@@ -38,7 +38,7 @@ hashtable_t *ht_create(unsigned int capacity)
 }
 
 /* 	Store data in the hashtable. If data with the same key are already stored,
-	they are overwritten, and return by the function. Else it return NULL.
+	they are overwritten, and return by the function. Else it returns NULL.
 */
 void* ht_put(hashtable_t* hasht, char* key, void* data)
 {
@@ -84,7 +84,7 @@ void* ht_get(hashtable_t* hasht, char* key)
         return NULL;
     }
     if(!key) {
-        printf("key je null\n");
+        printf("hashmap key cannot be null\n");
     }
     unsigned int h = ht_calc_hash(key) % hasht->capacity;
 

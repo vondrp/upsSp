@@ -489,7 +489,7 @@ public class GameModel {
                         break;
                 }
             }
-            stringForm.append(",");
+            //stringForm.append(",");
         }
         stringForm.append("\0");
         return stringForm.toString();
