@@ -4767,3 +4767,7 @@ Socket 6 receiving transmission room_list_req
 Socket 6 - List of joinable rooms has been sent
 Socket 5 disconnected, closing connection
 Socket 6 disconnected, closing connection
+Server has started on port 9123
+
+Server has started on port 10000
+

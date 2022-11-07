@@ -25,7 +25,7 @@ FILE *trace_file; // trace file link
 
 int main(int argc, char **argv)
 {
-    int port = -1;
+    int port = 0;
     int i, j;
     unsigned long len;
     char buf_port[10];
