@@ -5,7 +5,7 @@
 
 #include "errors.h"
 
-const int COMMANDS_COUNT = 8;
+const int COMMANDS_COUNT = 9;
 const cmd_handler COMMANDS[] =
     {
         {"login_req", cmd_login},
@@ -42,6 +42,7 @@ fcmd get_handler(char command[])
 int cmd_login(server *server, struct client *client, int argc, char **argv)
 {
     char buff[64];
+    int i;
     if(!client || !argv)
     {
         sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
@@ -66,7 +67,6 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
     }
     else
     {
-        int i;
         for(i = 0; i < strlen(argv[0]); i++) {
             if(argv[0][i] >= '0' && argv[0][i] <= '9') continue;
             if(argv[0][i] >= 'A' && argv[0][i] <= 'Z') continue;

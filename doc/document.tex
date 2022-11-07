@@ -127,6 +127,7 @@
 	\texttt{connected}\\
 	\subsubsection{Připojení}
 	\par Po úspěšném navázání spojení se klient může přihlásit. Přihlašování probíhá příkazem  \uv{login\_req;(name)}. Server může odpovědět buď s \uv{login\_ok;(name);(state)} nebo s \uv{login\_err;(error\_code)}. Na základě stavu se hráč připojí buď do lobi nebo hry/místnosti z níž odešel (při spadnutí klienta).\\
+	\par Pokud připojení selže je serverem ukončeno spojení s klientem.\\
 	\textbf{Požadavek klienta:}\\
 	\texttt{login\_req;(name)}\\
 	\textbf{Možné odpovědi serveru:}\\

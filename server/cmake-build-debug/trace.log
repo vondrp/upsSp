@@ -4771,3 +4771,66 @@ Server has started on port 9123
 
 Server has started on port 10000
 
+Server has started on port 10000
+
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 receiving transmission logout_req
+
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 - Socket was disconnected at its request
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 - Socket was disconnected at its request
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp_,
+
+Socket 5 - User is trying to login as vondrp_,, but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp_
+
+Socket 5 - User is trying to login as vondrp_, but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp_
+
+Socket 5 - User is trying to login as vondrp_, but this name does not meet requirements
+Socket 5 disconnected, closing connection

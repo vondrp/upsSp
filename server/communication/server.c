@@ -168,6 +168,7 @@ void server_listen(server *server, char *port) {
 
                     }
                 } else {
+                    printf("I: %d, can read: %d\n", i, can_read);
                     ioctl(i, FIONREAD, &can_read);
                     if(can_read > 0) {
 
@@ -189,7 +190,7 @@ void server_listen(server *server, char *port) {
                                 server_disconnect(server, i);
                             }
                         }
-                    } else if(can_read == 0){
+                    } else if(can_read == 0) {
                         trace("Socket %d disconnected, closing connection", i);
                         server_disconnect(server, i);
                     } else {

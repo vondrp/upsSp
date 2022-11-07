@@ -15,6 +15,9 @@
 #define DEFAULT_MAX_ROOMS 10
 #define DEFAULT_MAX_PLAYERS_NUM 20
 
+#define MIN_ROOMS 1
+#define MIN_PLAYERS 2
+
 #define MAX_PORT_NUMBER 65535
 
 #define SPLIT_SYMBOL ';'
@@ -137,6 +140,18 @@ int main(int argc, char **argv)
     {
         printf("Use ./server -p <port> or ./server --port <port>");
         printf("<port> - integer from 1 to %d", MAX_PORT_NUMBER);
+        return EXIT_SUCCESS;
+    }
+
+    if(max_rooms< MIN_ROOMS)
+    {
+        printf("Minimal amount of rooms is %d\n", MIN_ROOMS);
+        return EXIT_SUCCESS;
+    }
+
+    if (max_player_num < MIN_PLAYERS)
+    {
+        printf("Minimal amount of rooms is %d\n", MIN_PLAYERS);
         return EXIT_SUCCESS;
     }
 
@@ -283,7 +298,7 @@ int process_message(server *server, int fd, char *message)
         }
         server->clients[fd]->invalid_count = 0;
     } else {
-        sprintf(buff, "error%c unknown command\n", SPLIT_SYMBOL);
+        sprintf(buff, "error%cunknown_command\n", SPLIT_SYMBOL);
         send_message(server->clients[fd], buff);
         server->clients[fd]->invalid_count++;
         server->stat_unknown_commands++;
