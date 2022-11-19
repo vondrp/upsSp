@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.27)  7 NOV 2022 09:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.27)  19 NOV 2022 14:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,128 +856,126 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--128
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--137
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 139--146
+Underfull \hbox (badness 10000) in paragraph at lines 130--138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--156
+Underfull \hbox (badness 10000) in paragraph at lines 140--147
 
  []
 
 
-Overfull \hbox (22.24077pt too wide) in paragraph at lines 159--171
+Underfull \hbox (badness 10000) in paragraph at lines 148--157
+
+ []
+
+
+Overfull \hbox (22.24077pt too wide) in paragraph at lines 160--172
 \IL2/cmr/m/n/12 Povedlo-li se pøi-po-jení do-stanu kli-ent zprávu s jmé-nem pro
 -tiv-níka þroom[]join[]ok;(opp[]name)ÿ.
  []
 
 
-Overfull \hbox (41.41057pt too wide) in paragraph at lines 159--171
+Overfull \hbox (41.41057pt too wide) in paragraph at lines 160--172
 \IL2/cmr/m/n/12 Hráè èe-ka-jící v míst-nosti do-stane zprávu s jmé-nem pøi-po-j
 e-ného u¾i-va-tele þroom[]join[]opp;(name)ÿ. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--171
+Underfull \hbox (badness 10000) in paragraph at lines 160--172
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 172--183
+Underfull \hbox (badness 10000) in paragraph at lines 173--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--187
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
 
  []
 
 
-Overfull \hbox (79.49869pt too wide) in paragraph at lines 190--191
-\IL2/cmr/m/n/12 poøádku od-poví ser-ver se zprá-vou þgame[]prepared[]okÿ, pøi c
-hybì po¹le þgame[]prepared[]err;(error[]code)ÿ. 
+Underfull \hbox (badness 10000) in paragraph at lines 187--189
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--201
+Underfull \hbox (badness 10000) in paragraph at lines 194--203
 
  []
 
 [5]
-Overfull \hbox (170.91144pt too wide) in paragraph at lines 206--220
-\IL2/cmr/m/n/12 for-mací v ja-kém stavu je za-sa-¾ená po-zice a jestli pøi zá-s
-ahu byla znièena loï þgame[]fire[]ok;(x),(y),(status);(ship[]destroyed)ÿ.
- []
-
-
-Overfull \hbox (28.15042pt too wide) in paragraph at lines 206--220
+Overfull \hbox (28.15042pt too wide) in paragraph at lines 208--223
 \IL2/cmr/m/n/12 do-stane pro-ti-hráè in-for-maci o za-sa-¾e-ném poli þgame[]opp
 []fire;(x);(y);(status);(ship[]destroyed)ÿ. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--220
+Underfull \hbox (badness 10000) in paragraph at lines 208--223
 
  []
 
 
-Overfull \hbox (0.2771pt too wide) in paragraph at lines 221--233
+Overfull \hbox (0.2771pt too wide) in paragraph at lines 224--236
 \IL2/cmr/m/n/12 data ob-sa-hu-jící stav kli-en-tova a pro-tiv-ní-kova her-ního 
 pole þgame[]info[]data;(client[]status);
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 221--233
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 235--239
+Underfull \hbox (badness 10000) in paragraph at lines 224--236
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 240--250
+Underfull \hbox (badness 10000) in paragraph at lines 238--242
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--267
+Underfull \hbox (badness 10000) in paragraph at lines 243--253
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 275--277
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--280
 
  []
 
 [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 337--338
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 339--340
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 340--342
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 342--343
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 343--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 345--346
 
  []
 
@@ -988,7 +986,7 @@ Package rerunfilecheck Info: File `document.out' has not changed.
 Here is how much of TeX's memory you used:
  24710 strings out of 478593
  451621 string characters out of 2851639
- 752767 words of memory out of 3000000
+ 751767 words of memory out of 3000000
  42396 multiletter control sequences out of 15000+600000
  477205 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1004,7 +1002,7 @@ our/public/csfonts/dpi864\csbx12.pk> <C:\Users\vondr\AppData\Local\MiKTeX\fonts
 MiKTeX\fonts/pk/ljfour/public/csfonts/dpi1244\csbx12.pk><D:/programfiles/miktex
 /miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/programfiles/miktex/miktex
 /fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on document.pdf (11 pages, 193425 bytes).
+Output written on document.pdf (11 pages, 193583 bytes).
 PDF statistics:
  625 PDF objects out of 1000 (max. 8388607)
  68 named destinations out of 1000 (max. 500000)

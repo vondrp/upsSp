@@ -43,7 +43,7 @@
 	\pagebreak
 	\setcounter{page}{2}
 	\section{Pravidla hry}
-	\par Lodě, popřípadě Námořní bitva je hra pro dva hráče, ve které je cílem potom všechny lodě soupeře. Oba hráči mají vlastní herní pole o velikosti 10x10 na němž jsou rozmístěny jejich lodě různých velikostí.
+	\par Lodě, popřípadě Námořní bitva je hra pro dva hráče, ve které je cílem potom všechny lodě soupeře. Oba hráči mají vlastní herní pole o velikosti 10x10 na němž jsou rozmístěny jejich lodě různých velikostí.
 	
 	\par Lodě mohou být rozmístění pouze vodorovně nebo horizontálně. Je tedy vyloučeno umístění úhlopříčné nebo jinak šikmé. Lodě se navzájem nesmí překrývat a vzájemně se dotýkat a to ani rohem. Během hry se pozice lodí nemění.
 	
@@ -55,8 +55,8 @@
 	\section{Implementace programu}
 	\par Kromě implementace hry podle specifikovaných pravidel obsahuje hra systém místností. Místnost vytvoří jeden z hráčů a jakmile se k němu připojí protivník hra započne. Každá místnosti má své identifikační číslo a hráči mohou získat jejich seznam, který obsahuje jména hráčů v místnosti.
 		
-	\par Dojde-li ke ztrátě spojení nebo odpojení se, je stav hry a klienta stále k dispozici a uživatel se může připojit zpět.
-	\par Server si mapuje čísla deskriptoru ke klientovi, aby dokázal identifikovat kontext uživatele.
+	\par Dojde-li ke ztrátě spojení nebo odpojení se, je stav hry a klienta stále k dispozici a uživatel se může připojit zpět.
+	\par i mapuje čísla deskriptoru ke klientovi, aby dokázal identifikovat kontext uživatele.
 
 	\section{Komunikační protokol}
 	\par Komunikační protokol je nešifrovaný a textový. Je tak zajištěna jeho srozumitelnost pro vývoj, testování a kontrolu. Zprávy jsou dělené na 4 druhy a to žádosti, potvrzovací, datové a chybové. Žádosti odesílá klient a přijíma server, zatímco u ostatních typů zpráv je to naopak.
@@ -126,7 +126,7 @@
 	\textbf{Zpráva serveru:}\\
 	\texttt{connected}\\
 	\subsubsection{Připojení}
-	\par Po úspěšném navázání spojení se klient může přihlásit. Přihlašování probíhá příkazem  \uv{login\_req;(name)}. Server může odpovědět buď s \uv{login\_ok;(name);(state)} nebo s \uv{login\_err;(error\_code)}. Na základě stavu se hráč připojí buď do lobi nebo hry/místnosti z níž odešel (při spadnutí klienta).\\
+	\par Po úspěšném navázání spojení se klient může přihlásit. Přihlašování probíhá příkazem  \uv{login\_req;(name)}. Server může odpovědět buď s \uv{login\_ok;(name);(state)} nebo s \uv{login\_err;(error\_code)}. Na základě stavu se hráč připojí buď do lobi nebo hry/místnosti z níž odešel (při spadnutí klienta).\\
 	\par Pokud připojení selže je serverem ukončeno spojení s klientem.\\
 	\textbf{Požadavek klienta:}\\
 	\texttt{login\_req;(name)}\\
@@ -145,7 +145,7 @@
 	\texttt{room\_create\_err;(error\_code)}\\\\
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	\subsubsection{Seznam místností}
-	\par Pro připojení do místnosti je třeba získat její identifikační číslo na nějž se klient ptá příkazem \uv{room\_list} a je mu odpovězeno zprávou \uv{room\_list\_data;(id1);(name1);…} za níž se nachází dvojice identifikátoru místnosti a hráče, který v ní čeká.\\	
+	\par Pro připojení do místnosti je třeba získat její identifikační číslo na nějž se klient ptá příkazem \uv{room\_list} a je mu odpovězeno zprávou \uv{room\_list\_data;(id1);(name1);…} za níž se nachází dvojice identifikátoru místnosti a hráče, který v ní čeká.\\	
 	\textbf{Požadavek klienta:}\\
 	\texttt{room\_list}\\
 	\textbf{Možné odpovědi serveru:}\\
@@ -171,7 +171,7 @@
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	\subsubsection{Odejít z místnosti}
 	\par Z místnosti nebo ze hry se dá odejít příkazem \uv{room\_leave\_req}. Server odpoví potvrzením nebo s chybou \uv{room\_leave\_err;(error\_code)}.
-	Je-li ve hře nebo v místnosti oponent, dostane zprávu o odpojení protihráče \uv{room\_leave\_opp}. Odešel-li hráč během hry, hra skončí.	
+	Je-li ve hře nebo v místnosti oponent, dostane zprávu o odpojení protihráče \uv{room\_leave\_opp}. Odešel-li hráč během hry, hra skončí.\\
 	\textbf{Požadavek klienta:}\\
 	\texttt{room\_leave\_req}\\
 	\textbf{Možné odpovědi serveru:}\\
@@ -182,13 +182,14 @@
 	\texttt{(name)} - jméno odpojeného protihráče\\
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	\subsubsection{Vstup do hry}
-	\par Po té co se do místnosti připojí oba hráči dostanou od serveru zprávu \uv{game\_conn}. Tato zpráva značí, že oba hráči nyní přejdou do fáze přípravy hry.
+	\par Po té co se do místnosti připojí oba hráči dostanou od serveru zprávu \uv{game\_conn}. Tato zpráva značí, že oba hráči nyní přejdou do fáze přípravy hry.\\
+	
 	\textbf{Zpráva serveru:}\\
 	\texttt{game\_conn}\\
 	
 	\subsubsection{Herní plocha připravena}
 	\label{ssec:game_ready}
-	\par Po vstupu do hry oba hráči v rámci klienta rozmístí své lodě. Po dokončení rozmisťování lodí pošlou serveru zpráv, že jsou připraveni spolu s se svou hrací plochou. Plocha je ve formě řetězce tvořen dvěma typy znaků – E (prázdno) a číslice v rozsahu 0 až 6 jakožto symboly jednotlivých lodí. Příkaz je \uv{game\_prepared;(EEE00EEEEE…)}.  Je-li vše v pořádku odpoví server se zprávou \uv{game\_prepared\_ok}, při chybě pošle \uv{game\_prepared\_err;(error\_code)}.
+	\par Po vstupu do hry oba hráči v rámci klienta rozmístí své lodě. Po dokončení rozmisťování lodí pošlou serveru zpráv, že jsou připraveni spolu s se svou hrací plochou. Plocha je ve formě řetězce tvořen dvěma typy znaků – E (prázdno) a číslice v rozsahu 0 až 6 jakožto symboly jednotlivých lodí. Příkaz je \uv{game\_prepared;(EEE00EEEEE…)}.  Je-li vše v pořádku odpoví server se zprávou \uv{game\_prepared\_ok}. Při chybě obdrží klient zprávu \uv{game\_prepared\_err;(error\_code)}.
 	
 	\par Jsou-li obě hrací plochy připraveny pošle navíc jednomu z hráčů zprávu \uv{game\_play} značící začátek hry.\\
 	\textbf{Požadavek klienta:}\\
@@ -204,7 +205,8 @@
 		\item Informace o lodí jsou zaslány v podobě jejich identifikátorů, protože ten pomáhá serveru a klientovi označit okolí lodě při jejím zničení.
 	\end{notes}	
 	\subsubsection{Střelba}
-	\par Příkaz vystřelit na danou pozici \uv{game\_fire\_req;(x);(y)}. Bylo-li vystřeleno na pozici v platném rozsahu, která ještě zasažena nebyla dostane klient od serveru zprávu spolu s informací v jakém stavu je zasažená pozice a jestli při zásahu byla zničena loď \uv{game\_fire\_ok;(x),(y),(status);(ship\_destroyed)}. V opačném případě dostanou zprávu chybovou \uv{game\_fire\_err;(error\_code)}.
+	\par Příkaz vystřelit na danou pozici \uv{game\_fire\_req;(x);(y)}. Bylo-li vystřeleno na pozici v platném rozsahu, která ještě zasažena nebyla, dostane klient od serveru zprávu\\ \uv{game\_fire\_ok;(x),(y),(status);(ship\_destroyed)}. Ta hráče informuje o stavu zasažené pozice a zda byla zničena.\\
+	V opačném případě dostanou zprávu chybovou \uv{game\_fire\_err;(error\_code)}.
 	Při úspěchu dostane protihráč informaci o zasaženém poli \uv{game\_opp\_fire;(x);(y);(status);(ship\_destroyed)}.\\
 	\textbf{Požadavek klienta:}\\
 	\texttt{game\_fire\_req;(x);(y)}\\
@@ -228,7 +230,7 @@
 	\texttt{game\_info\_err|(error\_code)}\\\\
 	\texttt{(client\_status)} - status klienta (viz. \nameref{ssec:states})\\
 	\texttt{(opp\_name)} - jméno protihráče\\
-	\texttt{(client\_board)} - řetězcová reprezentace klientova hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď, \texttt{M} - zasažené prázdné pole a číslice od \texttt{0} do \texttt{6} symbolující jednotlivé lodě.\\
+	\texttt{(client\_board)} - řetězcová reprezentace klientova hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď, \texttt{M} - zasažené prázdné pole a číslice od \texttt{0} do \texttt{6} symbolující jednotlivé lodě.\\
 	\texttt{(opp\_board)} - řetězcová reprezentace protivního hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď a \texttt{M} - zasažené prázdné pole.\\
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	
@@ -281,7 +283,7 @@
 		\item Connection - okno sloužící k navázání spojení se serverem a připojení se
 		\item Lobby - lobby, ve kterém mohou uživatelé podat žádost o vytvoření nové místnosti nebo se připojit do místnosti jiného hráče
 		\item Room - místnost, v níž hráč po jejím vytvoření čeká než se připojí protihráč.
-		\item Game - okno v němž se odehrává hra. V horní části se nachází jméno hráče a protihráče společně s tlačítkem Ready, sloužící k odeslání připraveného hracího pole. V pravé části okna se nachází textová oblast v níž se nachází zprávy o průběhu hry (+ připojení/odpojení protihráče a další informace). Ve středu obrazovky leží vlevo hráčovo herní plocha a vpravo od ní plocha protihráče.
+		\item Game - okno v němž se odehrává hra. V horní části se nachází jméno hráče a protihráče společně s tlačítkem Ready, sloužící k odeslání připraveného hracího pole. V pravé části okna se nachází textová oblast v níž se nachází zprávy o průběhu hry (+ připojení/odpojení protihráče a další informace). Ve středu obrazovky leží vlevo hráčovo herní plocha a vpravo od ní plocha protihráče.
 		\item Result - okno zobrazující se po skončení hry obsahující jméno vítěze.
 	\end{itemize}
 	Modely jsou rozdělené do modelů připojení a hry.
@@ -338,7 +340,7 @@
 	\par Pro překladu programu se vyskytujeme v adresáři \texttt{/server/}. Pro build aplikace je používán nástroj CMake, jenž vytvoří příslušný Makefile.\\
 	\par Použijeme tedy příkaz: \texttt{cmake -B ./build/}\\
 	\par Přemístíme se do adresáře \texttt{build/} (\texttt{cd build}) a provedeme sestavení spustitelného souboru příkazem \texttt{make}, který vytvoří spustitelný soubor \texttt{server}.\\
-	\par Pro spuštění serveru potřebujeme znát číslo portu služby, například \texttt{9123}. Server s tímto portem spustíme příkazem:\\
+	\par Pro spuštění serveru potřebujeme znát číslo portu služby, například \texttt{9123}. Server s tímto portem spustíme příkazem:\\
 	\texttt{./server -p 9123} nebo \texttt{./server --port 9123}\\
 	\par V případě kdy uvedeme neplatnou hodnotu portu - tedy nečíselnou hodnotu, číslo menší než \texttt{1} nebo větší než texttt{65535} dojde k nastavení defaultní hodnoty portu \texttt{9123}\\
 	\par Program můžeme spusti i s několika nepovinnými parametry:
