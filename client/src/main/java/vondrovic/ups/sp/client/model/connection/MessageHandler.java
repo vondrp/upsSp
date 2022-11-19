@@ -96,6 +96,8 @@ public class MessageHandler {
                     App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.getGameModel().init();
                     App.INSTANCE.setScene(SceneEnum.GAME);
+                    App.INSTANCE.getScene().getWindow().setWidth(App.INSTANCE.getScene().getWidth() + 0.001);
+                    App.INSTANCE.getScene().getWindow().setWidth(App.INSTANCE.getScene().getHeight() + 0.001);
                     App.sendMessage("game_info_req");
                 } else {
                     App.INSTANCE.setScene(SceneEnum.LOBBY);
@@ -372,7 +374,10 @@ public class MessageHandler {
             App.INSTANCE.getGameModel().init();
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
             Platform.runLater(() -> {
+
                 App.INSTANCE.setScene(SceneEnum.GAME);
+                App.INSTANCE.getScene().getWindow().setWidth(App.INSTANCE.getScene().getWidth() + 0.001);
+                App.INSTANCE.getScene().getWindow().setWidth(App.INSTANCE.getScene().getHeight() + 0.001);
             });
 
             return;
@@ -421,9 +426,11 @@ public class MessageHandler {
                     break;
             }
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.PREPARING);
-            //TODO check if with invalid code game enables to send prepared again
+
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.GAME);
+                App.INSTANCE.getScene().getWindow().setWidth(App.INSTANCE.getScene().getWidth() + 0.001);
+                App.INSTANCE.getScene().getWindow().setWidth(App.INSTANCE.getScene().getHeight() + 0.001);
             });
             return;
         }

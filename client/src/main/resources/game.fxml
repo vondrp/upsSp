@@ -13,6 +13,7 @@
 <BorderPane fx:id="borderPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            prefHeight="700.0" prefWidth="700.0"
             fx:controller="vondrovic.ups.sp.client.controller.GameController">
     <top>
         <ToolBar fx:id="toolBar" prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -37,10 +38,10 @@
             </children></AnchorPane>
     </right>
     <center>
-        <AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="anchorPane" prefHeight="603.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
-                <Canvas fx:id="leftBoardCanvas" height="240.0" onMouseClicked="#handleLeftCanvasClick" width="240.0" />
-                <Canvas fx:id="rightBoardCanvas" height="240.0" layoutX="260" onMouseClicked="#handleRightCanvasClick" width="240.0" />
+                <Canvas fx:id="leftBoardCanvas" height="300.0" onMouseClicked="#handleLeftCanvasClick" width="300.0" />
+                <Canvas fx:id="rightBoardCanvas" height="300.0" layoutX="320" onMouseClicked="#handleRightCanvasClick" width="300.0" />
             </children>
         </AnchorPane>
     </center>

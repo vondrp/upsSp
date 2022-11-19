@@ -151,7 +151,7 @@ int main(int argc, char **argv)
 
     if (max_player_num < MIN_PLAYERS)
     {
-        printf("Minimal amount of rooms is %d\n", MIN_PLAYERS);
+        printf("Minimal amount of players is %d\n", MIN_PLAYERS);
         return EXIT_SUCCESS;
     }
 

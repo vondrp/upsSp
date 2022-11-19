@@ -103,11 +103,17 @@ public class App extends Application {
         stage.setScene(s);
 
         this.sceneEnum = scene;
+        stage.sizeToScene();
         stage.show();
         if(scene == SceneEnum.GAME) {
             AbstractController controller = (AbstractController) this.getController();
             controller.initialize();
         }
+    }
+    
+    public Scene getScene()
+    {
+        return stage.getScene();
     }
 
     /**

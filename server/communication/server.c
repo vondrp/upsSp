@@ -168,7 +168,6 @@ void server_listen(server *server, char *port) {
 
                     }
                 } else {
-                    printf("I: %d, can read: %d\n", i, can_read);
                     ioctl(i, FIONREAD, &can_read);
                     if(can_read > 0) {
 
