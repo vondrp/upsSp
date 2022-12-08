@@ -12,11 +12,6 @@
 #define STATS_FILE_NAME "stats.txt"
 
 #define SPLIT_SYMBOL ';'
-/**
- *  Function to close connection with socket
- * @param fd file descriptor number
- */
-void close_connection(int fd);
 
 /**
  * Function to evaluate messages

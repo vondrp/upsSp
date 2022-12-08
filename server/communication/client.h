@@ -1,7 +1,7 @@
-#include <string.h>
-
 #ifndef CLIENT_H
 #define CLIENT_H
+
+#include <string.h>
 
 // info in client is connected or not
 #define CONNECTED 1

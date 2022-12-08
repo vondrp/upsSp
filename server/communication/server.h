@@ -26,6 +26,12 @@ struct server_ {
 };
 
 /**
+ *  Function to close connection with socket
+ * @param fd file descriptor number
+ */
+void close_connection(int fd);
+
+/**
  * Type definition of server structure
  */
 typedef struct server_ server;

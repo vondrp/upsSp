@@ -1,10 +1,12 @@
-#include "../communication/client.h"
-#include <stdbool.h>
-#include "../communication/server.h"
-#include <stdlib.h>
-
 #ifndef SERVER_GAME_H
 #define SERVER_GAME_H
+
+#include <stdlib.h>
+#include <stdbool.h>
+
+#include "../communication/client.h"
+#include "../communication/server.h"
+
 
 #define GAME_STATE_LOBBY 0
 

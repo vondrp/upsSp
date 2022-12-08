@@ -32,7 +32,6 @@ typedef struct
 // Inititalize hashtable iterator on hashtable 'ht'
 #define HT_ITERATOR(ht) {ht, 0, ht->table[0]}
 
-char err_ptr;
 //void* HT_ERROR = &err_ptr; // Data pointing to HT_ERROR are returned in case of error
 
 /**
