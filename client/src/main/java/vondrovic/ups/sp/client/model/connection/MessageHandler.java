@@ -160,7 +160,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("login_err")) {
             this.invalidMessages = 0;
-            App.INSTANCE.disconnect();
+            //App.INSTANCE.disconnect();
 
             if (message.length < 2)
             {

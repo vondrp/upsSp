@@ -324,13 +324,22 @@ int process_message(server *server, int fd, char *message)
         {
             server->stat_fail_requests++;
         }
-        server->clients[fd]->invalid_count = 0;
+        // can happend that client was deconnected (removed) during loring req
+        if (server->clients[fd])
+        {
+            server->clients[fd]->invalid_count = 0;
+        }
     }
     else
     {
         sprintf(buff, "error%c unknown_command\n", SPLIT_SYMBOL);
         send_message(server->clients[fd], buff);
-        server->clients[fd]->invalid_count++;
+        // can happend that client was deconnected (removed) during loring req
+        if (server->clients[fd])
+        {
+            server->clients[fd]->invalid_count++;
+        }
+
         server->stat_unknown_commands++;
     }
 

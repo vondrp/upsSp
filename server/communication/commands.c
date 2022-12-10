@@ -47,6 +47,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
         send_message(client, buff);
         trace("Socket %d - Login request filed due internal error", client->fd);
+        disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
 
@@ -55,6 +56,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);
         trace("Socket %d - Login request failed due message format error", client->fd);
+        disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
 
@@ -63,8 +65,8 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         s_curr_players= s_curr_players + 1; // raise +1, because after failed login connection is closed and at the connection -> curr_player is reduced
         sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
         send_message(client, buff);
-
         trace("Socket %d - User is trying to login as %s, but max amount of players (%d) already reached", client->fd, argv[0], s_max_players);
+        disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
 
@@ -73,6 +75,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_USERNAME_WRONG_FORMAT);
         send_message(client, buff);
         trace("Socket %d - User is trying to login as %s, but this name does not meet requirements", client->fd, argv[0]);
+        disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
     else
@@ -85,6 +88,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
             sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_USERNAME_WRONG_FORMAT);
             send_message(client, buff);
             trace("Socket %d - User is trying to login as %s, but this name does not meet requirements", client->fd, argv[0]);
+            disconnect_login_err(server, client);
             return EXIT_FAILURE;
         }
     }
@@ -97,6 +101,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
             sprintf(buff, "login_err%c%d\n", SPLIT_SYMBOL, ERROR_USED_USERNAME);
             send_message(client, buff);;
             trace("Socket %d - User is trying to login as %s, but this name is using", client->fd, logged_client->name);
+            disconnect_login_err(server, client);
             return EXIT_SUCCESS;
         }
         else
@@ -116,7 +121,6 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
 
         s_curr_players = s_curr_players + 1;
 
-        printf("Curr players: %d\n", s_curr_players);
         sprintf(buff, "login_ok%c%s%c%d\n", SPLIT_SYMBOL, client->name, SPLIT_SYMBOL, client->state);
         ht_put(server->players, client->name, client);
         send_message(client, buff);
@@ -142,7 +146,15 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
     sprintf(buff,  "login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
     send_message(client, buff);
     trace("Socket %d - Login internal error", client->fd, client->name);
+    disconnect_login_err(server, client);
     return EXIT_FAILURE;
+}
+
+void disconnect_login_err(server *server, struct client *client)
+{
+    server->clients[client->fd] = client;
+    trace("Socket %d disconnected, closing connection", client->fd);
+    server_disconnect(server, client->fd);
 }
 
 int cmd_room_create(server *server, struct client *client, int argc, char **argv)
@@ -188,7 +200,6 @@ int cmd_room_list(server *server, struct client *client, int argc, char **argv) 
     int i = server->rooms->first;
 
     if(i == -1) {
-        printf("Jsem tady\n");
         send_message(client, "room_list_data\n");
         trace("Socket %d - List of joinable rooms has been sent", client->fd);
         return EXIT_SUCCESS;
@@ -286,7 +297,6 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
 
     struct game *room = arraylist_get(server->rooms, room_id);
 
-    printf("Room state %d\n", room->state);
     if(room->state == GAME_STATE_ERASED)
     {
         sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE);
@@ -327,7 +337,6 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
     send_message(opponent, buff);
     trace("Socket %d - Room (%d) join success.", client->fd, room->id);
 
-    printf("Client %s state %d\n", client->name, client->state);
     if (room->player1->state == STATE_IN_ROOM && room->player2->state == STATE_IN_ROOM)
     {
         room->player1->state = STATE_IN_GAME_PREPARING;

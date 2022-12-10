@@ -7381,3 +7381,226 @@ Server failed to bind
 Server failed to bind
 Server has started on port 10000
 
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 - Socket was disconnected at its request
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()...
+
+Socket 5 - User is trying to login as ()..., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;()..
+
+Socket 5 - User is trying to login as ().., but this name does not meet requirements
+Socket 5 disconnected, closing connection
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;vondrp
+
+Socket 5 - User vondrp logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission logout_req
+
+Socket 5 - Socket was disconnected at its request
+Server run on IP address: 127.0.5.5
+
+Server has started on port 10000
+
+Server run on IP address: 127.0.5.5
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Server run on IP address: 127.0.5.5
+
+Server has started on port 10000
+
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;prvni
+
+Socket 5 - User prvni logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;prvni
+
+Socket 6 - User is trying to login as prvni, but this name is using
+Socket 6 disconnected, closing connection
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission logout_req
+
+Socket 6 - Socket was disconnected at its request
+Socket 5 disconnected, closing connection
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;prvni
+
+Socket 5 - User prvni logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 5 receiving transmission game_prepared;111EEEEEEEEEEEEEE6EEEEEE4EEEEEEEEE4EEEEEEEEEEEEEEEEEEE222EEE0EEEEEEEEE0EEEEEEEEE0E5E3EEEEE0E5E3EEEEE
+Socket 6 receiving transmission game_prepared;EEEEEE111EEE222EEEEEEEEEEEE6EE4EEEEEEEEE4EE0000EEEEEEEEEEEEEE55EEEEEEEEEEEEE3EEEEEEEEE3EEEEEEEEEEEEE
+Socket 6 disconnected, closing connection
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy is logged but disconnected, reconnecting
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission game_info_req
+
+Socket 5 receiving transmission game_fire_req;3;2
+
+Socket 5 - Game fire request succeeded - position:[3][2], fire missed
+Socket 6 receiving transmission game_fire_req;6;5
+
+Socket 6 - Game fire request succeeded - position:[6][5], fire hit its target, ship 2 is still alive
+Socket 5 receiving transmission game_fire_req;3;6
+
+Socket 5 - Game fire request succeeded - position:[3][6], fire missed
+Socket 6 receiving transmission game_fire_req;7;3
+
+Socket 6 - Game fire request succeeded - position:[7][3], fire missed
+Socket 5 receiving transmission game_fire_req;1;5
+
+Socket 5 - Game fire request succeeded - position:[1][5], fire missed
+Socket 6 receiving transmission game_fire_req;3;9
+
+Socket 6 - Game fire request succeeded - position:[3][9], fire missed
+Socket 5 receiving transmission game_fire_req;6;0
+
+Socket 5 - Game fire request succeeded - position:[6][0], fire hit its target, ship 1 is still alive
+Socket 5 receiving transmission room_leave_req
+
+Socket 5 - Game 0 was terminated due client leave
+Socket 5 - Client left the game/room
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection

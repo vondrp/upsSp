@@ -188,7 +188,6 @@ void server_listen(server *server, char *port, char *ip) {
                         if ((nbytes = (int) recv(i, buf, sizeof buf, 0)) <= 0) {
                             // got error or connection closed by client
                             printf("Socket %d - Connection hang up", i);
-
                             server_disconnect(server, i);
                         } else {
                             trace("Socket %d receiving transmission %s", i, buf);
@@ -197,7 +196,7 @@ void server_listen(server *server, char *port, char *ip) {
 
                             process_message(server, i, buf);
 
-                            if(server->clients[i]->invalid_count >= MAX_INVALID_MESSAGES) {
+                            if(server->clients[i] && server->clients[i]->invalid_count >= MAX_INVALID_MESSAGES) {
                                 trace("Socket %d exceeded the invalid message limit, was disconnected", i);
                                 send_message(server->clients[i], "logout_ok\n");
                                 server_disconnect(server, i);

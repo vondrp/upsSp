@@ -10,6 +10,7 @@
 
 typedef int(*fcmd)(server *server, struct client *client, int, char **);
 
+
 typedef struct _cmd_handler {
     char *cmd;
     fcmd handler;
@@ -18,6 +19,7 @@ typedef struct _cmd_handler {
 
 fcmd get_handler(char commands[]);
 
+void disconnect_login_err(server *server, struct client *client);
 /**
  * Function to handle login request.
  * @param server server structure

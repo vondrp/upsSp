@@ -10,6 +10,14 @@
 string.h
 -
 
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.c
+commands.h
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.h
+../main.h
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
+errors.h
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/errors.h
+
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.h
 stdlib.h
 -
@@ -25,6 +33,8 @@ server.h
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.h
 ../game/shipsGame.h
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/shipsGame.h
+
+/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/errors.h
 
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c
 unistd.h
@@ -79,26 +89,6 @@ stdbool.h
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.h
 ship.h
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.h
-
-/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.c
-stdio.h
--
-signal.h
--
-time.h
--
-sys/socket.h
--
-stdarg.h
--
-main.h
-/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
-communication/server.h
-/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.h
-communication/client.h
-/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.h
-communication/commands.h
-/mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.h
 
 /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/main.h
 communication/server.h
