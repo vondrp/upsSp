@@ -10,7 +10,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <time.h>
 #include <sys/ioctl.h>
 
 #include "server.h"
@@ -18,10 +17,16 @@
 #include "../game/shipsGame.h"
 #include "../structures/hashmap.h"
 #include "../main.h"
+#include "commands.h"
 
 #define MAX_INVALID_MESSAGES 5
 
 fd_set master_fd_set;
+int s_max_players;
+int s_curr_players;
+
+int s_max_rooms;
+int s_curr_rooms;
 
 server *server_init(int max_rooms, int max_player_num)
 {
@@ -41,8 +46,13 @@ server *server_init(int max_rooms, int max_player_num)
     server->stat_bytes_in = 0;
     server->stat_fail_requests = 0;
     server->stat_unknown_commands = 0;
-
     server->players = (hashtable_t *) ht_create(max_player_num);
+
+    s_max_rooms = max_rooms;
+    s_curr_rooms = 0;
+    s_max_players = max_player_num;
+    s_curr_players = 0;
+
     return server;
 }
 
@@ -62,7 +72,7 @@ void *get_in_addr(struct sockaddr *sa)
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-void server_listen(server *server, char *port) {
+void server_listen(server *server, char *port, char *ip) {
     fd_set read_fds;
     struct addrinfo hints, *ai, *p; // address info structure
     struct sockaddr_storage remoteaddr; // client address
@@ -80,8 +90,7 @@ void server_listen(server *server, char *port) {
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
 
-
-    if ((rv = getaddrinfo(NULL, port, &hints, &ai)) != 0)
+    if ((rv = getaddrinfo(ip, port, &hints, &ai)) != 0)
     {
         fprintf(stderr, "ERROR: %s\n", gai_strerror(rv)); //  gai_strerror - return string representation of addrinfo error
         exit(1);
@@ -107,9 +116,13 @@ void server_listen(server *server, char *port) {
     if (p == NULL)
     {
         trace("Server failed to bind");
-        fprintf(stderr, "selectserver: failed to bind\n");
+        fprintf(stderr, "select server: failed to bind\n");
         exit(2);
     }
+
+    struct sockaddr_in *addr;
+    addr = (struct sockaddr_in *)ai->ai_addr;
+    printf("Server run on IP address: %s\n",inet_ntoa((struct in_addr)addr->sin_addr));
 
     freeaddrinfo(ai);
 
@@ -183,16 +196,21 @@ void server_listen(server *server, char *port) {
                             server->stat_bytes_in += nbytes;
 
                             process_message(server, i, buf);
+
                             if(server->clients[i]->invalid_count >= MAX_INVALID_MESSAGES) {
                                 trace("Socket %d exceeded the invalid message limit, was disconnected", i);
                                 send_message(server->clients[i], "logout_ok\n");
                                 server_disconnect(server, i);
                             }
                         }
-                    } else if(can_read == 0) {
+                    }
+                    else if(can_read == 0)
+                    {
                         trace("Socket %d disconnected, closing connection", i);
                         server_disconnect(server, i);
-                    } else {
+                    }
+                    else
+                    {
                         trace("Socket %d disconnected, closing connection", i);
                         close_connection(i);
                     }
@@ -210,19 +228,33 @@ void server_disconnect(server *server, int fd_number) {
 
     struct game *game = client->game;
 
+    // if player is in room -> will be disconnected
+    if (game && client->state == STATE_IN_ROOM)
+    {
+        cmd_room_leave(server, client, 0, NULL);
+    }
+
     if(game && (client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING
-    || client->state == STATE_IN_GAME_PREPARING)) {
+                || client->state == STATE_IN_GAME_PREPARING)) {
         struct client *opp;
-        if(game->player1 == client) {
+        if(game->player1 == client)
+        {
             opp = game->player2;
-        } else if(game->player2 == client) {
+        }
+        else
+        {
             opp = game->player1;
         }
 
-        if(opp && opp->connected) {
+        if(opp && opp->connected)
+        {
             char buf[64] = "";
             sprintf(buf, "room_leave_opp%c%s\n",SPLIT_SYMBOL, client->name);
             send_message(opp, buf);
+        }
+        else // opponent is not connected -> disconnected too - destroy game (allows another people to create a room
+        {
+            game_end(server, game, NULL);
         }
     }
 
@@ -264,11 +296,14 @@ void server_new_connection(server *server, int fd_number) {
 }
 
 
-void server_close_connection(server *server, int fd) {
+void server_close_connection(server *server, int fd)
+{
     close_connection(fd);
 }
 
-void close_connection(int fd) {
+void close_connection(int fd)
+{
+    s_curr_players = s_curr_players - 1;
     close(fd);
     FD_CLR(fd, &master_fd_set);
 }

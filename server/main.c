@@ -32,6 +32,7 @@ int main(int argc, char **argv)
     int i, j;
     unsigned long len;
     char buf_port[10];
+    char *ip = NULL;
 
     int max_rooms = DEFAULT_MAX_ROOMS;
     int max_player_num = DEFAULT_MAX_PLAYERS_NUM;
@@ -103,6 +104,7 @@ int main(int argc, char **argv)
 
             if(max_rooms == -1) //set default port
             {
+                printf("%s is unacceptable value for number of rooms  - default value %d will be used instead\n", argv[i + 1], DEFAULT_MAX_ROOMS);
                 max_rooms = DEFAULT_MAX_ROOMS;
             }
             else
@@ -126,11 +128,31 @@ int main(int argc, char **argv)
 
             if(max_player_num == -1) //set default port
             {
+                printf("%s is unacceptable value for number of players  - default value %d will be used instead\n", argv[i + 1], DEFAULT_MAX_PLAYERS_NUM);
                 max_player_num = DEFAULT_MAX_PLAYERS_NUM;
             }
             else
             {
                 max_player_num = atoi(argv[i + 1]);
+            }
+            cont = 1;
+        }
+
+        // ip address parameter
+        if(!strcmp(argv[i], "-ip"))
+        {
+            len = strlen(argv[i + 1]);
+
+            if (i + 1 >= argc)
+            {
+                printf("Use -ip <ip address>\n");
+                EXIT_FAILURE;
+            }
+
+            if (len > 0)
+            {
+                ip = malloc(len * sizeof(char));
+                strcpy(ip, argv[i + 1]);
             }
             cont = 1;
         }
@@ -160,6 +182,7 @@ int main(int argc, char **argv)
     signal(SIGINT, intHandler); // handeling signal
 
     printf("Server is running on port %d, max number of players is %d, max amount of rooms to be created is %d\n", port, max_player_num, max_rooms);
+
     srv = server_init(max_rooms, max_player_num); // init server
 
     // open trace file
@@ -171,7 +194,12 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    server_listen(srv, buf_port);
+    server_listen(srv, buf_port, ip);
+
+    if (ip != NULL)
+    {
+        free(ip);
+    }
 }
 
 void intHandler() {
@@ -297,8 +325,10 @@ int process_message(server *server, int fd, char *message)
             server->stat_fail_requests++;
         }
         server->clients[fd]->invalid_count = 0;
-    } else {
-        sprintf(buff, "error%cunknown_command\n", SPLIT_SYMBOL);
+    }
+    else
+    {
+        sprintf(buff, "error%c unknown_command\n", SPLIT_SYMBOL);
         send_message(server->clients[fd], buff);
         server->clients[fd]->invalid_count++;
         server->stat_unknown_commands++;

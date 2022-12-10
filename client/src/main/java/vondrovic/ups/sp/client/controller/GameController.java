@@ -136,8 +136,14 @@ public class GameController extends AbstractController {
             String myBoard = this.gameModel.getMyBoardStringForm();
             App.sendMessage("game_prepared;"+myBoard);
         }
+    }
 
-        readyButton.setDisable(true);
+    /**
+     * disable ready to play button
+     */
+    public void disablePrepareButton()
+    {
+        this.readyButton.setDisable(true);
     }
 
     /**

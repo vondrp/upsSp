@@ -7,6 +7,13 @@
 
 #include "../structures/arraylist.h"
 #include "../structures/hashmap.h"
+
+extern int s_max_players;
+extern int s_curr_players;
+
+extern int s_max_rooms;
+extern int s_curr_rooms;
+
 /**
  * Server structure
  */
@@ -76,7 +83,8 @@ void server_disconnect(server *server, int fd_number);
  * Function with endless loop to listen incoming messages
  * @param server server structure
  * @param port server port
+ * @param ip   ip address of the port
  */
-void server_listen(server *server, char *port);
+void server_listen(server *server, char *port, char *ip);
 
 #endif //SERVER_SERVER_H

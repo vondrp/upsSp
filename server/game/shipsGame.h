@@ -7,8 +7,9 @@
 #include "../communication/client.h"
 #include "../communication/server.h"
 
-
+#define GAME_STATE_ERASED 2
 #define GAME_STATE_LOBBY 0
+#define GAME_STATE_GAME 1
 
 #define SHIP_GAME_BOARD_SIZE 10
 #define AMOUNT_OF_SHIP 7

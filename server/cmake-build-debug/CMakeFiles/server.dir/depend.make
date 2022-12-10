@@ -16,6 +16,7 @@ CMakeFiles/server.dir/communication/commands.c.o: ../structures/arraylist.h
 CMakeFiles/server.dir/communication/commands.c.o: ../structures/hashmap.h
 
 CMakeFiles/server.dir/communication/server.c.o: ../communication/client.h
+CMakeFiles/server.dir/communication/server.c.o: ../communication/commands.h
 CMakeFiles/server.dir/communication/server.c.o: ../communication/server.c
 CMakeFiles/server.dir/communication/server.c.o: ../communication/server.h
 CMakeFiles/server.dir/communication/server.c.o: ../game/ship.h

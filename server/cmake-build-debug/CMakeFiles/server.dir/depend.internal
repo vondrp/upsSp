@@ -17,6 +17,7 @@ CMakeFiles/server.dir/communication/commands.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/structures/hashmap.h
 CMakeFiles/server.dir/communication/server.c.o
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/client.h
+ /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/commands.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.c
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/communication/server.h
  /mnt/d/FAV/3.rocnikZS/UPS/seminarni_prace/upsSp/server/game/ship.h

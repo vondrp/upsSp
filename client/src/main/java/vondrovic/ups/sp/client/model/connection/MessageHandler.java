@@ -31,6 +31,7 @@ public class MessageHandler {
     private final int ERROR_ALREADY_HIT = 9;
     private final int ERROR_SHIP_PLACEMENT = 10;
     private final int ERROR_SHIP_NUMBER = 11;
+    private final int ERROR_SERVER_LIMIT_REACHED = 12;
 
     //private final int ERROR_WAIT_TO_LONG_FOR_OPP = 12;
 
@@ -166,6 +167,7 @@ public class MessageHandler {
                 AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
                 return;
             }
+
             switch(Integer.parseInt(message[1]))
             {
                 case ERROR_USED_USERNAME:
@@ -177,11 +179,13 @@ public class MessageHandler {
                 case ERROR_USERNAME_WRONG_FORMAT:
                     AlertFactory.sendErrorMessageOutside("Login error", "Username contains illegal characters or has an invalid length (more than 20 characters or is empty).");
                     break;
+                case ERROR_SERVER_LIMIT_REACHED:
+                    AlertFactory.sendErrorMessageOutside("Login error", "Player capacity of the server has been reach.");
+                    break;
                 case ERROR_INTERNAL:
                 default:
                     AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
                     break;
-
             }
 
             return;
@@ -189,7 +193,6 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_create_err")) {
             this.invalidMessages = 0;
-            App.INSTANCE.disconnect();
 
             if (message.length < 2)
             {
@@ -197,9 +200,16 @@ public class MessageHandler {
                 return;
             }
 
-            if (Integer.parseInt(message[0]) == ERROR_USER_STATE) {
+            if (Integer.parseInt(message[1]) == ERROR_USER_STATE)
+            {
                 AlertFactory.sendErrorMessageOutside("Room create error", "Client is in wrong state to be able create a room.");
-            } else {
+            }
+            else if (Integer.parseInt(message[1]) == ERROR_SERVER_LIMIT_REACHED)
+            {
+                AlertFactory.sendErrorMessageOutside("Room create error", "Rooms capacity of the server has been reach.");
+            }
+            else
+            {
                 AlertFactory.sendErrorMessageOutside("Room create error", "An error occurred while creating a room.");
             }
             return;
@@ -252,16 +262,12 @@ public class MessageHandler {
                 return;
             }
 
-            if(message.length == 1) {
-                App.INSTANCE.getStage().getScene().setCursor(Cursor.DEFAULT);
-
-                return;
-            }
 
             if(!(App.INSTANCE.getController() instanceof LobbyController)) {
                 return;
             }
             LobbyController controller = (LobbyController) App.INSTANCE.getController();
+
             Platform.runLater(() -> {
 
                 ArrayList<Room> rooms = new ArrayList<Room>();
@@ -389,6 +395,8 @@ public class MessageHandler {
 
             ((GameController) App.INSTANCE.getController()).protocolAdd("Game prepared ok");
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
+
+            //((GameController) App.INSTANCE.getController()).disablePrepareButton();
 
             return;
         }
@@ -592,7 +600,8 @@ public class MessageHandler {
         }
 
         this.invalidMessages++;
-        if(this.invalidMessages > App.MAX_INVALID_MESSAGES) {
+        if(this.invalidMessages > App.MAX_INVALID_MESSAGES)
+        {
             App.INSTANCE.disconnect();
         };
     }

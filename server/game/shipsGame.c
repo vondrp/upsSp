@@ -17,7 +17,8 @@ bool room_create(server *server, struct client *client)
 
     client->game = game;
 
-    game->state = 0;
+    game->state = GAME_STATE_LOBBY;
+    s_curr_rooms = s_curr_rooms + 1;
     client->game->id = arraylist_insert(server->rooms, game);
 
     return true;
@@ -55,12 +56,15 @@ void game_end(server *server, struct game *game, char* name) {
     send_message(game->player1, buff);
     send_message(game->player2, buff);
 
+    game->state = GAME_STATE_ERASED;
     game->player1->game = NULL;
     game->player2->game = NULL;
     game->player1->state = STATE_IN_LOBBY;
     game->player2->state = STATE_IN_LOBBY;
 
     arraylist_delete_item(server->rooms, game->id);
+    s_curr_rooms = s_curr_rooms - 1;
+
     free(game);
 }
 

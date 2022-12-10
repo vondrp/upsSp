@@ -1,7 +1,6 @@
 
 #include "commands.h"
 #include "../main.h"
-#include "../game/shipsGame.h"
 
 #include "errors.h"
 
@@ -51,10 +50,21 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         return EXIT_FAILURE;
     }
 
+
     if(argc < 1) {
         sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);
         trace("Socket %d - Login request failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (s_curr_players + 1 > s_max_players)
+    {
+        s_curr_players= s_curr_players + 1; // raise +1, because after failed login connection is closed and at the connection -> curr_player is reduced
+        sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
+        send_message(client, buff);
+
+        trace("Socket %d - User is trying to login as %s, but max amount of players (%d) already reached", client->fd, argv[0], s_max_players);
         return EXIT_FAILURE;
     }
 
@@ -96,7 +106,7 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
             free(client);
             client = logged_client;
             client->connected = CONNECTED;
-            trace("Socket %d - User %s is logged bud disconnected, reconnecting", client->fd, logged_client->name);
+            trace("Socket %d - User %s is logged but disconnected, reconnecting", client->fd, logged_client->name);
         }
     }
 
@@ -104,6 +114,9 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
     {
         struct client *opp = NULL;
 
+        s_curr_players = s_curr_players + 1;
+
+        printf("Curr players: %d\n", s_curr_players);
         sprintf(buff, "login_ok%c%s%c%d\n", SPLIT_SYMBOL, client->name, SPLIT_SYMBOL, client->state);
         ht_put(server->players, client->name, client);
         send_message(client, buff);
@@ -135,17 +148,26 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
 int cmd_room_create(server *server, struct client *client, int argc, char **argv)
 {
     char buff[64];
-    if(client->state != STATE_IN_LOBBY) {
+    if (s_curr_rooms + 1 > s_max_rooms)
+    {
+        sprintf(buff, "room_create_err%c%d\n", SPLIT_SYMBOL, ERROR_SERVER_LIMIT_REACHED);
+        send_message(client, buff);
+        trace("Socket %d - room creation failed due to max amount of rooms (%d) reached.", client->fd, s_max_rooms);
+        return EXIT_SUCCESS;
+    }
+
+    if(client->state != STATE_IN_LOBBY)
+    {
         sprintf(buff, "room_create_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
         send_message(client, buff);
-        trace("Socket %d - room creation failed due wrong client state (%d)", client->fd, client->state);
+        trace("Socket %d - room creation failed due to wrong client state (%d)", client->fd, client->state);
         return EXIT_FAILURE;
     }
 
+    //CREATE ROOM
     room_create(server, client);
     client->state = STATE_IN_ROOM;
 
-    //CREATE ROOM
     send_message(client, "room_create_ok\n");
     trace("Socket %d - room creation success (%d)", client->fd, client->game->id);
     return EXIT_SUCCESS;
@@ -166,6 +188,7 @@ int cmd_room_list(server *server, struct client *client, int argc, char **argv) 
     int i = server->rooms->first;
 
     if(i == -1) {
+        printf("Jsem tady\n");
         send_message(client, "room_list_data\n");
         trace("Socket %d - List of joinable rooms has been sent", client->fd);
         return EXIT_SUCCESS;
@@ -263,9 +286,11 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
 
     struct game *room = arraylist_get(server->rooms, room_id);
 
-    if(!room) {
+    printf("Room state %d\n", room->state);
+    if(room->state == GAME_STATE_ERASED)
+    {
         sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE);
-        send_message(client, buff); //9
+        send_message(client, buff);
         trace("Socket %d - Room joining failed due room is unavailable", client->fd);
         return EXIT_FAILURE;
     }
@@ -311,6 +336,7 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
         room->player1->playerNum = 1;
         room->player2->playerNum = 2;
 
+        room->state = GAME_STATE_GAME;
         send_message(client, "game_conn\n");
         send_message(opponent, "game_conn\n");
         trace("Game %d - Room is full, game is starting", room->id);
@@ -354,8 +380,11 @@ int cmd_room_leave(server *server, struct client *client, int argc, char **argv)
             opp = client->game->player1;
         }
 
-        if (client->game->player1 == NULL && client->game->player2 == NULL) {
+        if (client->game->player1 == NULL && client->game->player2 == NULL)
+        {
+            client->game->state = GAME_STATE_ERASED;
             arraylist_delete_item(server->rooms, client->game->id);
+            s_curr_rooms = s_curr_rooms - 1;
             free(client->game);
         }
 
@@ -410,8 +439,12 @@ int cmd_logout(server *server, struct client *client, int argc, char **argv) {
             sprintf(buff, "room_leave_opp%c%s", SPLIT_SYMBOL, client->name);
             send_message(opp, buff);
         } else {
-            if(client->game->player1 == client || client->game->player2 == client) {
+            if(client->game->player1 == client || client->game->player2 == client)
+            {
+                client->game->state = GAME_STATE_ERASED;
                 arraylist_delete_item(server->rooms, client->game->id);
+                s_curr_rooms = s_curr_rooms - 1;
+
                 free(client->game);
                 client->game = NULL;
             }
