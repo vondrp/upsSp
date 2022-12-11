@@ -19,7 +19,6 @@ typedef struct _cmd_handler {
 
 fcmd get_handler(char commands[]);
 
-void disconnect_login_err(server *server, struct client *client);
 /**
  * Function to handle login request.
  * @param server server structure
@@ -29,6 +28,13 @@ void disconnect_login_err(server *server, struct client *client);
  * @return Information about operation success
  */
 int cmd_login(server *server, struct client *client, int argc, char **argv);
+
+/**
+ * Method used to disconnect user in method cmd_login in case of login_err
+ * @param server    server structure
+ * @param client    client to be disconnected
+ */
+void disconnect_login_err(server *server, struct client *client);
 
 /**
  * Function to handle room creation request.

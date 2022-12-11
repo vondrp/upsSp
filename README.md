@@ -29,13 +29,16 @@ nebo
 ./server -port 9123 
 ```
 
-Můžeme použít nepovinné parametry pro nastavení maxilního počtu hráčů a místností
+Můžeme použít nepovinné parametry pro nastavení maxilního počtu hráčů a místností + úvést IP adresu
 nebo
 ```
 -r 15  | --rooms 15
 ```
 ```
 -pl 30  | --players 15
+```
+```
+-ip <ip adresa>
 ```
 
 ### Klient

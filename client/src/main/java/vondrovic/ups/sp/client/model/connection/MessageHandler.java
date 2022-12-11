@@ -160,7 +160,6 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("login_err")) {
             this.invalidMessages = 0;
-            //App.INSTANCE.disconnect();
 
             if (message.length < 2)
             {
@@ -350,7 +349,6 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_leave_err")) {
             this.invalidMessages = 0;
-
             AlertFactory.sendErrorMessageOutside("Room leave error", "An error occurred while trying to leave a room.");
         }
 
@@ -395,9 +393,7 @@ public class MessageHandler {
 
             ((GameController) App.INSTANCE.getController()).protocolAdd("Game prepared ok");
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
-
-            //((GameController) App.INSTANCE.getController()).disablePrepareButton();
-
+            ((GameController) App.INSTANCE.getController()).disablePrepareButton();
             return;
         }
 
