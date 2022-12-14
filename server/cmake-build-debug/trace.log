@@ -7604,3 +7604,6 @@ Socket 6 receiving transmission room_list_req
 Socket 6 - List of joinable rooms has been sent
 Socket 5 disconnected, closing connection
 Socket 6 disconnected, closing connection
+Server failed to bind
+Server failed to bind
+Server failed to bind - port or ip address is unavailable

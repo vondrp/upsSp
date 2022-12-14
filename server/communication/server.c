@@ -113,16 +113,16 @@ void server_listen(server *server, char *port, char *ip) {
         break;
     }
 
-    if (p == NULL)
-    {
-        trace("Server failed to bind");
-        fprintf(stderr, "select server: failed to bind\n");
-        exit(2);
-    }
-
     struct sockaddr_in *addr;
     addr = (struct sockaddr_in *)ai->ai_addr;
     printf("Server run on IP address: %s\n",inet_ntoa((struct in_addr)addr->sin_addr));
+
+    if (p == NULL)
+    {
+        trace("Server failed to bind - port or ip address is unavailable");
+        fprintf(stderr, "select server: failed to bind\n");
+        exit(2);
+    }
 
     freeaddrinfo(ai);
 
