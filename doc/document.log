@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.27)  10 DEC 2022 22:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.27)  18 DEC 2022 17:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -846,89 +846,84 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {C:/Users/vondr/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/FAV
 _cmyk-eps-converted-to.pdf>] [2]
 LaTeX Font Info:    Trying to load font information for IL2+cmtt on input line 
-126.
+127.
 
 (D:\programfiles\miktex\miktex\tex/cslatex/base\il2cmtt.fd
 File: il2cmtt.fd 1997/08/20 CSLaTeX font definitions
 ) [3]
-Underfull \hbox (badness 10000) in paragraph at lines 129--137
+Underfull \hbox (badness 10000) in paragraph at lines 130--138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--145
+Underfull \hbox (badness 10000) in paragraph at lines 139--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 146--155
+Underfull \hbox (badness 10000) in paragraph at lines 147--156
 
  []
 
 
-Overfull \hbox (22.24077pt too wide) in paragraph at lines 156--168
+Overfull \hbox (22.24077pt too wide) in paragraph at lines 157--169
 \IL2/cmr/m/n/12 Povedlo-li se pøi-po-jení do-stanu kli-ent zprávu s jmé-nem pro
 -tiv-níka þroom[]join[]ok;(opp[]name)ÿ.
  []
 
 
-Overfull \hbox (41.41057pt too wide) in paragraph at lines 156--168
+Overfull \hbox (41.41057pt too wide) in paragraph at lines 157--169
 \IL2/cmr/m/n/12 Hráè èe-ka-jící v míst-nosti do-stane zprávu s jmé-nem pøi-po-j
 e-ného u¾i-va-tele þroom[]join[]opp;(name)ÿ. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--168
+Underfull \hbox (badness 10000) in paragraph at lines 157--169
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 169--179
+Underfull \hbox (badness 10000) in paragraph at lines 170--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--195
+Underfull \hbox (badness 10000) in paragraph at lines 187--196
 
  []
 
 [5]
-Overfull \hbox (12.8103pt too wide) in paragraph at lines 200--212
+Overfull \hbox (12.8103pt too wide) in paragraph at lines 201--213
 \IL2/cmr/m/n/12 þgame[]fire[]ok;(x),(y),(status);(ship[]destroyed)ÿ in-for-mu-j
 ící o stavu za-sa-¾ené po-zice a znièení
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--212
+Underfull \hbox (badness 10000) in paragraph at lines 201--213
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--224
+Underfull \hbox (badness 10000) in paragraph at lines 214--225
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--241
+Underfull \hbox (badness 10000) in paragraph at lines 232--242
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 255--256
+Underfull \hbox (badness 10000) in paragraph at lines 256--257
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 264--266
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 290--291
 
  []
@@ -939,12 +934,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 291--292
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--294
+Underfull \hbox (badness 10000) in paragraph at lines 293--295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
+Underfull \hbox (badness 10000) in paragraph at lines 295--296
 
  []
 
@@ -971,9 +966,9 @@ our/public/csfonts/dpi864\csbx12.pk> <C:\Users\vondr\AppData\Local\MiKTeX\fonts
 MiKTeX\fonts/pk/ljfour/public/csfonts/dpi1244\csbx12.pk><D:/programfiles/miktex
 /miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/programfiles/miktex/miktex
 /fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on document.pdf (9 pages, 187740 bytes).
+Output written on document.pdf (9 pages, 190134 bytes).
 PDF statistics:
- 604 PDF objects out of 1000 (max. 8388607)
+ 610 PDF objects out of 1000 (max. 8388607)
  64 named destinations out of 1000 (max. 500000)
  338 words of extra memory for PDF output out of 10000 (max. 10000000)
 

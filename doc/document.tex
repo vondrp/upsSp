@@ -70,12 +70,13 @@
 		\item 2 - V místnosti
 		\item 3 - Ve hře - připravuje hrací plochu
 		\item 4 - Ve hře - čeká
-		\item 5 - Ve hře - na tahu
-
+		\item 5 - Ve hře - na tahu		
 	\end{itemize}
+	\par Na serveru se nachází ještě dva bonusové stavy - CONNECTED a DISCONNECTED, které sledují zda je klient připojený. Stavy přechází pouze mezi sebou
+
 	\subsection{Stavový diagram}
 	\label{ssec:states}
-	\par Všechny stavy se mohou dostat do nepřipojeného/nepřihlášeného stavu.
+	\par Všechny stavy se mohou dostat do nepřipojeného/nepřihlášeného stavu a po připojení zpět se vrátit.
 	\begin{figure}[H]
 		\centering
 		\begin{tikzpicture}[node distance={25mm}, thick, main/.style = {draw, circle}]
@@ -288,8 +289,8 @@
 	\subsection{Spuštění serveru}
 	\par Pro překladu programu se vyskytujeme v adresáři \texttt{/server/}. Pro build aplikace je používán nástroj CMake, jenž vytvoří příslušný Makefile.\\
 	\par Použijeme tedy příkaz: \texttt{cmake -B ./build/}\\
-	\par Přemístíme se do adresáře \texttt{build/} (\texttt{cd build}) a provedeme sestavení spustitelného souboru příkazem \texttt{make}, který vytvoří spustitelný soubor \texttt{server}.\\
-	\par Pro spuštění serveru potřebujeme znát číslo portu služby, například \texttt{9123}. Server s tímto portem spustíme příkazem:\\
+	\par Přemístíme se do adresáře \texttt{build/} (\texttt{cd build}) a provedeme sestavení spustitelného souboru příkazem \texttt{make}, který vytvoří spustitelný soubor \texttt{server}.
+	\par Pro spuštění serveru potřebujeme znát číslo portu služby, například \texttt{9123}. Server s tímto portem spustíme příkazem:
 	\texttt{./server -p 9123} nebo \texttt{./server --port 9123}\\
 	\par V případě kdy uvedeme neplatnou hodnotu portu - tedy nečíselnou hodnotu, číslo menší než \texttt{1} nebo větší než texttt{65535} dojde k nastavení defaultní hodnoty portu \texttt{9123}\\
 	\par Program můžeme spusti i s několika nepovinnými parametry:
@@ -303,6 +304,7 @@
 
 	\subsection{Překlad a spuštění klienta}
 	\par Klient se spouští pomocí služby \texttt{gradle}. Program se přeloží, sestaví a spustí příkazem \texttt{./gradlew run} použitým ve složce \texttt{client}.
+	\par Můžeme si nechat vygenerovat spustitelný JAR příkazem \texttt{./gradlew jar}. Vygenerovaný JAR soubor se uloží do \texttt{build/libs/} pod názvem \texttt{client-1.0-SNAPSHOT.jar}. Máme-li správně nainstalované potřebné knihovny a nastavené cesty, můžeme tento soubor spustit příkazem \texttt{java -jar client-1.0-SNAPSHOT.jar}
 	\section{Závěr}
 	\par Server a klient spolu komunikují na popsaném protokolu a je přes něj realizovaná síťová hra. Program ošetřuje nevalidní zprávy, reaguje na výpadky a běží stabilně. Požadavky na práci jsou splněny.
 	
