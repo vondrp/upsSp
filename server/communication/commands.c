@@ -534,19 +534,6 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
     {
         ship_number = -1;
 
-        /*if (argv[0][i]  == ',')
-        {
-            // if is not 0 -> wrong amount of characters between
-            if (x != 0)
-            {
-                sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
-                send_message(client, buff);
-                trace("Socket %d - Game prepare request failed due message format error", client->fd);
-                return EXIT_FAILURE;
-            }
-            continue;
-        }*/
-
         if (isdigit(argv[0][i]))
         {
             ship_number = argv[0][i] - '0';
@@ -634,7 +621,14 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
                     trace("Socket %d - Game prepare request failed due to two ships placed next to each other.", client->fd);
                     return EXIT_FAILURE;
                 }
-                ship_place(&client->game->player1Ships[ship_number], x, y);
+
+                if (ship_place(&client->game->player1Ships[ship_number], x, y) == -1)
+                {
+                    sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+                    send_message(client, buff);
+                    trace("Socket %d - Game prepare request failed due to ships part wrong placement", client->fd);
+                    return EXIT_FAILURE;
+                }
             }
 
             client->game->player1_board[y][x] = argv[0][i];
@@ -704,7 +698,14 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
                     trace("Socket %d - Game prepare request failed due to two ships placed next to each other.", client->fd);
                     return EXIT_FAILURE;
                 }
-                ship_place(&client->game->player2Ships[ship_number], x, y);
+
+                if (ship_place(&client->game->player2Ships[ship_number], x, y) == -1)
+                {
+                    sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+                    send_message(client, buff);
+                    trace("Socket %d - Game prepare request failed due to ships part wrong placement", client->fd);
+                    return EXIT_FAILURE;
+                }
             }
 
             client->game->player2_board[y][x] = argv[0][i];
@@ -717,6 +718,43 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             x = 0;
         }
     }
+
+    // checking if ships length is at it should be
+    if (client->playerNum == 1)
+    {
+        if (client->game->player1Ships[0].length != SHIP_0_L ||
+            client->game->player1Ships[1].length != SHIP_1_L ||
+            client->game->player1Ships[2].length != SHIP_2_L ||
+            client->game->player1Ships[3].length != SHIP_3_L ||
+            client->game->player1Ships[4].length != SHIP_4_L ||
+            client->game->player1Ships[5].length != SHIP_5_L ||
+            client->game->player1Ships[6].length != SHIP_6_L
+            )
+        {
+            sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+            send_message(client, buff);
+            trace("Socket %d - Game prepare request failed due to wrong length of ships.", client->fd);
+            return EXIT_FAILURE;
+        }
+    }
+    else
+    {
+        if (client->game->player2Ships[0].length != SHIP_0_L ||
+            client->game->player2Ships[1].length != SHIP_1_L ||
+            client->game->player2Ships[2].length != SHIP_2_L ||
+            client->game->player2Ships[3].length != SHIP_3_L ||
+            client->game->player2Ships[4].length != SHIP_4_L ||
+            client->game->player2Ships[5].length != SHIP_5_L ||
+            client->game->player2Ships[6].length != SHIP_6_L
+                )
+        {
+            sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+            send_message(client, buff);
+            trace("Socket %d - Game prepare request failed due to wrong length of ships.", client->fd);
+            return EXIT_FAILURE;
+        }
+    }
+
     // CLIENT IS prepared
     client->state = STATE_IN_GAME;
     send_message(client, "game_prepared_ok\n");
@@ -749,7 +787,7 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     {
         sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_INTERNAL);
         send_message(client, buff);
-        trace("Socket %d - Game fire request filed due internal error", client->fd);
+        trace("Socket %d - Game fire request failed due internal error", client->fd);
         return EXIT_FAILURE;
     }
 
@@ -759,6 +797,37 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
         trace("Socket %d - Game fire request failed due message format error", client->fd);
         return EXIT_FAILURE;
     }
+
+    if (strlen(argv[0]) == 0 || strlen(argv[1]) == 0)
+    {
+        sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        send_message(client, buff);
+        trace("Socket %d - Game fire request failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+    int i;
+    for (i = 0; i < strlen(argv[0]); i++)
+    {
+        if (!isdigit(argv[0][i]))
+        {
+            sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+            send_message(client, buff);
+            trace("Socket %d - Game fire request failed due message format error", client->fd);
+            return EXIT_FAILURE;
+        }
+    }
+
+    for (i = 0; i < strlen(argv[1]); i++)
+    {
+        if (!isdigit(argv[1][i]))
+        {
+            sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+            send_message(client, buff);
+            trace("Socket %d - Game fire request failed due message format error", client->fd);
+            return EXIT_FAILURE;
+        }
+    }
+
 
     x = atoi(argv[0]);
     y = atoi(argv[1]);
@@ -822,11 +891,6 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     if (isdigit(c))
     {
         ship_number = c - '0';
-
-        /* zde by nemelo nikdy nastat
-        if (ship_number < 0 || ship_number >= AMOUNT_OF_SHIP)
-        {
-        }*/
 
         if (client->playerNum == 1)
         {

@@ -5,6 +5,14 @@
 #ifndef SERVER_SHIP_H
 #define SERVER_SHIP_H
 
+#define SHIP_0_L 4
+#define SHIP_1_L 3
+#define SHIP_2_L 3
+#define SHIP_3_L 2
+#define SHIP_4_L 2
+#define SHIP_5_L 2
+#define SHIP_6_L 1
+
 struct ship {
     int id;
     int startX;
@@ -25,8 +33,9 @@ void ship_init(struct ship *ship, int id);
  * @param ship  ship to be placed
  * @param x     x-coordinate
  * @param y     y-coordinate
+ * @return      0 - ship placed alright, -1 otherwise
  */
-void ship_place(struct ship *ship, int x, int y);
+int ship_place(struct ship *ship, int x, int y);
 
 /**
  * Hit given ship

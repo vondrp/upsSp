@@ -7607,3 +7607,34 @@ Socket 6 disconnected, closing connection
 Server failed to bind
 Server failed to bind
 Server failed to bind - port or ip address is unavailable
+Server failed to bind - port or ip address is unavailable
+Server has started on port 9123
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;prvni
+
+Socket 5 - User prvni logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_create_req
+
+Socket 6 - room creation success (0)
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_join_req;0
+
+Socket 5 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEEEEEEEEEEEE0000EEE4EEEEEEEEE4EE33EEEEEEEEEEEEEEEEE2E111EEEEE2EEEEEEEEE2E5EEEEE6EEE5EEEEEEEEEEEEEE
+Socket 5 receiving transmission game_prepared;EE0EEE3EEEEE0EEE3EEEEE0EEEEEEEEE0E55E111EEEEEEEEEEEEEEEEEEEEEEEEEEE6EEEE2EE4EEEEEE2EE4EEEEEE2EEEEEEE

@@ -14,23 +14,58 @@ void ship_init(struct ship *ship, int id)
     ship->health =  0;
 }
 
-void ship_place(struct ship *ship, int x, int y)
+int ship_place(struct ship *ship, int x, int y)
 {
+    int alright = -1;
+
+    // placing first ship placement
     if (ship->startX == -1 || ship->startY == -1)
     {
         ship->startX = x;
         ship->startY = y;
+        alright = 0;
+    }
+    // placing second ship square - check if vertical or not
+    else if (ship->length == 1)
+    {
+        // set ship vertical if is
+        if (ship->startX != x)
+        {
+            ship->vertical = 1;
+        }
+        else
+        {
+            ship->vertical = 0;
+        }
+    }
+
+    if (ship->vertical == 1)
+    {
+        if (ship->startX != x || ship->startY + ship->length != y)
+        {
+            alright = -1;
+        }
+        else
+        {
+            alright = 0;
+        }
     }
     else
     {
-        if ( (y - 1) == ship->startY && x == ship->startX)
+        if (ship->startY != y || ship->startX + ship->length != x)
         {
-            ship->vertical = 1;
+            alright = -1;
+        }
+        else
+        {
+            alright = 0;
         }
     }
 
     ship->health++;
     ship->length++;
+
+    return alright;
 }
 
 int ship_hit(struct ship *ship)
