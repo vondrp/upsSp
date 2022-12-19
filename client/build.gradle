@@ -25,8 +25,25 @@ javafx {
     version = '11.0.2'
 }
 
+
+
 mainClassName = 'vondrovic.ups.sp.client.Main'
 compileJava.options.encoding = 'UTF-8'
+
+
+jar {
+
+    duplicatesStrategy = 'include'
+    manifest {
+        attributes (
+                'Main-Class': mainClassName
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it)}
+    }
+}
+
 
 import org.apache.tools.ant.filters.EscapeUnicode
 tasks.withType(ProcessResources).each { task ->

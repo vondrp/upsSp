@@ -55,6 +55,11 @@ public class MessageHandler {
         this.window = window;
     }
 
+    /**
+     * process given messages
+     * @param line  message
+     * @throws IOException
+     */
     public void processMessage(String line) throws IOException
     {
         if (line.length() == 0) return;
