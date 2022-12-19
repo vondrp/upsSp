@@ -297,6 +297,13 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
 
     struct game *room = arraylist_get(server->rooms, room_id);
 
+    if (room == NULL)
+    {
+        sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE);
+        send_message(client, buff);
+        trace("Socket %d - Room joining failed due room is unavailable", client->fd);
+    }
+
     if(room->state == GAME_STATE_ERASED)
     {
         sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE);
