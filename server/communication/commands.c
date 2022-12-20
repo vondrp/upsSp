@@ -194,6 +194,14 @@ int cmd_room_list(server *server, struct client *client, int argc, char **argv) 
 
     char buff[64]; //buffer used to error messages
 
+    if(client->state != STATE_IN_LOBBY)
+    {
+        sprintf(buff,  "room_list_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        send_message(client, buff);
+        trace("Socket %d - Room list request fail - due to client state", client->fd);
+        return EXIT_FAILURE;
+    }
+
     strcpy(buffer, "room_list_data");
     copied = strlen(buffer);
 
@@ -368,7 +376,6 @@ int cmd_room_leave(server *server, struct client *client, int argc, char **argv)
     char buf[64];
     if(client->state == STATE_IN_GAME || client->state == STATE_IN_GAME_PLAYING || client->state == STATE_IN_GAME_PREPARING)
     {
-
         struct client *opp = NULL;
         char * winner;
 
@@ -796,7 +803,7 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     {
         sprintf(buff,  "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
         send_message(client, buff);
-        trace("Socket %d - Tried to fire when not in right state", client->fd);
+        trace("Socket %d - Tried to fire when not in the right state", client->fd);
         return EXIT_FAILURE;
     }
 
