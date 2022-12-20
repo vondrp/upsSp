@@ -792,6 +792,14 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
         return EXIT_FAILURE;
     }
 
+    if (client->state != STATE_IN_GAME_PLAYING)
+    {
+        sprintf(buff,  "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
+        send_message(client, buff);
+        trace("Socket %d - Tried to fire when not in right state", client->fd);
+        return EXIT_FAILURE;
+    }
+
     if(argc < 2) {
         sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);
