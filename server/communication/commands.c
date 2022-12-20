@@ -302,6 +302,7 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
         sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_ROOM_NOT_ACCESSIBLE);
         send_message(client, buff);
         trace("Socket %d - Room joining failed due room is unavailable", client->fd);
+        return EXIT_FAILURE;
     }
 
     if(room->state == GAME_STATE_ERASED)
