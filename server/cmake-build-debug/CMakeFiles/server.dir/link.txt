@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/server.dir/main.c.o CMakeFiles/server.dir/communication/server.c.o CMakeFiles/server.dir/structures/arraylist.c.o CMakeFiles/server.dir/communication/client.c.o CMakeFiles/server.dir/communication/commands.c.o CMakeFiles/server.dir/structures/hashmap.c.o CMakeFiles/server.dir/game/shipsGame.c.o CMakeFiles/server.dir/game/ship.c.o  -o server 

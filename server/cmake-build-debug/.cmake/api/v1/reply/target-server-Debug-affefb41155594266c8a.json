@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "server.exe"
-		},
-		{
-			"path" : "server.pdb"
+			"path" : "server"
 		}
 	],
 	"backtrace" : 1,
@@ -38,21 +35,13 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g  "
 				},
 				{
 					"fragment" : "-std=gnu99"
 				}
 			],
 			"language" : "C",
-			"languageStandard" : 
-			{
-				"backtraces" : 
-				[
-					1
-				],
-				"standard" : "99"
-			},
 			"sourceIndexes" : 
 			[
 				1,
@@ -78,16 +67,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "C"
 	},
 	"name" : "server",
-	"nameOnDisk" : "server.exe",
+	"nameOnDisk" : "server",
 	"paths" : 
 	{
 		"build" : ".",

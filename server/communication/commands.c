@@ -528,7 +528,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         return EXIT_FAILURE;
     }
 
-    if (strlen(argv[0]) < GAME_BOARD_STRING_SIZE) // can be bigger than game board string size -> there is +1 for \n of klient
+    if (strlen(argv[0]) != GAME_BOARD_STRING_SIZE) // can be bigger than game board string size -> there is +1 for \n of klient
     {
         sprintf(buff,  "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);

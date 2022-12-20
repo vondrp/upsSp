@@ -7638,3 +7638,63 @@ Socket 5 - Room (0) join success.
 Game 0 - Room is full, game is starting
 Socket 6 receiving transmission game_prepared;EEEEEEEEEEEEEE0000EEE4EEEEEEEEE4EE33EEEEEEEEEEEEEEEEE2E111EEEEE2EEEEEEEEE2E5EEEEE6EEE5EEEEEEEEEEEEEE
 Socket 5 receiving transmission game_prepared;EE0EEE3EEEEE0EEE3EEEEE0EEEEEEEEE0E55E111EEEEEEEEEEEEEEEEEEEEEEEEEEE6EEEE2EE4EEEEEE2EE4EEEEEE2EEEEEEE
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;prvni
+
+Socket 5 - User prvni logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;druhy
+
+Socket 6 - User druhy logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEEE0000EEEEEEEEEEEEEEEE33EEEEEEEEEEEEEEE111E55EEEEEEEEEEEEEE2E6E44EEEE2EEEEEEEEE2EEEEEEEEEEEEEEEEE
+Socket 6 - Game prepare request failed due to ships part wrong placement
+Socket 5 receiving transmission game_prepared;EE0000E33EEEEEEEEEEEEEEEEEEEEE222EEE44EEEEEEEEEEEEEEEEE111EE5EEEEEEEEE5EEEE6EEEEEEEEEEEEEEEEEEEEEEEE
+Socket 5 - Game prepare request failed due to ships part wrong placement
+Socket 6 receiving transmission game_prepared;EEEEE0000EEEEEEEEEEEEEEEE33EEEEEEEEEEEEEEE111E55EEEEEEEEEEEEEE2E6E44EEEE2EEEEEEEEE2EEEEEEEEEEEEEEEEE
+Socket 6 - Game prepare request failed due to ships part wrong placement
+Server has started on port 10000
+
+Socket 5 - new connection from 127.0.0.1
+
+Socket 5 receiving transmission login_req;druhy
+
+Socket 5 - User druhy logged in.
+Socket 5 receiving transmission room_list_req
+
+Socket 5 - List of joinable rooms has been sent
+Socket 5 receiving transmission room_create_req
+
+Socket 5 - room creation success (0)
+Socket 6 - new connection from 127.0.0.1
+
+Socket 6 receiving transmission login_req;prvni
+
+Socket 6 - User prvni logged in.
+Socket 6 receiving transmission room_list_req
+
+Socket 6 - List of joinable rooms has been sent
+Socket 6 receiving transmission room_join_req;0
+
+Socket 6 - Room (0) join success.
+Game 0 - Room is full, game is starting
+Socket 6 receiving transmission game_prepared;EEEEEEEEEE0000EE4EEEEEEEEE4EEEEEEEEEEEEEEE5EEE111EEE5EEEEEEEEEEEEEEEEEE2EEEE3EEEE2E6EE3EEEE2EEEEEEEE
+Socket 5 receiving transmission game_prepared;6EE44EEEEEEEEEEEEEEEEE0000EEEEEEEEEEEEEEE222EEEEEEEEEEEEEE55EEEEEEEEEEEE1E3EEEEEEE1E3EEEEEEE1EEEEEEE
+Socket 5 disconnected, closing connection
+Socket 6 disconnected, closing connection

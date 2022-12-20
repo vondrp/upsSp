@@ -26,10 +26,10 @@ int ship_place(struct ship *ship, int x, int y)
         alright = 0;
     }
     // placing second ship square - check if vertical or not
-    else if (ship->length == 1)
+    if (ship->length == 1)
     {
         // set ship vertical if is
-        if (ship->startX != x)
+        if (ship->startX == x)
         {
             ship->vertical = 1;
         }
@@ -41,7 +41,7 @@ int ship_place(struct ship *ship, int x, int y)
 
     if (ship->vertical == 1)
     {
-        if (ship->startX != x || ship->startY + ship->length != y)
+        if (ship->startX != x || (ship->startY + ship->length) != y)
         {
             alright = -1;
         }
@@ -52,7 +52,7 @@ int ship_place(struct ship *ship, int x, int y)
     }
     else
     {
-        if (ship->startY != y || ship->startX + ship->length != x)
+        if (ship->startY != y || (ship->startX + ship->length) != x)
         {
             alright = -1;
         }
