@@ -220,6 +220,23 @@ void mark_destroyed_ship(struct game *game, struct ship *ship, int ship_owner)
             }
         }
     }
-
 }
 
+void clean_client_ships(struct client *client, struct game *game)
+{
+    int i;
+    if (client->playerNum == 1)
+    {
+        for (i = 0; i < AMOUNT_OF_SHIP; i++)
+        {
+            ship_init(&game->player1Ships[i], i);
+        }
+    }
+    else
+    {
+        for (i = 0; i < AMOUNT_OF_SHIP; i++)
+        {
+            ship_init(&game->player2Ships[i], i);
+        }
+    }
+}

@@ -66,4 +66,10 @@ void game_end(server *server, struct game *game, char* name_winner);
  */
 void mark_destroyed_ship(struct game *game, struct ship *ship, int ship_owner);
 
+/**
+ * Clean client ships
+ * @param client   client ships to be cleaned
+ * @param game      game where client is playing
+ */
+void clean_client_ships(struct client *client, struct game *game);
 #endif

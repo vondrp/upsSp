@@ -547,6 +547,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             ship_number = argv[0][i] - '0';
             if (ship_number < 0 || ship_number >= AMOUNT_OF_SHIP)
             {
+                clean_client_ships(client, client->game);
                 sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_NUMBER);
                 send_message(client, buff);
                 trace("Socket %d - Game prepare request failed due message format error", client->fd);
@@ -557,6 +558,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
         {
             if (argv[0][i] != 'E')
             {
+                clean_client_ships(client, client->game);
                 sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
                 send_message(client, buff);
                 trace("Socket %d - Game prepare request failed due message format error", client->fd);
@@ -624,6 +626,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
                 if (check_neigh_ship == 1)
                 {
+                    clean_client_ships(client, client->game);
                     sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
                     send_message(client, buff);
                     trace("Socket %d - Game prepare request failed due to two ships placed next to each other.", client->fd);
@@ -632,6 +635,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
                 if (ship_place(&client->game->player1Ships[ship_number], x, y) == -1)
                 {
+                    clean_client_ships(client, client->game);
                     sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
                     send_message(client, buff);
                     trace("Socket %d - Game prepare request failed due to ships part wrong placement", client->fd);
@@ -701,6 +705,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
                 if (check_neigh_ship == 1)
                 {
+                    clean_client_ships(client, client->game);
                     sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
                     send_message(client, buff);
                     trace("Socket %d - Game prepare request failed due to two ships placed next to each other.", client->fd);
@@ -709,6 +714,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
 
                 if (ship_place(&client->game->player2Ships[ship_number], x, y) == -1)
                 {
+                    clean_client_ships(client, client->game);
                     sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
                     send_message(client, buff);
                     trace("Socket %d - Game prepare request failed due to ships part wrong placement", client->fd);
@@ -739,6 +745,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             client->game->player1Ships[6].length != SHIP_6_L
             )
         {
+            clean_client_ships(client, client->game);
             sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
             send_message(client, buff);
             trace("Socket %d - Game prepare request failed due to wrong length of ships.", client->fd);
@@ -756,6 +763,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             client->game->player2Ships[6].length != SHIP_6_L
                 )
         {
+            clean_client_ships(client, client->game);
             sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
             send_message(client, buff);
             trace("Socket %d - Game prepare request failed due to wrong length of ships.", client->fd);
