@@ -144,9 +144,9 @@
 	\texttt{room\_create\_err;(error\_code)}\\\\
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	\subsubsection{Seznam místností}
-	\par Pro připojení do místnosti je třeba získat její identifikační číslo na nějž se klient ptá příkazem \uv{room\_list} a je mu odpovězeno zprávou \uv{room\_list\_data;(id1);(name1);…} za níž se nachází dvojice identifikátoru místnosti a hráče, který v ní čeká.\\	
+	\par Pro připojení do místnosti je třeba získat její identifikační číslo na nějž se klient ptá příkazem \uv{room\_list\_req} a je mu odpovězeno zprávou \uv{room\_list\_data;(id1);(name1);…} za níž se nachází dvojice identifikátoru místnosti a hráče, který v ní čeká.\\	
 	\textbf{Požadavek klienta:}\\
-	\texttt{room\_list}\\
+	\texttt{room\_list\_req}\\
 	\textbf{Možné odpovědi serveru:}\\
 	\texttt{room\_list\_data;(id1);(name1);(id2);(name2)...}\\
 	\texttt{room\_list\_err|(error\_code)}\\\\
@@ -183,10 +183,11 @@
 	\texttt{game\_conn}
 	\subsubsection{Herní plocha připravena}
 	\label{ssec:game_ready}
-	\par Pro vstupu do hry hráči rozmístí své lodě a pošlou svou hrací plochu. Plocha je ve formě řetězce tvořen dvěma typy znaků – E (prázdno) a číslice v rozsahu 0 až 6 jakožto symboly jednotlivých lodí. Příkaz je \uv{game\_prepared;(EEE00EEEEE…)}.
-	\par Pro připravení hracích polí obou hráčů dostane jeden z nich zprávu \uv{game\_play} značící začátek hry.
+	\par Pro vstupu do hry hráči rozmístí své lodě a pošlou svou hrací plochu. Plocha je ve formě řetězce tvořen dvěma typy znaků – E (prázdno) a číslice v rozsahu 0 až 6 jakožto symboly jednotlivých lodí. Příkaz je \uv{game\_prepared;(EEE0000EEE…)}.
+	\par Lodě mají pevně stanovenou délku - loď 0 je dlouha 4 políčka, 1 a 2 mají délku 3, 3, 4 a 5 délka 2 a lod s indexem 6 má délku 1.
+	\par Po připravení hracích polí obou hráčů dostane jeden z nich zprávu \uv{game\_play} značící začátek hry.\\
 	\textbf{Požadavek klienta:}\\
-	\texttt{game\_prepared;(EEE00EEEEE…)}\\
+	\texttt{game\_prepared;(EEE0000EEE…)}\\
 	\textbf{Možné odpovědi serveru:}\\
 	\texttt{game\_prepared\_ok}\\
 	\texttt{game\_prepared\_err;(error\_code)}\\
@@ -304,7 +305,7 @@
 
 	\subsection{Překlad a spuštění klienta}
 	\par Klient se spouští pomocí služby \texttt{gradle}. Program se přeloží, sestaví a spustí příkazem \texttt{./gradlew run} použitým ve složce \texttt{client}.
-	\par Můžeme si nechat vygenerovat spustitelný JAR příkazem \texttt{./gradlew jar}. Vygenerovaný JAR soubor se uloží do \texttt{build/libs/} pod názvem \texttt{client-1.0-SNAPSHOT.jar}. Máme-li správně nainstalované potřebné knihovny a nastavené cesty, můžeme tento soubor spustit příkazem \texttt{java -jar client-1.0-SNAPSHOT.jar}
+	\par Můžeme si nechat vygenerovat spustitelný JAR příkazem \texttt{./gradlew jar}. Vygenerovaný JAR soubor se uloží do \texttt{build/libs/} pod názvem \texttt{client.jar}. Máme-li správně nainstalované potřebné knihovny a nastavené cesty, můžeme tento soubor spustit příkazem \texttt{java -jar client.jar}
 	\section{Závěr}
 	\par Server a klient spolu komunikují na popsaném protokolu a je přes něj realizovaná síťová hra. Program ošetřuje nevalidní zprávy, reaguje na výpadky a běží stabilně. Požadavky na práci jsou splněny.
 	
