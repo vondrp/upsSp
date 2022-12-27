@@ -199,6 +199,9 @@ int cmd_room_list(server *server, struct client *client, int argc, char **argv) 
         sprintf(buff,  "room_list_err%c%d\n", SPLIT_SYMBOL, ERROR_USER_STATE);
         send_message(client, buff);
         trace("Socket %d - Room list request fail - due to client state", client->fd);
+
+        free(temp);
+        free(buffer);
         return EXIT_FAILURE;
     }
 
@@ -746,7 +749,7 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
             )
         {
             clean_client_ships(client, client->game);
-            sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIP_PLACEMENT);
+            sprintf(buff, "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_SHIPS_WRONG_LENGTH);
             send_message(client, buff);
             trace("Socket %d - Game prepare request failed due to wrong length of ships.", client->fd);
             return EXIT_FAILURE;

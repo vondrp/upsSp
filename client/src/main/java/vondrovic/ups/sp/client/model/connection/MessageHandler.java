@@ -32,6 +32,7 @@ public class MessageHandler {
     private final int ERROR_SHIP_PLACEMENT = 10;
     private final int ERROR_SHIP_NUMBER = 11;
     private final int ERROR_SERVER_LIMIT_REACHED = 12;
+    private final int ERROR_SHIPS_WRONG_LENGTH = 13;
 
     //private final int ERROR_WAIT_TO_LONG_FOR_OPP = 12;
 
@@ -427,6 +428,10 @@ public class MessageHandler {
                 case ERROR_SHIP_PLACEMENT:
                     AlertFactory.sendErrorMessageOutside("Game prepare error", "Two ships cannot be placed directly next to each other.");
                     ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid. Two ships cannot be place directly next to each other.");
+                    break;
+                case ERROR_SHIPS_WRONG_LENGTH:
+                    AlertFactory.sendErrorMessageOutside("Game prepare error", "Wrong length of the ship");
+                    ((GameController) App.INSTANCE.getController()).protocolAdd("The server returned game preparation as invalid. Lengths of the ships is not valid.");
                     break;
                 case ERROR_INTERNAL:
                 default:

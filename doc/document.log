@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.27)  20 DEC 2022 18:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12.10) (preloaded format=pdflatex 2022.1.27)  27 DEC 2022 15:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -846,100 +846,110 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {C:/Users/vondr/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/FAV
 _cmyk-eps-converted-to.pdf>] [2]
 LaTeX Font Info:    Trying to load font information for IL2+cmtt on input line 
-127.
+128.
 
 (D:\programfiles\miktex\miktex\tex/cslatex/base\il2cmtt.fd
 File: il2cmtt.fd 1997/08/20 CSLaTeX font definitions
 ) [3]
-Underfull \hbox (badness 10000) in paragraph at lines 130--138
+Underfull \hbox (badness 10000) in paragraph at lines 131--139
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 139--146
+Underfull \hbox (badness 10000) in paragraph at lines 140--147
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--156
+Underfull \hbox (badness 10000) in paragraph at lines 148--157
 
  []
 
 
-Overfull \hbox (22.24077pt too wide) in paragraph at lines 157--169
+Overfull \hbox (22.24077pt too wide) in paragraph at lines 158--170
 \IL2/cmr/m/n/12 Povedlo-li se pøi-po-jení do-stanu kli-ent zprávu s jmé-nem pro
 -tiv-níka þroom[]join[]ok;(opp[]name)ÿ.
  []
 
 
-Overfull \hbox (41.41057pt too wide) in paragraph at lines 157--169
+Overfull \hbox (41.41057pt too wide) in paragraph at lines 158--170
 \IL2/cmr/m/n/12 Hráè èe-ka-jící v míst-nosti do-stane zprávu s jmé-nem pøi-po-j
 e-ného u¾i-va-tele þroom[]join[]opp;(name)ÿ. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--169
+Underfull \hbox (badness 10000) in paragraph at lines 158--170
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 170--180
+Underfull \hbox (badness 10000) in paragraph at lines 171--181
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--197
+Underfull \hbox (badness 10000) in paragraph at lines 189--198
 
  []
 
 [5]
-Overfull \hbox (12.8103pt too wide) in paragraph at lines 202--214
+Overfull \hbox (12.8103pt too wide) in paragraph at lines 203--215
 \IL2/cmr/m/n/12 þgame[]fire[]ok;(x),(y),(status);(ship[]destroyed)ÿ in-for-mu-j
 ící o stavu za-sa-¾ené po-zice a znièení
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--214
+Underfull \hbox (badness 10000) in paragraph at lines 203--215
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--226
+Underfull \hbox (badness 10000) in paragraph at lines 216--227
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--227
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 216--227
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 233--243
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 257--258
+Underfull \hbox (badness 10000) in paragraph at lines 234--244
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 266--268
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--269
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 292--293
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 294--296
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--297
+Underfull \hbox (badness 10000) in paragraph at lines 295--297
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 297--298
 
  []
 
@@ -948,9 +958,9 @@ Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 4D6634BFCB1375989087D6627D90BB21;5888.
  ) 
 Here is how much of TeX's memory you used:
- 24704 strings out of 478593
- 451501 string characters out of 2851639
- 751765 words of memory out of 3000000
+ 24705 strings out of 478593
+ 451508 string characters out of 2851639
+ 751767 words of memory out of 3000000
  42393 multiletter control sequences out of 15000+600000
  477205 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -966,9 +976,9 @@ our/public/csfonts/dpi864\csbx12.pk> <C:\Users\vondr\AppData\Local\MiKTeX\fonts
 MiKTeX\fonts/pk/ljfour/public/csfonts/dpi1244\csbx12.pk><D:/programfiles/miktex
 /miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/programfiles/miktex/miktex
 /fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on document.pdf (10 pages, 189122 bytes).
+Output written on document.pdf (10 pages, 189574 bytes).
 PDF statistics:
- 608 PDF objects out of 1000 (max. 8388607)
- 65 named destinations out of 1000 (max. 500000)
+ 609 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 500000)
  338 words of extra memory for PDF output out of 10000 (max. 10000000)
 

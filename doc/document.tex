@@ -118,6 +118,7 @@
 		\item Neplatné umístění lodě
 		\item Neplatný identifikátor lodě
 		\item Vyčerpaná kapacita serveru
+		\item Neplatná délka lodí
 	\end{enumerate}
 	\subsection{Skupiny zpráv}
 	\par U všech zpráv s vyjímkou navázání spojení může server potvrdit správnost příkazu nebo ohlásit chybu.
@@ -126,7 +127,7 @@
 	\textbf{Zpráva serveru:}\\
 	\texttt{connected}
 	\subsubsection{Připojení}
-	\par Po navázání spojení se klient může přihlásit příkazem \uv{login\_req;(name)}. Na základě stavu se hráč připojí buď do lobi nebo hry/místnosti z níž odešel (při spadnutí klienta).
+	\par Po navázání spojení se klient může přihlásit příkazem \uv{login\_req;(name)}. Na základě stavu se hráč připojí buď do lobi nebo hry/místnosti z níž odešel (při spadnutí klienta). Uživatelské jméno nesmí být delší než 19 znaků a může obsahovat pouze písmena malé, velké abecedy a číslice.
 	\par Pokud připojení selže je serverem ukončeno spojení s klientem.\\
 	\textbf{Požadavek klienta:}\\
 	\texttt{login\_req;(name)}\\
@@ -220,7 +221,7 @@
 	\texttt{game\_info\_err|(error\_code)}\\\\
 	\texttt{(client\_status)} - status klienta (viz. \nameref{ssec:states})\\
 	\texttt{(opp\_name)} - jméno protihráče\\
-	\texttt{(client\_board)} - řetězcová reprezentace klientova hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď, \texttt{M} - zasažené prázdné pole a číslice od \texttt{0} do \texttt{6} symbolující jednotlivé lodě.\\
+	\texttt{(client\_board)} - řetězcová reprezentace klientova hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď, \texttt{M} - zasažené prázdné pole a číslice od \texttt{0} do \texttt{6} symbolující jednotlivé lodě.\\\\\\
 	\texttt{(opp\_board)} - řetězcová reprezentace protivního hracího plánu. Obsahuje symboly \texttt{E} - prázdné pole, \texttt{H} - zasažená loď a \texttt{M} - zasažené prázdné pole.\\
 	\texttt{(error\_code)} - identifikační číslo chyby (viz. \nameref{ssec:error_codes})
 	
