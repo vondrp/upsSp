@@ -42,13 +42,3 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it)}
     }
 }
-
-
-import org.apache.tools.ant.filters.EscapeUnicode
-tasks.withType(ProcessResources).each { task ->
-    task.from(task.getSource()) {
-        include '**/*.properties'
-        filter(EscapeUnicode)
-        duplicatesStrategy = 'warn'
-    }
-}
