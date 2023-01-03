@@ -69,6 +69,17 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
+    printf("Jsem tady po s curr players\n");
+
+    if (argv[0] == NULL)
+    {
+        sprintf(buff,"login_err%c%d\n", SPLIT_SYMBOL, ERROR_USERNAME_WRONG_FORMAT);
+        send_message(client, buff);
+        trace("Socket %d - User is trying to login as %s, but this name does not meet requirements", client->fd, argv[0]);
+        disconnect_login_err(server,client);
+        return EXIT_FAILURE;
+    }
+    printf("Po kontrole null\n");
 
     if(strlen(argv[0]) == 0 || strlen(argv[0]) > NAME_MAX_LENGTH)
     {

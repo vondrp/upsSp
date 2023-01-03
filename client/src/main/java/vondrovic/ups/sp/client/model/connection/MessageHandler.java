@@ -65,10 +65,12 @@ public class MessageHandler {
     {
         if (line.length() == 0) return;
 
+        boolean receive_msg = false;
         String[] message = line.split(";");
 
         if (message[0].equalsIgnoreCase("connected"))
         {
+            receive_msg = true;
             this.invalidMessages = 0;
             App.sendMessage("login_req;" + App.INSTANCE.getPlayer().getName());
             return;
@@ -76,6 +78,7 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("login_ok"))
         {
+            receive_msg = true;
             this.invalidMessages = 0;
             if(message.length <= 2)
             {
@@ -114,6 +117,7 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_info_data"))
         {
+            receive_msg = true;
             this.invalidMessages = 0;
 
             if (message.length <= 4) return;
@@ -166,7 +170,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("login_err")) {
             this.invalidMessages = 0;
-
+            receive_msg = true;
             if (message.length < 2)
             {
                 AlertFactory.sendErrorMessageOutside("Login error", "An error occurred while logging in.");
@@ -198,7 +202,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_create_err")) {
             this.invalidMessages = 0;
-
+            receive_msg = true;
             if (message.length < 2)
             {
                 AlertFactory.sendErrorMessageOutside("Room create error", "An error occurred while creating a room.");
@@ -222,7 +226,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_list_err")) {
             this.invalidMessages = 0;
-
+            receive_msg = true;
 
             AlertFactory.sendErrorMessageOutside("Room list error", "An error occurred while getting list of rooms");
             return;
@@ -230,6 +234,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_join_err")) {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             if (message.length < 2)
             {
@@ -259,7 +264,7 @@ public class MessageHandler {
         }
 
         if(message[0].equalsIgnoreCase("room_list_data")) {
-
+            receive_msg = true;
             this.invalidMessages = 0;
             if(message.length % 2 != 1) {
                 AlertFactory.sendErrorMessageOutside("Server data error", "An error occurred in the server message");
@@ -293,6 +298,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_create_ok")) {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             App.INSTANCE.gameModel = new GameModel();
 
@@ -305,6 +311,8 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_join_ok")) {
             this.invalidMessages = 0;
+            receive_msg = true;
+
             if(message.length < 2) {
 
                 return;
@@ -323,6 +331,8 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_join_opp")) {
             this.invalidMessages = 0;
+            receive_msg = true;
+
             if(message.length < 2) {
 
                 return;
@@ -344,6 +354,8 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_leave_ok")) {
             this.invalidMessages = 0;
+            receive_msg = true;
+
             App.INSTANCE.gameModel = null;
 
             Platform.runLater(() -> {
@@ -355,18 +367,20 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("room_leave_err")) {
             this.invalidMessages = 0;
+            receive_msg = true;
             AlertFactory.sendErrorMessageOutside("Room leave error", "An error occurred while trying to leave a room.");
         }
 
         if(message[0].equalsIgnoreCase("logout_err")) {
             this.invalidMessages = 0;
-
+            receive_msg = true;
             AlertFactory.sendErrorMessageOutside("Logout error", "An error occurred. Client is already disconnected.");
             return;
         }
 
         if(message[0].equalsIgnoreCase("room_leave_opp")) {
             this.invalidMessages = 0;
+            receive_msg = true;
             if(App.INSTANCE.getSceneEnum() == SceneEnum.GAME) {
                 ((GameController) App.INSTANCE.getController()).protocolAdd("Teammate " + App.INSTANCE.getOpponent().getName() + " left the game.");
             }
@@ -375,7 +389,7 @@ public class MessageHandler {
 
         if(message[0].equalsIgnoreCase("game_conn")) {
             this.invalidMessages = 0;
-
+            receive_msg = true;
             if(App.INSTANCE.getSceneEnum() != SceneEnum.LOBBY && App.INSTANCE.getSceneEnum() != SceneEnum.ROOM) {
 
                 return;
@@ -396,6 +410,7 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_prepared_ok"))
         {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             ((GameController) App.INSTANCE.getController()).protocolAdd("Game prepared ok");
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
@@ -406,6 +421,7 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_prepared_err"))
         {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             if (message.length < 2)
             {
@@ -454,6 +470,7 @@ public class MessageHandler {
         {
             this.invalidMessages = 0;
             App.INSTANCE.gameModel.setGameStatus(GameStatus.PLAYING);
+            receive_msg = true;
 
             Platform.runLater(() -> {
                 ((GameController) App.INSTANCE.getController()).protocolAdd("Your turn to fire");
@@ -467,6 +484,7 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_fire_ok"))
         {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             if (message.length < 4) return;
 
@@ -512,6 +530,7 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_fire_err"))
         {
+            receive_msg = true;
             if (message.length < 2)
             {
                 AlertFactory.sendErrorMessageOutside("Game fire error", "An error occurred while firing.");
@@ -543,6 +562,7 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_opp_fire"))
         {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             if (message.length < 4) return;
 
@@ -589,6 +609,7 @@ public class MessageHandler {
         if (message[0].equalsIgnoreCase("game_end"))
         {
             this.invalidMessages = 0;
+            receive_msg = true;
 
             if (message.length < 2) return;
 
@@ -602,6 +623,13 @@ public class MessageHandler {
                 App.INSTANCE.setScene(SceneEnum.GAME_RESULT);
             });
             
+            return;
+        }
+
+        if (!receive_msg)
+        {
+            AlertFactory.sendErrorMessageOutside("Message error", "Received unknown message.");
+            App.INSTANCE.disconnect();
             return;
         }
 

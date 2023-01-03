@@ -29,6 +29,9 @@ javafx {
 mainClassName = 'vondrovic.ups.sp.client.Main'
 compileJava.options.encoding = 'UTF-8'
 
+tasks.withType(JavaCompile) {
+    options.release = 11
+}
 
 jar {
 
