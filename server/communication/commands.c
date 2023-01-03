@@ -69,7 +69,6 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
-    printf("Jsem tady po s curr players\n");
 
     if (argv[0] == NULL)
     {
@@ -79,7 +78,6 @@ int cmd_login(server *server, struct client *client, int argc, char **argv)
         disconnect_login_err(server,client);
         return EXIT_FAILURE;
     }
-    printf("Po kontrole null\n");
 
     if(strlen(argv[0]) == 0 || strlen(argv[0]) > NAME_MAX_LENGTH)
     {
@@ -292,6 +290,14 @@ int cmd_room_join(server *server, struct client *client, int argc, char **argv) 
 
     if(argc < 1) {
         sprintf(buff, "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        send_message(client, buff);
+        trace("Socket %d - Room joining failed due to wrong message format", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (argv[0] == NULL)
+    {
+        sprintf(buff,  "room_join_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);
         trace("Socket %d - Room joining failed due to wrong message format", client->fd);
         return EXIT_FAILURE;
@@ -538,6 +544,14 @@ int cmd_game_prepared(server *server, struct client *client, int argc, char **ar
     if(argc < 1) {
         sprintf(buff,  "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client,buff);
+        trace("Socket %d Game prepared failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (argv[0] == NULL)
+    {
+        sprintf(buff,  "game_prepared_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        send_message(client, buff);
         trace("Socket %d Game prepared failed due message format error", client->fd);
         return EXIT_FAILURE;
     }
@@ -830,6 +844,14 @@ int cmd_game_fire(server *server, struct client *client, int argc, char **argv)
     }
 
     if(argc < 2) {
+        sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
+        send_message(client, buff);
+        trace("Socket %d - Game fire request failed due message format error", client->fd);
+        return EXIT_FAILURE;
+    }
+
+    if (argv[0]  == NULL || argv[1] == NULL)
+    {
         sprintf(buff, "game_fire_err%c%d\n", SPLIT_SYMBOL, ERROR_FORMAT);
         send_message(client, buff);
         trace("Socket %d - Game fire request failed due message format error", client->fd);
