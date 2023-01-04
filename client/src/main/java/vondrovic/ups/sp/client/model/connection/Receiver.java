@@ -49,10 +49,13 @@ public class Receiver extends Thread {
     public void run() {
         this.setRunning(true);
         String line = "";
+
         while(this.running) {
             try {
-
                 line = bufferedReader.readLine();
+
+                // after first message disable socket timeout
+                this.connectionModel.setSocketTimeout(0);
             } catch (IOException e) {
                 e.printStackTrace();
                 try {
@@ -65,6 +68,7 @@ public class Receiver extends Thread {
                         }
                         App.INSTANCE.setSceneOutside(SceneEnum.CONNECT);
                         AlertFactory.sendErrorMessageOutside("Connection Loss", "Connection to the server was broken.");
+                        App.INSTANCE.disconnect();
                     });
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
@@ -96,7 +100,6 @@ public class Receiver extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 

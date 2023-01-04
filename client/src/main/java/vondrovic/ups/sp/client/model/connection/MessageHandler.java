@@ -101,7 +101,7 @@ public class MessageHandler {
                     App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.setScene(SceneEnum.ROOM);
                 } else if(state == STATE_IN_GAME || state == STATE_IN_GAME_PLAYING ||
-                 state == STATE_IN_GAME_PREPARING) {
+                        state == STATE_IN_GAME_PREPARING) {
 
                     App.INSTANCE.gameModel = new GameModel();
                     App.INSTANCE.getGameModel().init();
@@ -254,7 +254,7 @@ public class MessageHandler {
                 case ERROR_ROOM_FULL:
                     AlertFactory.sendErrorMessageOutside("Room join error", "Room is full.");
                     break;
-                    case ERROR_INTERNAL:
+                case ERROR_INTERNAL:
                 default:
                     AlertFactory.sendErrorMessageOutside("Room join error", "An error occurred while joining to room.");
                     break;
@@ -509,7 +509,7 @@ public class MessageHandler {
             // is square was hit check if ship is destroyed
             if (squareStatus == SquareStatus.HIT && Integer.parseInt(message[4]) == 1)
             {
-               App.INSTANCE.getGameModel().markDestroyedShip(x, y, App.INSTANCE.getGameModel().getEnemyBoard());
+                App.INSTANCE.getGameModel().markDestroyedShip(x, y, App.INSTANCE.getGameModel().getEnemyBoard());
             }
 
             App.INSTANCE.getGameModel().setGameStatus(GameStatus.WAITING);
@@ -530,6 +530,7 @@ public class MessageHandler {
 
         if (message[0].equalsIgnoreCase("game_fire_err"))
         {
+            invalidMessages = 0;
             receive_msg = true;
             if (message.length < 2)
             {
@@ -622,13 +623,20 @@ public class MessageHandler {
             Platform.runLater(() -> {
                 App.INSTANCE.setScene(SceneEnum.GAME_RESULT);
             });
-            
+
+            return;
+        }
+
+        if(message[0].equalsIgnoreCase("logout_ok")) {
+            this.invalidMessages = 0;
+            receive_msg = true;
+
             return;
         }
 
         if (!receive_msg)
         {
-            AlertFactory.sendErrorMessageOutside("Message error", "Received unknown message.");
+            AlertFactory.sendErrorMessageOutside("Message error", "Received invalid message. Probably connected to the wrong server.");
             App.INSTANCE.disconnect();
             return;
         }
@@ -636,6 +644,7 @@ public class MessageHandler {
         this.invalidMessages++;
         if(this.invalidMessages > App.MAX_INVALID_MESSAGES)
         {
+            AlertFactory.sendErrorMessageOutside("Message error", "Too many invalid messages");
             App.INSTANCE.disconnect();
         };
     }

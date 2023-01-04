@@ -2,6 +2,7 @@ package vondrovic.ups.sp.client.model.connection;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * Connection model containing socket, printwriter and bufferedreader
@@ -19,6 +20,7 @@ public class ConnectionModel {
      */
     public ConnectionModel(String address, int port) throws IOException {
         socket = new Socket(address, port);
+        socket.setSoTimeout(5000); // waiting max 5s for first message
         printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         this.bufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
     }
@@ -64,5 +66,15 @@ public class ConnectionModel {
         Stats.INSTANCE.sentBytes += message.length() + 1;
         this.printWriter.println(message);
         this.printWriter.flush();
+    }
+
+    /**
+     * Set socket timeout - how long max waiting for message from server
+     * - with value 0 -> not waiting
+     * @param time          time to wait
+     * @throws SocketException
+     */
+    public void setSocketTimeout(int time) throws SocketException {
+        this.socket.setSoTimeout(time);
     }
 }
