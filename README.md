@@ -43,10 +43,22 @@ nebo
 
 ### Klient
 Klient je napsán v jazyce Java a jedná se o okenní aplikaci využívající JavaFX.
-#### Build a spuštění
+#### Build a spuštění maven
 Předpokládá se, že před zadáním následujících příkazů se nacházíme v adresáři `/client/`
-Pro spuštění můžeme použít wrapper Gradle. Aplikaci pomocí něj sputíme zadáním příkazu:
+Pro spuštění můžeme použít wrapper Gradle. Aplikaci pomocí něj spustíme zadáním příkazu:
 ```
 ./gradlew run
 ```
-Po zadání předchozího příkazu se otevře okno pro zadání údajů pro připojení.
+Nebo vygenerujeme jar nacházející se ve složce build/libs/client.jar
+```
+./gradlew jar
+```
+
+
+#### Build a spuštění maven
+Předpokládá se, že před zadáním následujících příkazů se nacházíme v adresáři `/client/`
+Pro přeložení je potřeba mít nainstalován maven - pro překlad programu se použije příkaz
+```
+mvn clean install
+```
+Ve vytvořené složce target, se nachází spustitelný soubor client-2-jar-with-dependencies.jar
