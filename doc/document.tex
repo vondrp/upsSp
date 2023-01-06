@@ -305,8 +305,12 @@
 	
 
 	\subsection{Překlad a spuštění klienta}
-	\par Klient se spouští pomocí služby \texttt{gradle}. Program se přeloží, sestaví a spustí příkazem \texttt{./gradlew run} použitým ve složce \texttt{client}.
-	\par Můžeme si nechat vygenerovat spustitelný JAR příkazem \texttt{./gradlew jar}. Vygenerovaný JAR soubor se uloží do \texttt{build/libs/} pod názvem \texttt{client.jar}. Máme-li správně nainstalované potřebné knihovny a nastavené cesty, můžeme tento soubor spustit příkazem \texttt{java -jar client.jar}
+	\par První možnost spuštění klienta je pomocí pomocí služby \texttt{gradle}. Program se přeloží, sestaví a spustí příkazem \texttt{./gradlew run} použitým ve složce \texttt{client}.
+	\par Pomocí \texttt{gradle} si můžeme nechat vygenerovat spustitelný JAR příkazem \texttt{./gradlew jar}. Vygenerovaný JAR soubor se uloží do \texttt{build/libs/} pod názvem \texttt{client.jar}. Máme-li správně nainstalované potřebné knihovny a nastavené cesty, můžeme tento soubor spustit příkazem \texttt{java -jar client.jar}
+	\\
+	\par Druhou možností pro překlad a spuštění klienta je \texttt{maven}. Program se přeloží pomocí příkazu \texttt{mvn clean install}. Následně se musí přejít do vytvořené složky target, kde se nachází spustitelný soubor \texttt{client-2-jar-with-dependencies.jar}. Soubor lze spustit dvojím pokliknutím, případně příkazem \\ \texttt{java -jar client-2-jar-with-dependencies.jar}.
+	\par Na systému ubuntu nemusí uvedený příkaz fungovat, z důvodu, že okenní manažer Wayland nemusí být ve verzi, v níž funguje knihovna \texttt{JavaFx}. V tom případě, lze aplikaci spustit příkazem:\\
+	\texttt{java -Djdk.gtk.version=2 -jar client-2-jar-with-dependencies.jar}
 	\section{Závěr}
 	\par Server a klient spolu komunikují na popsaném protokolu a je přes něj realizovaná síťová hra. Program ošetřuje nevalidní zprávy, reaguje na výpadky a běží stabilně. Požadavky na práci jsou splněny.
 	
