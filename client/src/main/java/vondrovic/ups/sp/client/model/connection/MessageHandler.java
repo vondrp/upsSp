@@ -634,6 +634,15 @@ public class MessageHandler {
             return;
         }
 
+        if(message[0].equalsIgnoreCase("game_info_err")) {
+            this.invalidMessages = 0;
+            receive_msg = true;
+
+            AlertFactory.sendErrorMessageOutside("Game info error", "An error occurred occured with game info");
+
+            return;
+        }
+
         if (!receive_msg)
         {
             AlertFactory.sendErrorMessageOutside("Message error", "Received invalid message. Probably connected to the wrong server.");
